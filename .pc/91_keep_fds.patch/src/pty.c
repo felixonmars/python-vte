@@ -18,7 +18,7 @@
  */
 
 /**
- * SECTION: vte-pty
+ * SECTION: deepinvte-pty
  * @short_description: Functions for starting a new process on a new pseudo-terminal and for
  * manipulating pseudo-terminals
  *
@@ -30,9 +30,9 @@
 
 #include <config.h>
 
-#include "vtepty.h"
-#include "vtepty-private.h"
-#include "vte.h"
+#include "deepinvtepty.h"
+#include "deepinvtepty-private.h"
+#include "deepinvte.h"
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
@@ -70,21 +70,21 @@
 
 #include <glib/gi18n-lib.h>
 
-#ifdef VTE_USE_GNOME_PTY_HELPER
+#ifdef DEEPINVTE_USE_GNOME_PTY_HELPER
 #include <sys/uio.h>
 #ifdef HAVE_SYS_UN_H
 #include <sys/un.h>
 #endif
 #include "../gnome-pty-helper/gnome-pty.h"
-static gboolean _vte_pty_helper_started = FALSE;
-static pid_t _vte_pty_helper_pid = -1;
-static int _vte_pty_helper_tunnel = -1;
+static gboolean _deepinvte_pty_helper_started = FALSE;
+static pid_t _deepinvte_pty_helper_pid = -1;
+static int _deepinvte_pty_helper_tunnel = -1;
 #endif
 
 /* Reset the handlers for all known signals to their defaults.  The parent
  * (or one of the libraries it links to) may have changed one to be ignored. */
 static void
-_vte_pty_reset_signal_handlers(void)
+_deepinvte_pty_reset_signal_handlers(void)
 {
 #ifdef SIGHUP
 	signal(SIGHUP,  SIG_DFL);
@@ -181,7 +181,7 @@ _vte_pty_reset_signal_handlers(void)
 #endif
 }
 
-typedef struct _VtePtyPrivate VtePtyPrivate;
+typedef struct _DeepinvtePtyPrivate DeepinvtePtyPrivate;
 
 typedef struct {
 	enum {
@@ -192,26 +192,26 @@ typedef struct {
 		const char *name;
 		int fd;
 	} tty;
-} VtePtyChildSetupData;
+} DeepinvtePtyChildSetupData;
 
 /**
- * VtePty:
+ * DeepinvtePty:
  *
  * Since: 0.26
  */
-struct _VtePty {
+struct _DeepinvtePty {
         GObject parent_instance;
 
         /* <private> */
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 };
 
-struct _VtePtyPrivate {
-        VtePtyFlags flags;
+struct _DeepinvtePtyPrivate {
+        DeepinvtePtyFlags flags;
         int pty_fd;
 
         const char *term;
-        VtePtyChildSetupData child_setup_data;
+        DeepinvtePtyChildSetupData child_setup_data;
 
         gpointer helper_tag; /* only use when using_helper is TRUE */
 
@@ -220,23 +220,23 @@ struct _VtePtyPrivate {
         guint using_helper : 1;
 };
 
-struct _VtePtyClass {
+struct _DeepinvtePtyClass {
         GObjectClass parent_class;
 };
 
 /**
- * vte_pty_child_setup:
- * @pty: a #VtePty
+ * deepinvte_pty_child_setup:
+ * @pty: a #DeepinvtePty
  *
  * FIXMEchpe
  *
  * Since: 0.26
  */
 void
-vte_pty_child_setup (VtePty *pty)
+deepinvte_pty_child_setup (DeepinvtePty *pty)
 {
-        VtePtyPrivate *priv = pty->priv;
-	VtePtyChildSetupData *data = &priv->child_setup_data;
+        DeepinvtePtyPrivate *priv = pty->priv;
+	DeepinvtePtyChildSetupData *data = &priv->child_setup_data;
 	int fd = -1;
 	const char *tty = NULL;
 
@@ -256,7 +256,7 @@ vte_pty_child_setup (VtePty *pty)
                                 break;
                 }
 
-                _vte_debug_print (VTE_DEBUG_PTY,
+                _deepinvte_debug_print (DEEPINVTE_DEBUG_PTY,
                                 "Setting up child pty: name = %s, fd = %d\n",
                                         tty ? tty : "(none)", fd);
 
@@ -279,7 +279,7 @@ vte_pty_child_setup (VtePty *pty)
 
 	/* Start a new session and become process-group leader. */
 #if defined(HAVE_SETSID) && defined(HAVE_SETPGID)
-	_vte_debug_print (VTE_DEBUG_PTY, "Starting new session\n");
+	_deepinvte_debug_print (DEEPINVTE_DEBUG_PTY, "Starting new session\n");
 	setsid();
 	setpgid(0, 0);
 #endif
@@ -334,7 +334,7 @@ vte_pty_child_setup (VtePty *pty)
 
 	/* Reset our signals -- our parent may have done any number of
 	 * weird things to them. */
-	_vte_pty_reset_signal_handlers();
+	_deepinvte_pty_reset_signal_handlers();
 
         /* Now set the TERM environment variable */
         if (priv->term != NULL) {
@@ -347,7 +347,7 @@ vte_pty_child_setup (VtePty *pty)
  */
 
 /*
- * __vte_pty_get_argv:
+ * __deepinvte_pty_get_argv:
  * @command: the command to run
  * @argv: the argument vector
  * @flags: (inout) flags from #GSpawnFlags
@@ -358,7 +358,7 @@ vte_pty_child_setup (VtePty *pty)
  * Returns: a newly allocated array of strings. Free with g_strfreev()
  */
 char **
-__vte_pty_get_argv (const char *command,
+__deepinvte_pty_get_argv (const char *command,
                     char **argv,
                     GSpawnFlags *flags /* inout */)
 {
@@ -386,7 +386,7 @@ __vte_pty_get_argv (const char *command,
 }
 
 /*
- * __vte_pty_merge_environ:
+ * __deepinvte_pty_merge_environ:
  * @envp: environment vector
  *
  * Merges @envp to the parent environment, and returns a new environment vector.
@@ -394,7 +394,7 @@ __vte_pty_get_argv (const char *command,
  * Returns: a newly allocated string array. Free using g_strfreev()
  */
 static gchar **
-__vte_pty_merge_environ (char **envp, const char *term_value)
+__deepinvte_pty_merge_environ (char **envp, const char *term_value)
 {
 	GHashTable *table;
         GHashTableIter iter;
@@ -441,36 +441,36 @@ __vte_pty_merge_environ (char **envp, const char *term_value)
 }
 
 /*
- * __vte_pty_get_pty_flags:
+ * __deepinvte_pty_get_pty_flags:
  * @lastlog: %TRUE if the session should be logged to the lastlog
  * @utmp: %TRUE if the session should be logged to the utmp/utmpx log
  * @wtmp: %TRUE if the session should be logged to the wtmp/wtmpx log
  *
  * Combines the @lastlog, @utmp, @wtmp arguments into the coresponding
- * #VtePtyFlags flags.
+ * #DeepinvtePtyFlags flags.
  *
- * Returns: flags from #VtePtyFlags
+ * Returns: flags from #DeepinvtePtyFlags
  */
-VtePtyFlags
-__vte_pty_get_pty_flags(gboolean lastlog,
+DeepinvtePtyFlags
+__deepinvte_pty_get_pty_flags(gboolean lastlog,
                         gboolean utmp,
                         gboolean wtmp)
 {
-        VtePtyFlags flags = VTE_PTY_DEFAULT;
+        DeepinvtePtyFlags flags = DEEPINVTE_PTY_DEFAULT;
 
         if (!lastlog)
-                flags |= VTE_PTY_NO_LASTLOG;
+                flags |= DEEPINVTE_PTY_NO_LASTLOG;
         if (!utmp)
-                flags |= VTE_PTY_NO_UTMP;
+                flags |= DEEPINVTE_PTY_NO_UTMP;
         if (!wtmp)
-                flags |= VTE_PTY_NO_WTMP;
+                flags |= DEEPINVTE_PTY_NO_WTMP;
 
         return flags;
 }
 
 /*
- * __vte_pty_spawn:
- * @pty: a #VtePty
+ * __deepinvte_pty_spawn:
+ * @pty: a #DeepinvtePty
  * @directory: the name of a directory the command should start in, or %NULL
  *   to use the cwd
  * @argv: child's argument vector
@@ -485,7 +485,7 @@ __vte_pty_get_pty_flags(gboolean lastlog,
  * Uses g_spawn_async() to spawn the command in @argv. The child's environment will
  * be the parent environment with the variables in @envv set afterwards.
  *
- * Enforces the vte_terminal_watch_child() requirements by adding
+ * Enforces the deepinvte_terminal_watch_child() requirements by adding
  * %G_SPAWN_DO_NOT_REAP_CHILD to @spawn_flags.
  *
  * Note that the %G_SPAWN_LEAVE_DESCRIPTORS_OPEN flag is not supported;
@@ -498,7 +498,7 @@ __vte_pty_get_pty_flags(gboolean lastlog,
  * Returns: %TRUE on success, or %FALSE on failure with @error filled in
  */
 gboolean
-__vte_pty_spawn (VtePty *pty,
+__deepinvte_pty_spawn (DeepinvtePty *pty,
                  const char *directory,
                  char **argv,
                  char **envv,
@@ -521,9 +521,9 @@ __vte_pty_spawn (VtePty *pty,
         spawn_flags &= ~G_SPAWN_LEAVE_DESCRIPTORS_OPEN;
 
         /* add the given environment to the childs */
-        envp2 = __vte_pty_merge_environ (envv, pty->priv->term);
+        envp2 = __deepinvte_pty_merge_environ (envv, pty->priv->term);
 
-        _VTE_DEBUG_IF (VTE_DEBUG_MISC) {
+        _DEEPINVTE_DEBUG_IF (DEEPINVTE_DEBUG_MISC) {
                 g_printerr ("Spawing command:\n");
                 for (i = 0; argv[i] != NULL; i++) {
                         g_printerr ("    argv[%d] = %s\n", i, argv[i]);
@@ -539,7 +539,7 @@ __vte_pty_spawn (VtePty *pty,
                                        argv, envp2,
                                        spawn_flags,
                                        child_setup ? child_setup
-                                                   : (GSpawnChildSetupFunc) vte_pty_child_setup,
+                                                   : (GSpawnChildSetupFunc) deepinvte_pty_child_setup,
                                        child_setup ? child_setup_data : pty,
                                        child_pid,
                                        NULL, NULL, NULL,
@@ -553,7 +553,7 @@ __vte_pty_spawn (VtePty *pty,
                                                argv, envp2,
                                                spawn_flags,
                                                child_setup ? child_setup
-                                                           : (GSpawnChildSetupFunc) vte_pty_child_setup,
+                                                           : (GSpawnChildSetupFunc) deepinvte_pty_child_setup,
                                                child_setup ? child_setup_data : pty,
                                                child_pid,
                                                NULL, NULL, NULL,
@@ -570,17 +570,17 @@ __vte_pty_spawn (VtePty *pty,
 }
 
 /*
- * __vte_pty_fork:
- * @pty: a #VtePty
+ * __deepinvte_pty_fork:
+ * @pty: a #DeepinvtePty
  * @pid: (out) a location to store a #GPid, or %NULL
  * @error: a location to store a #GError, or %NULL
  *
- * Forks and calls vte_pty_child_setup() in the child.
+ * Forks and calls deepinvte_pty_child_setup() in the child.
  *
  * Returns: %TRUE on success, or %FALSE on failure with @error filled in
  */
 gboolean
-__vte_pty_fork(VtePty *pty,
+__deepinvte_pty_fork(DeepinvtePty *pty,
                GPid *pid,
                GError **error)
 {
@@ -597,7 +597,7 @@ __vte_pty_fork(VtePty *pty,
                                     g_strerror(errno));
                         ret = FALSE;
                 case 0: /* child */
-                        vte_pty_child_setup(pty);
+                        deepinvte_pty_child_setup(pty);
                         break;
                 default: /* parent */
                         break;
@@ -612,8 +612,8 @@ __vte_pty_fork(VtePty *pty,
 }
 
 /**
- * vte_pty_set_size:
- * @pty: a #VtePty
+ * deepinvte_pty_set_size:
+ * @pty: a #DeepinvtePty
  * @rows: the desired number of rows
  * @columns: the desired number of columns
  * @error: (allow-none); return location to store a #GError, or %NULL
@@ -628,26 +628,26 @@ __vte_pty_fork(VtePty *pty,
  * Since: 0.26
  */
 gboolean
-vte_pty_set_size(VtePty *pty,
+deepinvte_pty_set_size(DeepinvtePty *pty,
                  int rows,
                  int columns,
                  GError **error)
 {
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 	struct winsize size;
         int master;
 	int ret;
 
-        g_return_val_if_fail(VTE_IS_PTY(pty), FALSE);
+        g_return_val_if_fail(DEEPINVTE_IS_PTY(pty), FALSE);
 
         priv = pty->priv;
 
-        master = vte_pty_get_fd(pty);
+        master = deepinvte_pty_get_fd(pty);
 
 	memset(&size, 0, sizeof(size));
 	size.ws_row = rows > 0 ? rows : 24;
 	size.ws_col = columns > 0 ? columns : 80;
-	_vte_debug_print(VTE_DEBUG_PTY,
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 			"Setting size on fd %d to (%d,%d).\n",
 			master, columns, rows);
 	ret = ioctl(master, TIOCSWINSZ, &size);
@@ -659,7 +659,7 @@ vte_pty_set_size(VtePty *pty,
                             "Failed to set window size: %s",
                             g_strerror(errsv));
 
-		_vte_debug_print(VTE_DEBUG_PTY,
+		_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 				"Failed to set size on %d: %s.\n",
 				master, g_strerror(errsv));
 
@@ -672,8 +672,8 @@ vte_pty_set_size(VtePty *pty,
 }
 
 /**
- * vte_pty_get_size:
- * @pty: a #VtePty
+ * deepinvte_pty_get_size:
+ * @pty: a #DeepinvtePty
  * @rows: (out) (allow-none): a location to store the number of rows, or %NULL
  * @columns: (out) (allow-none): a location to store the number of columns, or %NULL
  * @error: return location to store a #GError, or %NULL
@@ -687,21 +687,21 @@ vte_pty_set_size(VtePty *pty,
  * Since: 0.26
  */
 gboolean
-vte_pty_get_size(VtePty *pty,
+deepinvte_pty_get_size(DeepinvtePty *pty,
                  int *rows,
                  int *columns,
                  GError **error)
 {
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 	struct winsize size;
         int master;
 	int ret;
 
-        g_return_val_if_fail(VTE_IS_PTY(pty), FALSE);
+        g_return_val_if_fail(DEEPINVTE_IS_PTY(pty), FALSE);
 
         priv = pty->priv;
 
-        master = vte_pty_get_fd(pty);
+        master = deepinvte_pty_get_fd(pty);
 
 	memset(&size, 0, sizeof(size));
 	ret = ioctl(master, TIOCGWINSZ, &size);
@@ -712,7 +712,7 @@ vte_pty_get_size(VtePty *pty,
 		if (rows != NULL) {
 			*rows = size.ws_row;
 		}
-		_vte_debug_print(VTE_DEBUG_PTY,
+		_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 				"Size on fd %d is (%d,%d).\n",
 				master, size.ws_col, size.ws_row);
                 return TRUE;
@@ -724,7 +724,7 @@ vte_pty_get_size(VtePty *pty,
                             "Failed to get window size: %s",
                             g_strerror(errsv));
 
-		_vte_debug_print(VTE_DEBUG_PTY,
+		_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 				"Failed to read size from fd %d: %s\n",
 				master, g_strerror(errsv));
 
@@ -735,7 +735,7 @@ vte_pty_get_size(VtePty *pty,
 }
 
 /*
- * _vte_pty_ptsname:
+ * _deepinvte_pty_ptsname:
  * @master: file descriptor to the PTY master
  * @error: a location to store a #GError, or %NULL
  *
@@ -743,7 +743,7 @@ vte_pty_get_size(VtePty *pty,
  *   PTY slave device, or %NULL on failure with @error filled in
  */
 static char *
-_vte_pty_ptsname(int master,
+_deepinvte_pty_ptsname(int master,
                  GError **error)
 {
 #if defined(HAVE_PTSNAME_R)
@@ -756,7 +756,7 @@ _vte_pty_ptsname(int master,
 		switch (i) {
 		case 0:
 			/* Return the allocated buffer with the name in it. */
-			_vte_debug_print(VTE_DEBUG_PTY,
+			_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 					"PTY slave is `%s'.\n", buf);
 			return buf;
 			break;
@@ -770,28 +770,28 @@ _vte_pty_ptsname(int master,
 		len *= 2;
 	} while ((i != 0) && (errno == ERANGE));
 
-        g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+        g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                     "%s failed: %s", "ptsname_r", g_strerror(errno));
         return NULL;
 #elif defined(HAVE_PTSNAME)
 	char *p;
 	if ((p = ptsname(master)) != NULL) {
-		_vte_debug_print(VTE_DEBUG_PTY, "PTY slave is `%s'.\n", p);
+		_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY, "PTY slave is `%s'.\n", p);
 		return g_strdup(p);
 	}
 
-        g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+        g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                     "%s failed: %s", "ptsname", g_strerror(errno));
         return NULL;
 #elif defined(TIOCGPTN)
 	int pty = 0;
 	if (ioctl(master, TIOCGPTN, &pty) == 0) {
-		_vte_debug_print(VTE_DEBUG_PTY,
+		_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
 				"PTY slave is `/dev/pts/%d'.\n", pty);
 		return g_strdup_printf("/dev/pts/%d", pty);
 	}
 
-        g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+        g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                     "%s failed: %s", "ioctl(TIOCGPTN)", g_strerror(errno));
         return NULL;
 #else
@@ -800,7 +800,7 @@ _vte_pty_ptsname(int master,
 }
 
 /*
- * _vte_pty_getpt:
+ * _deepinvte_pty_getpt:
  * @error: a location to store a #GError, or %NULL
  *
  * Opens a file descriptor for the next available PTY master.
@@ -809,7 +809,7 @@ _vte_pty_ptsname(int master,
  * Returns: a new file descriptor, or %-1 on failure
  */
 static int
-_vte_pty_getpt(GError **error)
+_deepinvte_pty_getpt(GError **error)
 {
 	int fd, flags, rv;
 #ifdef HAVE_GETPT
@@ -823,8 +823,8 @@ _vte_pty_getpt(GError **error)
 	}
 #endif
         if (fd == -1) {
-                g_set_error (error, VTE_PTY_ERROR,
-                             VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error (error, DEEPINVTE_PTY_ERROR,
+                             DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                              "%s failed: %s", "getpt", g_strerror(errno));
                 return -1;
         }
@@ -832,8 +832,8 @@ _vte_pty_getpt(GError **error)
         rv = fcntl(fd, F_GETFL, 0);
         if (rv < 0) {
                 int errsv = errno;
-                g_set_error(error, VTE_PTY_ERROR,
-                            VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error(error, DEEPINVTE_PTY_ERROR,
+                            DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                             "%s failed: %s", "fcntl(F_GETFL)", g_strerror(errno));
                 close(fd);
                 errno = errsv;
@@ -841,13 +841,13 @@ _vte_pty_getpt(GError **error)
         }
 
 	/* Set it to blocking. */
-        /* FIXMEchpe: why?? vte_terminal_set_pty does the inverse... */
+        /* FIXMEchpe: why?? deepinvte_terminal_set_pty does the inverse... */
         flags = rv & ~(O_NONBLOCK);
         rv = fcntl(fd, F_SETFL, flags);
         if (rv < 0) {
                 int errsv = errno;
-                g_set_error(error, VTE_PTY_ERROR,
-                            VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error(error, DEEPINVTE_PTY_ERROR,
+                            DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                             "%s failed: %s", "fcntl(F_SETFL)", g_strerror(errno));
                 close(fd);
                 errno = errsv;
@@ -858,7 +858,7 @@ _vte_pty_getpt(GError **error)
 }
 
 static gboolean
-_vte_pty_grantpt(int master,
+_deepinvte_pty_grantpt(int master,
                  GError **error)
 {
 #ifdef HAVE_GRANTPT
@@ -867,7 +867,7 @@ _vte_pty_grantpt(int master,
         rv = grantpt(master);
         if (rv != 0) {
                 int errsv = errno;
-                g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                             "%s failed: %s", "grantpt", g_strerror(errsv));
                 errno = errsv;
                 return FALSE;
@@ -877,7 +877,7 @@ _vte_pty_grantpt(int master,
 }
 
 static gboolean
-_vte_pty_unlockpt(int fd,
+_deepinvte_pty_unlockpt(int fd,
                   GError **error)
 {
         int rv;
@@ -885,7 +885,7 @@ _vte_pty_unlockpt(int fd,
 	rv = unlockpt(fd);
         if (rv != 0) {
                 int errsv = errno;
-                g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                             "%s failed: %s", "unlockpt", g_strerror(errsv));
                 errno = errsv;
                 return FALSE;
@@ -896,7 +896,7 @@ _vte_pty_unlockpt(int fd,
 	rv = ioctl(fd, TIOCSPTLCK, &zero);
         if (rv != 0) {
                 int errsv = errno;
-                g_set_error(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY98_FAILED,
+                g_set_error(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY98_FAILED,
                             "%s failed: %s", "ioctl(TIOCSPTLCK)", g_strerror(errsv));
                 errno = errsv;
                 return FALSE;
@@ -908,8 +908,8 @@ _vte_pty_unlockpt(int fd,
 }
 
 /*
- * _vte_pty_open_unix98:
- * @pty: a #VtePty
+ * _deepinvte_pty_open_unix98:
+ * @pty: a #DeepinvtePty
  * @error: a location to store a #GError, or %NULL
  *
  * Opens a new file descriptor to a new PTY master.
@@ -917,26 +917,26 @@ _vte_pty_unlockpt(int fd,
  * Returns: %TRUE on success, %FALSE on failure with @error filled in
  */
 static gboolean
-_vte_pty_open_unix98(VtePty *pty,
+_deepinvte_pty_open_unix98(DeepinvtePty *pty,
                      GError **error)
 {
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePtyPrivate *priv = pty->priv;
 	int fd;
 	char *buf;
 
 	/* Attempt to open the master. */
-	fd = _vte_pty_getpt(error);
+	fd = _deepinvte_pty_getpt(error);
 	if (fd == -1)
                 return FALSE;
 
-	_vte_debug_print(VTE_DEBUG_PTY, "Allocated pty on fd %d.\n", fd);
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY, "Allocated pty on fd %d.\n", fd);
 
         /* Read the slave number and unlock it. */
-        if ((buf = _vte_pty_ptsname(fd, error)) == NULL ||
-            !_vte_pty_grantpt(fd, error) ||
-            !_vte_pty_unlockpt(fd, error)) {
+        if ((buf = _deepinvte_pty_ptsname(fd, error)) == NULL ||
+            !_deepinvte_pty_grantpt(fd, error) ||
+            !_deepinvte_pty_unlockpt(fd, error)) {
                 int errsv = errno;
-                _vte_debug_print(VTE_DEBUG_PTY,
+                _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
                                 "PTY setup failed, bailing.\n");
                 close(fd);
                 errno = errsv;
@@ -951,10 +951,10 @@ _vte_pty_open_unix98(VtePty *pty,
         return TRUE;
 }
 
-#ifdef VTE_USE_GNOME_PTY_HELPER
+#ifdef DEEPINVTE_USE_GNOME_PTY_HELPER
 #ifdef HAVE_RECVMSG
 static void
-_vte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
+_deepinvte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
 {
 	int i, ret;
 	char control[LINE_MAX], iobuf[LINE_MAX];
@@ -997,7 +997,7 @@ _vte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
 }
 #elif defined (I_RECVFD)
 static void
-_vte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
+_deepinvte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
 {
 	int i;
 	if (ioctl(tunnel, I_RECVFD, &i) == -1) {
@@ -1013,7 +1013,7 @@ _vte_pty_read_ptypair(int tunnel, int *parentfd, int *childfd)
 
 #ifdef HAVE_SOCKETPAIR
 static int
-_vte_pty_pipe_open(int *a, int *b)
+_deepinvte_pty_pipe_open(int *a, int *b)
 {
 	int p[2], ret = -1;
 #ifdef PF_UNIX
@@ -1034,7 +1034,7 @@ _vte_pty_pipe_open(int *a, int *b)
 }
 #else
 static int
-_vte_pty_pipe_open(int *a, int *b)
+_deepinvte_pty_pipe_open(int *a, int *b)
 {
 	int p[2], ret = -1;
 
@@ -1113,24 +1113,24 @@ n_write(int fd, const void *buffer, size_t count)
 }
 
 /*
- * _vte_pty_stop_helper:
+ * _deepinvte_pty_stop_helper:
  *
  * Terminates the running GNOME PTY helper.
  */
 static void
-_vte_pty_stop_helper(void)
+_deepinvte_pty_stop_helper(void)
 {
-	if (_vte_pty_helper_started) {
-		close(_vte_pty_helper_tunnel);
-		_vte_pty_helper_tunnel = -1;
-		kill(_vte_pty_helper_pid, SIGTERM);
-		_vte_pty_helper_pid = -1;
-		_vte_pty_helper_started = FALSE;
+	if (_deepinvte_pty_helper_started) {
+		close(_deepinvte_pty_helper_tunnel);
+		_deepinvte_pty_helper_tunnel = -1;
+		kill(_deepinvte_pty_helper_pid, SIGTERM);
+		_deepinvte_pty_helper_pid = -1;
+		_deepinvte_pty_helper_started = FALSE;
 	}
 }
 
 /*
- * _vte_pty_start_helper:
+ * _deepinvte_pty_start_helper:
  * @error: a location to store a #GError, or %NULL
  *
  * Starts the GNOME PTY helper process, if it is not already running.
@@ -1139,13 +1139,13 @@ _vte_pty_stop_helper(void)
  *   %FALSE on failure with @error filled in
  */
 static gboolean
-_vte_pty_start_helper(GError **error)
+_deepinvte_pty_start_helper(GError **error)
 {
 	int i, errsv;
         int tunnel = -1;
         int tmp[2] = { -1, -1 };
 
-        if (_vte_pty_helper_started)
+        if (_deepinvte_pty_helper_started)
                 return TRUE;
 
 	/* Create a communication link for use with the helper. */
@@ -1157,7 +1157,7 @@ _vte_pty_start_helper(GError **error)
 	if (tmp[1] == -1) {
 		goto failure;
 	}
-	if (_vte_pty_pipe_open(&_vte_pty_helper_tunnel, &tunnel) != 0) {
+	if (_deepinvte_pty_pipe_open(&_deepinvte_pty_helper_tunnel, &tunnel) != 0) {
 		goto failure;
 	}
 	close(tmp[0]);
@@ -1165,11 +1165,11 @@ _vte_pty_start_helper(GError **error)
         tmp[0] = tmp[1] = -1;
 
 	/* Now fork and start the helper. */
-	_vte_pty_helper_pid = fork();
-	if (_vte_pty_helper_pid == -1) {
+	_deepinvte_pty_helper_pid = fork();
+	if (_deepinvte_pty_helper_pid == -1) {
 		goto failure;
 	}
-	if (_vte_pty_helper_pid == 0) {
+	if (_deepinvte_pty_helper_pid == 0) {
 		/* Child.  Close descriptors.  No need to close all,
 		 * gnome-pty-helper does that anyway. */
 		for (i = 0; i < 3; i++) {
@@ -1179,7 +1179,7 @@ _vte_pty_start_helper(GError **error)
 		dup2(tunnel, STDIN_FILENO);
 		dup2(tunnel, STDOUT_FILENO);
 		close(tunnel);
-		close(_vte_pty_helper_tunnel);
+		close(_deepinvte_pty_helper_tunnel);
 		/* Exec our helper. */
 		execl(LIBEXECDIR "/gnome-pty-helper",
 		      "gnome-pty-helper", NULL);
@@ -1187,16 +1187,16 @@ _vte_pty_start_helper(GError **error)
 		_exit(1);
 	}
 	close(tunnel);
-	atexit(_vte_pty_stop_helper);
+	atexit(_deepinvte_pty_stop_helper);
 
-        _vte_pty_helper_started = TRUE;
+        _deepinvte_pty_helper_started = TRUE;
 	return TRUE;
 
 failure:
         errsv = errno;
 
-        g_set_error(error, VTE_PTY_ERROR,
-                    VTE_PTY_ERROR_PTY_HELPER_FAILED,
+        g_set_error(error, DEEPINVTE_PTY_ERROR,
+                    DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                     "Failed to start gnome-pty-helper: %s",
                     g_strerror (errsv));
 
@@ -1206,19 +1206,19 @@ failure:
                 close(tmp[1]);
         if (tunnel != -1)
                 close(tunnel);
-        if (_vte_pty_helper_tunnel != -1)
-                close(_vte_pty_helper_tunnel);
+        if (_deepinvte_pty_helper_tunnel != -1)
+                close(_deepinvte_pty_helper_tunnel);
 
-        _vte_pty_helper_pid = -1;
-        _vte_pty_helper_tunnel = -1;
+        _deepinvte_pty_helper_pid = -1;
+        _deepinvte_pty_helper_tunnel = -1;
 
         errno = errsv;
         return FALSE;
 }
 
 /*
- * _vte_pty_helper_ops_from_flags:
- * @flags: flags from #VtePtyFlags
+ * _deepinvte_pty_helper_ops_from_flags:
+ * @flags: flags from #DeepinvtePtyFlags
  *
  * Translates @flags into the corresponding op code for the
  * GNOME PTY helper.
@@ -1226,7 +1226,7 @@ failure:
  * Returns: the #GnomePtyOps corresponding to @flags
  */
 static int
-_vte_pty_helper_ops_from_flags (VtePtyFlags flags)
+_deepinvte_pty_helper_ops_from_flags (DeepinvtePtyFlags flags)
 {
 	int op = 0;
 	static const int opmap[8] = {
@@ -1239,13 +1239,13 @@ _vte_pty_helper_ops_from_flags (VtePtyFlags flags)
 		GNOME_PTY_OPEN_PTY_UWTMP,		/* 1 1 0 */
 		GNOME_PTY_OPEN_PTY_LASTLOGUWTMP,	/* 1 1 1 */
 	};
-	if ((flags & VTE_PTY_NO_LASTLOG) == 0) {
+	if ((flags & DEEPINVTE_PTY_NO_LASTLOG) == 0) {
 		op += 1;
 	}
-	if ((flags & VTE_PTY_NO_UTMP) == 0) {
+	if ((flags & DEEPINVTE_PTY_NO_UTMP) == 0) {
 		op += 2;
 	}
-	if ((flags & VTE_PTY_NO_WTMP) == 0) {
+	if ((flags & DEEPINVTE_PTY_NO_WTMP) == 0) {
 		op += 4;
 	}
 	g_assert(op >= 0 && op < (int) G_N_ELEMENTS(opmap));
@@ -1254,8 +1254,8 @@ _vte_pty_helper_ops_from_flags (VtePtyFlags flags)
 }
 
 /*
- * _vte_pty_open_with_helper:
- * @pty: a #VtePty
+ * _deepinvte_pty_open_with_helper:
+ * @pty: a #DeepinvtePty
  * @error: a location to store a #GError, or %NULL
  *
  * Opens a new file descriptor to a new PTY master using the
@@ -1264,62 +1264,62 @@ _vte_pty_helper_ops_from_flags (VtePtyFlags flags)
  * Returns: %TRUE on success, %FALSE on failure with @error filled in
  */
 static gboolean
-_vte_pty_open_with_helper(VtePty *pty,
+_deepinvte_pty_open_with_helper(DeepinvtePty *pty,
                           GError **error)
 {
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePtyPrivate *priv = pty->priv;
 	GnomePtyOps ops;
 	int ret;
 	int parentfd = -1, childfd = -1;
 	gpointer tag;
 
 	/* We have to use the pty helper here. */
-	if (!_vte_pty_start_helper(error))
+	if (!_deepinvte_pty_start_helper(error))
                 return FALSE;
 
 	/* Try to open a new descriptor. */
 
-        ops = _vte_pty_helper_ops_from_flags(priv->flags);
+        ops = _deepinvte_pty_helper_ops_from_flags(priv->flags);
         /* Send our request. */
-        if (n_write(_vte_pty_helper_tunnel,
+        if (n_write(_deepinvte_pty_helper_tunnel,
                     &ops, sizeof(ops)) != sizeof(ops)) {
-                g_set_error (error, VTE_PTY_ERROR,
-                              VTE_PTY_ERROR_PTY_HELPER_FAILED,
+                g_set_error (error, DEEPINVTE_PTY_ERROR,
+                              DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                               "Failed to send request to gnome-pty-helper: %s",
                               g_strerror(errno));
                 return FALSE;
         }
-        _vte_debug_print(VTE_DEBUG_PTY, "Sent request to helper.\n");
+        _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY, "Sent request to helper.\n");
         /* Read back the response. */
-        if (n_read(_vte_pty_helper_tunnel,
+        if (n_read(_deepinvte_pty_helper_tunnel,
                     &ret, sizeof(ret)) != sizeof(ret)) {
-                g_set_error (error, VTE_PTY_ERROR,
-                              VTE_PTY_ERROR_PTY_HELPER_FAILED,
+                g_set_error (error, DEEPINVTE_PTY_ERROR,
+                              DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                               "Failed to read response from gnome-pty-helper: %s",
                               g_strerror(errno));
                 return FALSE;
         }
-        _vte_debug_print(VTE_DEBUG_PTY,
+        _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
                         "Received response from helper.\n");
         if (ret == 0) {
-                g_set_error_literal (error, VTE_PTY_ERROR,
-                                      VTE_PTY_ERROR_PTY_HELPER_FAILED,
+                g_set_error_literal (error, DEEPINVTE_PTY_ERROR,
+                                      DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                                       "gnome-pty-helper failed to open pty");
                 return FALSE;
         }
-        _vte_debug_print(VTE_DEBUG_PTY, "Helper returns success.\n");
+        _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY, "Helper returns success.\n");
         /* Read back a tag. */
-        if (n_read(_vte_pty_helper_tunnel,
+        if (n_read(_deepinvte_pty_helper_tunnel,
                     &tag, sizeof(tag)) != sizeof(tag)) {
-                g_set_error (error, VTE_PTY_ERROR,
-                              VTE_PTY_ERROR_PTY_HELPER_FAILED,
+                g_set_error (error, DEEPINVTE_PTY_ERROR,
+                              DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                               "Failed to read tag from gnome-pty-helper: %s",
                               g_strerror(errno));
                 return FALSE;
         }
-        _vte_debug_print(VTE_DEBUG_PTY, "Tag = %p.\n", tag);
+        _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY, "Tag = %p.\n", tag);
         /* Receive the master and slave ptys. */
-        _vte_pty_read_ptypair(_vte_pty_helper_tunnel,
+        _deepinvte_pty_read_ptypair(_deepinvte_pty_helper_tunnel,
                               &parentfd, &childfd);
 
         if ((parentfd == -1) || (childfd == -1)) {
@@ -1328,15 +1328,15 @@ _vte_pty_open_with_helper(VtePty *pty,
                 close(parentfd);
                 close(childfd);
 
-                g_set_error (error, VTE_PTY_ERROR,
-                              VTE_PTY_ERROR_PTY_HELPER_FAILED,
+                g_set_error (error, DEEPINVTE_PTY_ERROR,
+                              DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
                               "Failed to read master or slave pty from gnome-pty-helper: %s",
                               g_strerror(errsv));
                 errno = errsv;
                 return FALSE;
         }
 
-        _vte_debug_print(VTE_DEBUG_PTY,
+        _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
                         "Got master pty %d and slave pty %d.\n",
                         parentfd, childfd);
 
@@ -1350,11 +1350,11 @@ _vte_pty_open_with_helper(VtePty *pty,
         return TRUE;
 }
 
-#endif /* VTE_USE_GNOME_PTY_HELPER */
+#endif /* DEEPINVTE_USE_GNOME_PTY_HELPER */
 
 /**
- * vte_pty_set_utf8:
- * @pty: a #VtePty
+ * deepinvte_pty_set_utf8:
+ * @pty: a #DeepinvtePty
  * @utf8: whether or not the pty is in UTF-8 mode
  * @error: (allow-none): return location to store a #GError, or %NULL
  *
@@ -1367,16 +1367,16 @@ _vte_pty_open_with_helper(VtePty *pty,
  * Since: 0.26
  */
 gboolean
-vte_pty_set_utf8(VtePty *pty,
+deepinvte_pty_set_utf8(DeepinvtePty *pty,
                  gboolean utf8,
                  GError **error)
 {
 #if defined(HAVE_TCSETATTR) && defined(IUTF8)
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 	struct termios tio;
 	tcflag_t saved_cflag;
 
-        g_return_val_if_fail(VTE_IS_PTY(pty), FALSE);
+        g_return_val_if_fail(DEEPINVTE_IS_PTY(pty), FALSE);
 
         priv = pty->priv;
         g_return_val_if_fail (priv->pty_fd > 0, FALSE);
@@ -1411,8 +1411,8 @@ vte_pty_set_utf8(VtePty *pty,
 }
 
 /**
- * vte_pty_close:
- * @pty: a #VtePty
+ * deepinvte_pty_close:
+ * @pty: a #DeepinvtePty
  *
  * Cleans up the PTY, specifically any logging performed for the session.
  * The file descriptor to the PTY master remains open.
@@ -1420,10 +1420,10 @@ vte_pty_set_utf8(VtePty *pty,
  * Since: 0.26
  */
 void
-vte_pty_close (VtePty *pty)
+deepinvte_pty_close (DeepinvtePty *pty)
 {
-#ifdef VTE_USE_GNOME_PTY_HELPER
-        VtePtyPrivate *priv = pty->priv;
+#ifdef DEEPINVTE_USE_GNOME_PTY_HELPER
+        DeepinvtePtyPrivate *priv = pty->priv;
 	gpointer tag;
 	GnomePtyOps ops;
 
@@ -1434,28 +1434,28 @@ vte_pty_close (VtePty *pty)
         tag = priv->helper_tag;
 
         ops = GNOME_PTY_CLOSE_PTY;
-        if (n_write(_vte_pty_helper_tunnel,
+        if (n_write(_deepinvte_pty_helper_tunnel,
                     &ops, sizeof(ops)) != sizeof(ops)) {
                 return;
         }
-        if (n_write(_vte_pty_helper_tunnel,
+        if (n_write(_deepinvte_pty_helper_tunnel,
                     &tag, sizeof(tag)) != sizeof(tag)) {
                 return;
         }
 
         ops = GNOME_PTY_SYNCH;
-        if (n_write(_vte_pty_helper_tunnel,
+        if (n_write(_deepinvte_pty_helper_tunnel,
                     &ops, sizeof(ops)) != sizeof(ops)) {
                 return;
         }
-        n_read(_vte_pty_helper_tunnel, &ops, 1);
+        n_read(_deepinvte_pty_helper_tunnel, &ops, 1);
 
         priv->helper_tag = NULL;
         priv->using_helper = FALSE;
 #endif
 }
 
-/* VTE PTY class */
+/* DEEPINVTE PTY class */
 
 enum {
         PROP_0,
@@ -1467,12 +1467,12 @@ enum {
 /* GInitable impl */
 
 static gboolean
-vte_pty_initable_init (GInitable *initable,
+deepinvte_pty_initable_init (GInitable *initable,
                        GCancellable *cancellable,
                        GError **error)
 {
-        VtePty *pty = VTE_PTY (initable);
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePty *pty = DEEPINVTE_PTY (initable);
+        DeepinvtePtyPrivate *priv = pty->priv;
         gboolean ret = FALSE;
 
         if (cancellable != NULL) {
@@ -1487,25 +1487,25 @@ vte_pty_initable_init (GInitable *initable,
                 return TRUE;
         }
 
-#ifdef VTE_USE_GNOME_PTY_HELPER
-	if ((priv->flags & VTE_PTY_NO_HELPER) == 0) {
+#ifdef DEEPINVTE_USE_GNOME_PTY_HELPER
+	if ((priv->flags & DEEPINVTE_PTY_NO_HELPER) == 0) {
                 GError *err = NULL;
 
-		ret = _vte_pty_open_with_helper(pty, &err);
+		ret = _deepinvte_pty_open_with_helper(pty, &err);
                 g_assert(ret || err != NULL);
 
                 if (ret)
                         goto out;
 
-                _vte_debug_print(VTE_DEBUG_PTY,
-                                 "_vte_pty_open_with_helper failed: %s\n",
+                _deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
+                                 "_deepinvte_pty_open_with_helper failed: %s\n",
                                  err->message);
 
                 /* Only do fallback if gnome-pty-helper failed! */
-                if ((priv->flags & VTE_PTY_NO_FALLBACK) ||
+                if ((priv->flags & DEEPINVTE_PTY_NO_FALLBACK) ||
                     !g_error_matches(err,
-                                     VTE_PTY_ERROR,
-                                     VTE_PTY_ERROR_PTY_HELPER_FAILED)) {
+                                     DEEPINVTE_PTY_ERROR,
+                                     DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED)) {
                         g_propagate_error (error, err);
                         goto out;
                 }
@@ -1514,54 +1514,54 @@ vte_pty_initable_init (GInitable *initable,
                 /* Fall back to unix98 PTY */
         }
 #else
-        if (priv->flags & VTE_PTY_NO_FALLBACK) {
-                g_set_error_literal(error, VTE_PTY_ERROR, VTE_PTY_ERROR_PTY_HELPER_FAILED,
-                                    "VTE compiled without GNOME PTY helper");
+        if (priv->flags & DEEPINVTE_PTY_NO_FALLBACK) {
+                g_set_error_literal(error, DEEPINVTE_PTY_ERROR, DEEPINVTE_PTY_ERROR_PTY_HELPER_FAILED,
+                                    "DEEPINVTE compiled without GNOME PTY helper");
                 goto out;
         }
-#endif /* VTE_USE_GNOME_PTY_HELPER */
+#endif /* DEEPINVTE_USE_GNOME_PTY_HELPER */
 
-        ret = _vte_pty_open_unix98(pty, error);
+        ret = _deepinvte_pty_open_unix98(pty, error);
 
   out:
-	_vte_debug_print(VTE_DEBUG_PTY,
-			"vte_pty_initable_init returning %s with ptyfd = %d\n",
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_PTY,
+			"deepinvte_pty_initable_init returning %s with ptyfd = %d\n",
 			ret ? "TRUE" : "FALSE", priv->pty_fd);
 
 	return ret;
 }
 
 static void
-vte_pty_initable_iface_init (GInitableIface  *iface)
+deepinvte_pty_initable_iface_init (GInitableIface  *iface)
 {
-        iface->init = vte_pty_initable_init;
+        iface->init = deepinvte_pty_initable_init;
 }
 
 /* GObjectClass impl */
 
-G_DEFINE_TYPE_WITH_CODE (VtePty, vte_pty, G_TYPE_OBJECT,
-                         G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, vte_pty_initable_iface_init))
+G_DEFINE_TYPE_WITH_CODE (DeepinvtePty, deepinvte_pty, G_TYPE_OBJECT,
+                         G_IMPLEMENT_INTERFACE (G_TYPE_INITABLE, deepinvte_pty_initable_iface_init))
 
 static void
-vte_pty_init (VtePty *pty)
+deepinvte_pty_init (DeepinvtePty *pty)
 {
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 
-        priv = pty->priv = G_TYPE_INSTANCE_GET_PRIVATE (pty, VTE_TYPE_PTY, VtePtyPrivate);
+        priv = pty->priv = G_TYPE_INSTANCE_GET_PRIVATE (pty, DEEPINVTE_TYPE_PTY, DeepinvtePtyPrivate);
 
-        priv->flags = VTE_PTY_DEFAULT;
+        priv->flags = DEEPINVTE_PTY_DEFAULT;
         priv->pty_fd = -1;
         priv->foreign = FALSE;
         priv->using_helper = FALSE;
         priv->helper_tag = NULL;
-        priv->term = vte_terminal_get_default_emulation(NULL /* that's ok, this function is just retarded */); /* already interned */
+        priv->term = deepinvte_terminal_get_default_emulation(NULL /* that's ok, this function is just retarded */); /* already interned */
 }
 
 static void
-vte_pty_finalize (GObject *object)
+deepinvte_pty_finalize (GObject *object)
 {
-        VtePty *pty = VTE_PTY (object);
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePty *pty = DEEPINVTE_PTY (object);
+        DeepinvtePtyPrivate *priv = pty->priv;
 
         if (priv->child_setup_data.mode == TTY_OPEN_BY_FD &&
             priv->child_setup_data.tty.fd != -1) {
@@ -1569,24 +1569,24 @@ vte_pty_finalize (GObject *object)
                 close(priv->child_setup_data.tty.fd);
         }
 
-        vte_pty_close(pty);
+        deepinvte_pty_close(pty);
 
         /* Close the master FD */
         if (priv->pty_fd != -1) {
                 close(priv->pty_fd);
         }
 
-        G_OBJECT_CLASS (vte_pty_parent_class)->finalize (object);
+        G_OBJECT_CLASS (deepinvte_pty_parent_class)->finalize (object);
 }
 
 static void
-vte_pty_get_property (GObject    *object,
+deepinvte_pty_get_property (GObject    *object,
                        guint       property_id,
                        GValue     *value,
                        GParamSpec *pspec)
 {
-        VtePty *pty = VTE_PTY (object);
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePty *pty = DEEPINVTE_PTY (object);
+        DeepinvtePtyPrivate *priv = pty->priv;
 
         switch (property_id) {
         case PROP_FLAGS:
@@ -1594,7 +1594,7 @@ vte_pty_get_property (GObject    *object,
                 break;
 
         case PROP_FD:
-                g_value_set_int(value, vte_pty_get_fd(pty));
+                g_value_set_int(value, deepinvte_pty_get_fd(pty));
                 break;
 
         case PROP_TERM:
@@ -1607,13 +1607,13 @@ vte_pty_get_property (GObject    *object,
 }
 
 static void
-vte_pty_set_property (GObject      *object,
+deepinvte_pty_set_property (GObject      *object,
                        guint         property_id,
                        const GValue *value,
                        GParamSpec   *pspec)
 {
-        VtePty *pty = VTE_PTY (object);
-        VtePtyPrivate *priv = pty->priv;
+        DeepinvtePty *pty = DEEPINVTE_PTY (object);
+        DeepinvtePtyPrivate *priv = pty->priv;
 
         switch (property_id) {
         case PROP_FLAGS:
@@ -1626,7 +1626,7 @@ vte_pty_set_property (GObject      *object,
                 break;
 
         case PROP_TERM:
-                vte_pty_set_term(pty, g_value_get_string(value));
+                deepinvte_pty_set_term(pty, g_value_get_string(value));
                 break;
 
         default:
@@ -1635,18 +1635,18 @@ vte_pty_set_property (GObject      *object,
 }
 
 static void
-vte_pty_class_init (VtePtyClass *klass)
+deepinvte_pty_class_init (DeepinvtePtyClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-        g_type_class_add_private(object_class, sizeof(VtePtyPrivate));
+        g_type_class_add_private(object_class, sizeof(DeepinvtePtyPrivate));
 
-        object_class->set_property = vte_pty_set_property;
-        object_class->get_property = vte_pty_get_property;
-        object_class->finalize     = vte_pty_finalize;
+        object_class->set_property = deepinvte_pty_set_property;
+        object_class->get_property = deepinvte_pty_get_property;
+        object_class->finalize     = deepinvte_pty_finalize;
 
         /**
-         * VtePty:flags:
+         * DeepinvtePty:flags:
          *
          * Controls how the session is recorded in lastlog, utmp, and wtmp,
          * and whether to use the GNOME PTY helper.
@@ -1657,14 +1657,14 @@ vte_pty_class_init (VtePtyClass *klass)
                 (object_class,
                  PROP_FLAGS,
                  g_param_spec_flags ("flags", NULL, NULL,
-                                     VTE_TYPE_PTY_FLAGS,
-                                     VTE_PTY_DEFAULT,
+                                     DEEPINVTE_TYPE_PTY_FLAGS,
+                                     DEEPINVTE_PTY_DEFAULT,
                                      G_PARAM_READWRITE |
                                      G_PARAM_CONSTRUCT_ONLY |
                                      G_PARAM_STATIC_STRINGS));
 
         /**
-         * VtePty:fd:
+         * DeepinvtePty:fd:
          *
          * The file descriptor of the PTY master.
          *
@@ -1680,7 +1680,7 @@ vte_pty_class_init (VtePtyClass *klass)
                                    G_PARAM_STATIC_STRINGS));
 
         /**
-         * VtePty:term:
+         * DeepinvtePty:term:
          *
          * The value to set for the TERM environment variable just after
          * forking.
@@ -1699,29 +1699,29 @@ vte_pty_class_init (VtePtyClass *klass)
 /* public API */
 
 /**
- * vte_pty_error_quark:
+ * deepinvte_pty_error_quark:
  *
- * Error domain for VTE PTY errors. Errors in this domain will be from the #VtePtyError
+ * Error domain for DEEPINVTE PTY errors. Errors in this domain will be from the #DeepinvtePtyError
  * enumeration. See #GError for more information on error domains.
  *
- * Returns: the error domain for VTE PTY errors
+ * Returns: the error domain for DEEPINVTE PTY errors
  *
  * Since: 0.26
  */
 GQuark
-vte_pty_error_quark(void)
+deepinvte_pty_error_quark(void)
 {
   static GQuark quark = 0;
 
   if (G_UNLIKELY (quark == 0))
-    quark = g_quark_from_static_string("vte-pty-error");
+    quark = g_quark_from_static_string("deepinvte-pty-error");
 
   return quark;
 }
 
 /**
- * vte_pty_new:
- * @flags: flags from #VtePtyFlags
+ * deepinvte_pty_new:
+ * @flags: flags from #DeepinvtePtyFlags
  * @error: (allow-none): return location for a #GError, or %NULL
  *
  * Allocates a new pseudo-terminal.
@@ -1729,33 +1729,33 @@ vte_pty_error_quark(void)
  * You can later use fork() or the g_spawn_async() family of functions
  * to start a process on the PTY.
  *
- * If using fork(), you MUST call vte_pty_child_setup() in the child.
+ * If using fork(), you MUST call deepinvte_pty_child_setup() in the child.
  *
  * If using g_spawn_async() and friends, you MUST either use
- * vte_pty_child_setup() directly as the child setup function, or call
- * vte_pty_child_setup() from your own child setup function supplied.
+ * deepinvte_pty_child_setup() directly as the child setup function, or call
+ * deepinvte_pty_child_setup() from your own child setup function supplied.
  * Also, you MUST pass the %G_SPAWN_DO_NOT_REAP_CHILD flag.
  *
  * If GNOME PTY Helper is available and
- * unless some of the %VTE_PTY_NO_LASTLOG, %VTE_PTY_NO_UTMP or
- * %VTE_PTY_NO_WTMP flags are passed in @flags, the
+ * unless some of the %DEEPINVTE_PTY_NO_LASTLOG, %DEEPINVTE_PTY_NO_UTMP or
+ * %DEEPINVTE_PTY_NO_WTMP flags are passed in @flags, the
  * session is logged in the corresponding lastlog, utmp or wtmp
- * system files.  When passing %VTE_PTY_NO_HELPER in @flags, the
+ * system files.  When passing %DEEPINVTE_PTY_NO_HELPER in @flags, the
  * GNOME PTY Helper is bypassed entirely.
  *
- * When passing %VTE_PTY_NO_FALLBACK in @flags,
+ * When passing %DEEPINVTE_PTY_NO_FALLBACK in @flags,
  * and opening a PTY using the PTY helper fails, there will
  * be no fallback to allocate a PTY using Unix98 PTY functions.
  *
- * Returns: (transfer full): a new #VtePty, or %NULL on error with @error filled in
+ * Returns: (transfer full): a new #DeepinvtePty, or %NULL on error with @error filled in
  *
  * Since: 0.26
  */
-VtePty *
-vte_pty_new (VtePtyFlags flags,
+DeepinvtePty *
+deepinvte_pty_new (DeepinvtePtyFlags flags,
              GError **error)
 {
-        return g_initable_new (VTE_TYPE_PTY,
+        return g_initable_new (DEEPINVTE_TYPE_PTY,
                                NULL /* cancellable */,
                                error,
                                "flags", flags,
@@ -1763,28 +1763,28 @@ vte_pty_new (VtePtyFlags flags,
 }
 
 /**
- * vte_pty_new_foreign:
+ * deepinvte_pty_new_foreign:
  * @fd: (transfer full): a file descriptor to the PTY
  * @error: (allow-none): return location for a #GError, or %NULL
  *
- * Creates a new #VtePty for the PTY master @fd.
+ * Creates a new #DeepinvtePty for the PTY master @fd.
  *
  * No entry will be made in the lastlog, utmp or wtmp system files.
  *
- * Note that the newly created #VtePty will take ownership of @fd
+ * Note that the newly created #DeepinvtePty will take ownership of @fd
  * and close it on finalize.
  *
- * Returns: (transfer full): a new #VtePty for @fd, or %NULL on error with @error filled in
+ * Returns: (transfer full): a new #DeepinvtePty for @fd, or %NULL on error with @error filled in
  *
  * Since: 0.26
  */
-VtePty *
-vte_pty_new_foreign (int fd,
+DeepinvtePty *
+deepinvte_pty_new_foreign (int fd,
                      GError **error)
 {
         g_return_val_if_fail(fd >= 0, NULL);
 
-        return g_initable_new (VTE_TYPE_PTY,
+        return g_initable_new (DEEPINVTE_TYPE_PTY,
                                NULL /* cancellable */,
                                error,
                                "fd", fd,
@@ -1792,18 +1792,18 @@ vte_pty_new_foreign (int fd,
 }
 
 /**
- * vte_pty_get_fd:
- * @pty: a #VtePty
+ * deepinvte_pty_get_fd:
+ * @pty: a #DeepinvtePty
  *
  * Returns: (transfer none): the file descriptor of the PTY master in @pty. The
  *   file descriptor belongs to @pty and must not be closed
  */
 int
-vte_pty_get_fd (VtePty *pty)
+deepinvte_pty_get_fd (DeepinvtePty *pty)
 {
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 
-        g_return_val_if_fail(VTE_IS_PTY(pty), -1);
+        g_return_val_if_fail(DEEPINVTE_IS_PTY(pty), -1);
 
         priv = pty->priv;
         g_return_val_if_fail(priv->pty_fd != -1, -1);
@@ -1812,8 +1812,8 @@ vte_pty_get_fd (VtePty *pty)
 }
 
 /**
- * vte_pty_set_term:
- * @pty: a #VtePty
+ * deepinvte_pty_set_term:
+ * @pty: a #DeepinvtePty
  * @emulation: (allow-none): the name of a terminal description, or %NULL
  *
  * Sets what value of the TERM environment variable to set just after forking.
@@ -1821,12 +1821,12 @@ vte_pty_get_fd (VtePty *pty)
  * Since: 0.26
  */
 void
-vte_pty_set_term (VtePty *pty,
+deepinvte_pty_set_term (DeepinvtePty *pty,
                   const char *emulation)
 {
-        VtePtyPrivate *priv;
+        DeepinvtePtyPrivate *priv;
 
-        g_return_if_fail(VTE_IS_PTY(pty));
+        g_return_if_fail(DEEPINVTE_IS_PTY(pty));
         g_return_if_fail(emulation != NULL);
 
         priv = pty->priv;
@@ -1838,27 +1838,27 @@ vte_pty_set_term (VtePty *pty,
         g_object_notify(G_OBJECT(pty), "term");
 }
 
-/* Reimplementation of the ugly deprecated APIs _vte_pty_*() */
+/* Reimplementation of the ugly deprecated APIs _deepinvte_pty_*() */
 
-#ifndef VTE_DISABLE_DEPRECATED_SOURCE
+#ifndef DEEPINVTE_DISABLE_DEPRECATED_SOURCE
 
 static GHashTable *fd_to_pty_hash = NULL;
 
-static VtePty *
-get_vte_pty_for_fd (int fd)
+static DeepinvtePty *
+get_deepinvte_pty_for_fd (int fd)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
 
         if (fd_to_pty_hash != NULL &&
             (pty = g_hash_table_lookup(fd_to_pty_hash, &fd)) != NULL)
                 return pty;
 
-        g_warning("No VtePty found for fd %d!\n", fd);
+        g_warning("No DeepinvtePty found for fd %d!\n", fd);
         return NULL;
 }
 
 /**
- * _vte_pty_open:
+ * _deepinvte_pty_open:
  * @child: location to store the new process's ID
  * @env_add: a list of environment variables to add to the child's environment
  * @command: name of the binary to run
@@ -1878,10 +1878,10 @@ get_vte_pty_for_fd (int fd)
  *
  * Returns: an open file descriptor for the pty master, -1 on failure
  *
- * Deprecated: 0.26: Use #VtePty together with fork() or the g_spawn_async() family of functions instead
+ * Deprecated: 0.26: Use #DeepinvtePty together with fork() or the g_spawn_async() family of functions instead
  */
 int
-_vte_pty_open(pid_t *child,
+_deepinvte_pty_open(pid_t *child,
               char **env_add,
               const char *command,
               char **argv,
@@ -1892,11 +1892,11 @@ _vte_pty_open(pid_t *child,
               gboolean utmp,
               gboolean wtmp)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
         GPid pid;
         gboolean ret;
 
-        pty = vte_pty_new(__vte_pty_get_pty_flags (lastlog, utmp, wtmp), NULL);
+        pty = deepinvte_pty_new(__deepinvte_pty_get_pty_flags (lastlog, utmp, wtmp), NULL);
         if (pty == NULL)
                 return -1;
 
@@ -1906,8 +1906,8 @@ _vte_pty_open(pid_t *child,
 
                 spawn_flags = G_SPAWN_CHILD_INHERITS_STDIN |
                               G_SPAWN_SEARCH_PATH;
-                real_argv = __vte_pty_get_argv(command, argv, &spawn_flags);
-                ret = __vte_pty_spawn(pty,
+                real_argv = __deepinvte_pty_get_argv(command, argv, &spawn_flags);
+                ret = __deepinvte_pty_spawn(pty,
                                       directory,
                                       real_argv,
                                       env_add,
@@ -1917,7 +1917,7 @@ _vte_pty_open(pid_t *child,
                                       NULL);
                 g_strfreev(real_argv);
         } else {
-                ret = __vte_pty_fork(pty, &pid, NULL);
+                ret = __deepinvte_pty_fork(pty, &pid, NULL);
         }
 
         if (!ret) {
@@ -1925,7 +1925,7 @@ _vte_pty_open(pid_t *child,
                 return -1;
         }
 
-        vte_pty_set_size(pty, rows, columns, NULL);
+        deepinvte_pty_set_size(pty, rows, columns, NULL);
 
         /* Stash the pty in the hash so we can later retrieve it by FD */
         if (fd_to_pty_hash == NULL) {
@@ -1940,11 +1940,11 @@ _vte_pty_open(pid_t *child,
         if (child)
                 *child = (pid_t) pid;
 
-        return vte_pty_get_fd(pty);
+        return deepinvte_pty_get_fd(pty);
 }
 
 /**
- * _vte_pty_get_size:
+ * _deepinvte_pty_get_size:
  * @master: the file descriptor of the PTY master
  * @columns: a place to store the number of columns
  * @rows: a place to store the number of rows
@@ -1953,26 +1953,26 @@ _vte_pty_open(pid_t *child,
  *
  * Returns: 0 on success, -1 on failure.
  *
- * Deprecated: 0.26: Use #VtePty and vte_pty_get_size() instead
+ * Deprecated: 0.26: Use #DeepinvtePty and deepinvte_pty_get_size() instead
  */
 int
-_vte_pty_get_size(int master,
+_deepinvte_pty_get_size(int master,
                   int *columns,
                   int *rows)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
 
-        if ((pty = get_vte_pty_for_fd(master)) == NULL)
+        if ((pty = get_deepinvte_pty_for_fd(master)) == NULL)
                 return -1;
 
-        if (vte_pty_get_size(pty, rows, columns, NULL))
+        if (deepinvte_pty_get_size(pty, rows, columns, NULL))
                 return 0;
 
         return -1;
 }
 
 /**
- * _vte_pty_set_size:
+ * _deepinvte_pty_set_size:
  * @master: the file descriptor of the PTY master
  * @columns: the desired number of columns
  * @rows: the desired number of rows
@@ -1982,26 +1982,26 @@ _vte_pty_get_size(int master,
  *
  * Returns: 0 on success, -1 on failure.
  *
- * Deprecated: 0.26: Use #VtePty and vte_pty_set_size() instead
+ * Deprecated: 0.26: Use #DeepinvtePty and deepinvte_pty_set_size() instead
  */
 int
-_vte_pty_set_size(int master,
+_deepinvte_pty_set_size(int master,
                   int columns,
                   int rows)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
 
-        if ((pty = get_vte_pty_for_fd(master)) == NULL)
+        if ((pty = get_deepinvte_pty_for_fd(master)) == NULL)
                 return -1;
 
-        if (vte_pty_set_size(pty, rows, columns, NULL))
+        if (deepinvte_pty_set_size(pty, rows, columns, NULL))
                 return 0;
 
         return -1;
 }
 
 /**
- * _vte_pty_set_utf8:
+ * _deepinvte_pty_set_utf8:
  * @pty: The pty master descriptor.
  * @utf8: Whether or not the pty is in UTF-8 mode.
  *
@@ -2009,33 +2009,33 @@ _vte_pty_set_size(int master,
  * use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line
  * discipline do multibyte backspace correctly.
  *
- * Deprecated: 0.26: Use #VtePty and vte_pty_set_utf8() instead
+ * Deprecated: 0.26: Use #DeepinvtePty and deepinvte_pty_set_utf8() instead
  */
-void _vte_pty_set_utf8(int master,
+void _deepinvte_pty_set_utf8(int master,
                        gboolean utf8)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
 
-        if ((pty = get_vte_pty_for_fd(master)) == NULL)
+        if ((pty = get_deepinvte_pty_for_fd(master)) == NULL)
                 return;
 
-        vte_pty_set_utf8(pty, utf8, NULL);
+        deepinvte_pty_set_utf8(pty, utf8, NULL);
 }
 
 /**
- * _vte_pty_close:
+ * _deepinvte_pty_close:
  * @pty: the pty master descriptor.
  *
  * Cleans up the PTY associated with the descriptor, specifically any logging
  * performed for the session.  The descriptor itself remains open.
  *
- * Deprecated: 0.26: Use #VtePty and vte_pty_close() instead
+ * Deprecated: 0.26: Use #DeepinvtePty and deepinvte_pty_close() instead
  */
-void _vte_pty_close(int master)
+void _deepinvte_pty_close(int master)
 {
-        VtePty *pty;
+        DeepinvtePty *pty;
 
-        if ((pty = get_vte_pty_for_fd(master)) == NULL)
+        if ((pty = get_deepinvte_pty_for_fd(master)) == NULL)
                 return;
 
         /* Prevent closing the FD */
@@ -2049,4 +2049,4 @@ void _vte_pty_close(int master)
         }
 }
 
-#endif /* !VTE_DISABLE_DEPRECATED_SOURCE */
+#endif /* !DEEPINVTE_DISABLE_DEPRECATED_SOURCE */

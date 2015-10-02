@@ -1,6 +1,6 @@
-# translation of vte.HEAD.ml.po to Malayalam
-# This file is distributed under the same license as the vte package.
-# Copyright (C) 2003-2008 vte'S COPYRIGHT HOLDER.
+# translation of deepinvte.HEAD.ml.po to Malayalam
+# This file is distributed under the same license as the deepinvte package.
+# Copyright (C) 2003-2008 deepinvte'S COPYRIGHT HOLDER.
 # FSF-India <locale@gnu.org.in>, 2003.
 # Suresh Valiya Parambil <mvpsuresh@yahoo.com>, 2003.
 # Ani Peter <apeter@redhat.com>, 2006.
@@ -8,7 +8,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vte.HEAD.ml\n"
+"Project-Id-Version: deepinvte.HEAD.ml\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-04-25 03:21+0100\n"
 "PO-Revision-Date: 2008-03-8 23:12+0530\n"
@@ -22,7 +22,7 @@ msgstr ""
 "\n"
 
 #: ../src/iso2022.c:791 ../src/iso2022.c:799 ../src/iso2022.c:830
-#: ../src/vte.c:1797
+#: ../src/deepinvte.c:1797
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "%s-ല്‍ നിന്നും %s-ലേക്ക് അക്ഷരങ്ങളെ മാറ്റാന്‍ സാധിക്കുന്നില്ല."
@@ -59,61 +59,61 @@ msgstr "സിഗ്നല്‍ പൈപ്പ് ഉണ്ടാക്കു�
 msgid "Duplicate (%s/%s)!"
 msgstr "തനിപകര്‍പ്പു് (%s/%s)!"
 
-#: ../src/vte.c:1187
+#: ../src/deepinvte.c:1187
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "റെഗുലര്‍ എക്സ്പ്രഷന്‍ \"%s\"സമാഹാരിയ്ക്കുന്നതില്‍ പിശകു്."
 
-#: ../src/vte.c:2657 ../src/vte.c:2662
+#: ../src/deepinvte.c:2657 ../src/deepinvte.c:2662
 #, c-format
 msgid "No handler for control sequence `%s' defined."
 msgstr "control sequence `%s'-ന് ഹാന്‍ഡ്ലറുകള്‍ ലഭ്യമല്ല."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:3627
+#: ../src/deepinvte.c:3627
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "ചൈള്‍ഡില്‍ നിന്നും വായിക്കുന്നതില്‍ പിശകു്: %s."
 
-#: ../src/vte.c:3743
+#: ../src/deepinvte.c:3743
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr "ചൈല്‍ഡിനു് ഡാറ്റ അയക്കാന്‍ പറ്റുന്നില്ല. തെറ്റായ കാര്‍സെറ്റ് കണ്‍വെര്‍ട്ടര്‍"
 
-#: ../src/vte.c:3754 ../src/vte.c:4631
+#: ../src/deepinvte.c:3754 ../src/deepinvte.c:4631
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr "ചൈള്‍ഡിനു് ഡേറ്റാ മാറ്റുന്നതില്‍ പിഴവു് (%s), ഉപേക്ഷിയ്ക്കുന്നു."
 
-#: ../src/vte.c:6866
+#: ../src/deepinvte.c:6866
 #, c-format
 msgid "Error reading PTY size, using defaults: %s."
 msgstr "PTY വലിപ്പം വായിയ്ക്കുന്നതില്‍ പിശകു്, വതേയുള്ളതു്  ഉപയോഗിക്കുന്നു: %s."
 
-#: ../src/vte.c:6895
+#: ../src/deepinvte.c:6895
 #, c-format
 msgid "Error setting PTY size: %s."
 msgstr "PTY വലിപ്പം സജ്ജീകരിയ്ക്കുന്നതില്‍ തകരാര്‍: %s."
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:11348
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_conv_open() failed setting word characters"
+#: ../src/deepinvte.c:11348
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_conv_open() failed setting word characters"
 
-#: ../src/vteseq.c:3926
+#: ../src/deepinvteseq.c:3926
 #, c-format
 msgid "Got unexpected (key?) sequence `%s'."
 msgstr "Got unexpected (key?) sequence `%s'."
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:774
+#: ../src/deepinvteapp.c:774
 msgid "Could not open console.\n"
 msgstr "കണ്‍സോള്‍ തുറക്കാനാവുന്നില്ല.\n"
 
-#: ../src/vteapp.c:838
+#: ../src/deepinvteapp.c:838
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "Could not parse the geometry spec passed to --geometry"
 
-#: ../src/vteglyph.c:562
+#: ../src/deepinvteglyph.c:562
 #, c-format
 msgid "Unknown pixel mode %d.\n"
 msgstr "അറിയാത്ത പിക്സല്‍ രീതി %d.\n"

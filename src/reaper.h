@@ -16,10 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef VTE_DISABLE_DEPRECATED
+#ifndef DEEPINVTE_DISABLE_DEPRECATED
 
-#ifndef vte_reaper_h_included
-#define vte_reaper_h_included
+#ifndef deepinvte_reaper_h_included
+#define deepinvte_reaper_h_included
 
 #include <sys/wait.h>
 #include <signal.h>
@@ -29,47 +29,47 @@
 G_BEGIN_DECLS
 
 /**
- * VteReaper:
+ * DeepinvteReaper:
  *
  * The reaper object.
  */
-struct _VteReaper {
+struct _DeepinvteReaper {
 	GObject object;
 
         /*< private >*/
 	GIOChannel *_channel; /* unused */
 	int _iopipe[2]; /* unused */
 };
-typedef struct _VteReaper VteReaper;
+typedef struct _DeepinvteReaper DeepinvteReaper;
 
-struct _VteReaperClass {
+struct _DeepinvteReaperClass {
 	GObjectClass parent_class;
         /*< private >*/
 	guint child_exited_signal;
 };
-typedef struct _VteReaperClass VteReaperClass;
+typedef struct _DeepinvteReaperClass DeepinvteReaperClass;
 
-GType vte_reaper_get_type(void);
+GType deepinvte_reaper_get_type(void);
 
-#define VTE_TYPE_REAPER			(vte_reaper_get_type())
-#define VTE_REAPER(obj)			(G_TYPE_CHECK_INSTANCE_CAST((obj), \
-							VTE_TYPE_REAPER, \
-							VteReaper))
-#define VTE_REAPER_CLASS(klass)		G_TYPE_CHECK_CLASS_CAST((klass), \
-							     VTE_TYPE_REAPER, \
-							     VteReaperClass)
-#define VTE_IS_REAPER(obj)		G_TYPE_CHECK_INSTANCE_TYPE((obj), VTE_TYPE_REAPER)
-#define VTE_IS_REAPER_CLASS(klass)	G_TYPE_CHECK_CLASS_TYPE((klass), \
-							     VTE_TYPE_REAPER)
-#define VTE_REAPER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), \
-								   VTE_TYPE_REAPER, \
-								   VteReaperClass))
+#define DEEPINVTE_TYPE_REAPER			(deepinvte_reaper_get_type())
+#define DEEPINVTE_REAPER(obj)			(G_TYPE_CHECK_INSTANCE_CAST((obj), \
+							DEEPINVTE_TYPE_REAPER, \
+							DeepinvteReaper))
+#define DEEPINVTE_REAPER_CLASS(klass)		G_TYPE_CHECK_CLASS_CAST((klass), \
+							     DEEPINVTE_TYPE_REAPER, \
+							     DeepinvteReaperClass)
+#define DEEPINVTE_IS_REAPER(obj)		G_TYPE_CHECK_INSTANCE_TYPE((obj), DEEPINVTE_TYPE_REAPER)
+#define DEEPINVTE_IS_REAPER_CLASS(klass)	G_TYPE_CHECK_CLASS_TYPE((klass), \
+							     DEEPINVTE_TYPE_REAPER)
+#define DEEPINVTE_REAPER_GET_CLASS(obj)	(G_TYPE_INSTANCE_GET_CLASS((obj), \
+								   DEEPINVTE_TYPE_REAPER, \
+								   DeepinvteReaperClass))
 
-VteReaper *vte_reaper_get(void);
-int vte_reaper_add_child(GPid pid);
+DeepinvteReaper *deepinvte_reaper_get(void);
+int deepinvte_reaper_add_child(GPid pid);
 
 G_END_DECLS
 
 #endif
 
-#endif /* !VTE_DISABLE_DEPRECATED */
+#endif /* !DEEPINVTE_DISABLE_DEPRECATED */

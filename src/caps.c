@@ -21,12 +21,12 @@
 #include <glib.h>
 #include "caps.h"
 
-#define ESC _VTE_CAP_ESC
-#define CSI _VTE_CAP_CSI
-#define ST  _VTE_CAP_ST
-#define OSC _VTE_CAP_OSC
-#define PM  _VTE_CAP_PM
-#define APC _VTE_CAP_APC
+#define ESC _DEEPINVTE_CAP_ESC
+#define CSI _DEEPINVTE_CAP_CSI
+#define ST  _DEEPINVTE_CAP_ST
+#define OSC _DEEPINVTE_CAP_OSC
+#define PM  _DEEPINVTE_CAP_PM
+#define APC _DEEPINVTE_CAP_APC
 
 #define ENQ "\005"
 #define BEL "\007"
@@ -41,7 +41,7 @@
 
 /* This list combined from the Linux termcap(5) man page, and
  * termcap_&_terminfo by Strang, Mui, and O'Reilly. */
-struct _vte_capability_quark _vte_terminal_capability_strings[] = {
+struct _deepinvte_capability_quark _deepinvte_terminal_capability_strings[] = {
 	{"!1", TRUE, 0},
 	{"!2", TRUE, 0},
 	{"!3", TRUE, 0},
@@ -362,7 +362,7 @@ struct _vte_capability_quark _vte_terminal_capability_strings[] = {
 
 /* From some really old XTerm docs we had at the office, and an updated
  * version at Moy, Gildea, and Dickey. */
-struct _vte_capability_string _vte_xterm_capability_strings[] = {
+struct _deepinvte_capability_string _deepinvte_xterm_capability_strings[] = {
 	{ENQ, "return-terminal-status", 0},
 	{VT,  "vertical-tab", 0},
 	{FF,  "form-feed", 0},
@@ -566,33 +566,33 @@ struct _vte_capability_string _vte_xterm_capability_strings[] = {
 
 #if 0
 /**
- * vte_capability_init:
+ * deepinvte_capability_init:
  *
- * Initializes the vte_terminal_capability_strings and
- * vte_xterm_capability_strings structures used by the terminal.  Can
+ * Initializes the deepinvte_terminal_capability_strings and
+ * deepinvte_xterm_capability_strings structures used by the terminal.  Can
  * be called multiple times without ill effect.
  *
  * Returns: void
  */
 
 void
-_vte_capability_init(void)
+_deepinvte_capability_init(void)
 {
 	unsigned int i;
-	for (i = 0; _vte_terminal_capability_strings[i].capability[0]; i++) {
+	for (i = 0; _deepinvte_terminal_capability_strings[i].capability[0]; i++) {
 		const char *tmp;
 		GQuark quark;
-		tmp = _vte_terminal_capability_strings[i].capability;
+		tmp = _deepinvte_terminal_capability_strings[i].capability;
 		quark = g_quark_from_static_string(tmp);
-		_vte_terminal_capability_strings[i].quark = quark;
+		_deepinvte_terminal_capability_strings[i].quark = quark;
 	}
-	for (i = 0; i < G_N_ELEMENTS(_vte_xterm_capability_strings); i++) {
+	for (i = 0; i < G_N_ELEMENTS(_deepinvte_xterm_capability_strings); i++) {
 		const char *tmp;
 		GQuark quark;
-		tmp = _vte_xterm_capability_strings[i].value;
+		tmp = _deepinvte_xterm_capability_strings[i].value;
 		if (tmp != NULL) {
 			quark = g_quark_from_static_string(tmp);
-			_vte_xterm_capability_strings[i].quark = quark;
+			_deepinvte_xterm_capability_strings[i].quark = quark;
 		}
 	}
 }

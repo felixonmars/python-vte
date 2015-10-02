@@ -7,10 +7,10 @@ AUTOMAKE_OPTIONS = 1.10
 # of using the various options.
 
 # The name of the module, e.g. 'glib'.
-DOC_MODULE = vte
+DOC_MODULE = deepinvte
 
 # Uncomment for versioned docs and specify the version of the module, e.g. '2'.
-DOC_MODULE_VERSION = $(VTE_API_VERSION)
+DOC_MODULE_VERSION = $(DEEPINVTE_API_VERSION)
 
 # The top-level SGML file. You can change this if you want to.
 DOC_MAIN_SGML_FILE = $(DOC_MODULE)-docs.xml
@@ -26,11 +26,11 @@ SCANGOBJ_OPTIONS =
 
 # Extra options to supply to gtkdoc-scan.
 # e.g. SCAN_OPTIONS=--deprecated-guards="GTK_DISABLE_DEPRECATED"
-SCAN_OPTIONS = --deprecated-guards="VTE_DISABLE_DEPRECATED"
+SCAN_OPTIONS = --deprecated-guards="DEEPINVTE_DISABLE_DEPRECATED"
 
 # Extra options to supply to gtkdoc-mkdb.
 # e.g. MKDB_OPTIONS=--sgml-mode --output-format=xml
-MKDB_OPTIONS = --sgml-mode --output-format=xml --name-space=vte
+MKDB_OPTIONS = --sgml-mode --output-format=xml --name-space=deepinvte
 
 # Extra options to supply to gtkdoc-mktmpl
 # e.g. MKTMPL_OPTIONS=--only-section-tmpl
@@ -61,7 +61,7 @@ CFILE_GLOB = \
 
 # Extra header to include when scanning, which are not under DOC_SOURCE_DIR
 # e.g. EXTRA_HFILES=$(top_srcdir}/contrib/extra.h
-# EXTRA_HFILES = $(top_builddir)/vte/vteversion.h
+# EXTRA_HFILES = $(top_builddir)/deepinvte/deepinvteversion.h
 EXTRA_HFILES =
 
 # Header files to ignore when scanning. Use base file name, no paths
@@ -76,24 +76,24 @@ IGNORE_HFILES = \
 	marshal.h \
 	matcher.h \
 	ring.h \
-	stamp-vtetypebuiltins.h \
+	stamp-deepinvtetypebuiltins.h \
 	table.h \
 	trie.h \
-	vtebg.h \
-	vteconv.h \
-	vtedraw.h \
-	vteint.h \
-	vte-private.h \
-	vteregex.h \
-	vterowdata.h \
-	vteseq-list.h \
-	vtestream-base.h \
-	vtestream-file.h \
-	vtestream.h \
-	vtetc.h \
-	vtetree.h \
-	vteunistr.h \
-	vteunistr.h
+	deepinvtebg.h \
+	deepinvteconv.h \
+	deepinvtedraw.h \
+	deepinvteint.h \
+	deepinvte-private.h \
+	deepinvteregex.h \
+	deepinvterowdata.h \
+	deepinvteseq-list.h \
+	deepinvtestream-base.h \
+	deepinvtestream-file.h \
+	deepinvtestream.h \
+	deepinvtetc.h \
+	deepinvtetree.h \
+	deepinvteunistr.h \
+	deepinvteunistr.h
 
 # Images to copy into HTML directory.
 # e.g. HTML_IMAGES=$(top_srcdir)/gtk/stock-icons/stock_about_24.png
@@ -119,12 +119,12 @@ GTKDOC_CFLAGS = \
 	-I$(top_srcdir)/src \
 	-I$(top_builddir) \
 	-I$(top_builddir)/src \
-	-DVTE_COMPILATION \
-	$(VTE_CFLAGS)
+	-DDEEPINVTE_COMPILATION \
+	$(DEEPINVTE_CFLAGS)
 
 GTKDOC_LIBS = \
-	$(top_builddir)/src/libvte@VTE_LIBRARY_SUFFIX_U@.la \
-	$(VTE_LIBS)
+	$(top_builddir)/src/libdeepinvte@DEEPINVTE_LIBRARY_SUFFIX_U@.la \
+	$(DEEPINVTE_LIBS)
 
 # This includes the standard gtk-doc make rules, copied by gtkdocize.
 include $(top_srcdir)/gtk-doc.make

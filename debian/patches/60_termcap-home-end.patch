@@ -1,5 +1,5 @@
---- vte-0.16.14.orig/termcaps/xterm
-+++ vte-0.16.14/termcaps/xterm
+--- deepinvte-0.16.14.orig/termcaps/xterm
++++ deepinvte-0.16.14/termcaps/xterm
 @@ -15,6 +15,7 @@
  	:cs=\E[%i%d;%dr:ct=\E[3g:dc=\E[P:dl=\E[M:do=^J:ec=\E[%dX:\
  	:ei=\E[4l:ho=\E[H:im=\E[4h:is=\E[!p\E[?3;4l\E[4l\E>:\

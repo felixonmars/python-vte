@@ -48,7 +48,7 @@ static enum {
 static void
 decset(int mode, gboolean value)
 {
-	fprintf(stdout, _VTE_CAP_CSI "?%d%c", mode, value ? 'h' : 'l');
+	fprintf(stdout, _DEEPINVTE_CAP_CSI "?%d%c", mode, value ? 'h' : 'l');
 }
 
 static void
@@ -66,11 +66,11 @@ static void
 clear(void)
 {
 	fprintf(stdout, "%s",
-		_VTE_CAP_ESC "7"
-		_VTE_CAP_CSI "8;1H"
-		_VTE_CAP_CSI "1J"
-		_VTE_CAP_CSI "2K"
-		_VTE_CAP_CSI "1;1H");
+		_DEEPINVTE_CAP_ESC "7"
+		_DEEPINVTE_CAP_CSI "8;1H"
+		_DEEPINVTE_CAP_CSI "1J"
+		_DEEPINVTE_CAP_CSI "2K"
+		_DEEPINVTE_CAP_CSI "1;1H");
 	reset();
 	switch (tracking_mode) {
 	case tracking_x10:
@@ -102,7 +102,7 @@ clear(void)
 	fprintf(stdout, "C - Hilite tracking [FIXME: NOT IMPLEMENTED].\r\n");
 	fprintf(stdout, "D - Cell motion tracking.\r\n");
 	fprintf(stdout, "E - All motion tracking.\r\n");
-	fprintf(stdout, "%s", _VTE_CAP_ESC "8");
+	fprintf(stdout, "%s", _DEEPINVTE_CAP_ESC "8");
 	fflush(stdout);
 }
 
@@ -282,9 +282,9 @@ main(int argc, char **argv)
 	flags = fcntl(STDIN_FILENO, F_GETFL);
 	fcntl(STDIN_FILENO, F_SETFL, flags & ~(O_NONBLOCK));
 	fprintf(stdout, "%s",
-		_VTE_CAP_CSI "9;1H"
-		_VTE_CAP_CSI "2K"
-		_VTE_CAP_CSI "2J");
+		_DEEPINVTE_CAP_CSI "9;1H"
+		_DEEPINVTE_CAP_CSI "2K"
+		_DEEPINVTE_CAP_CSI "2J");
 	do {
 		clear();
 		FD_ZERO(&in_fds);

@@ -40,7 +40,7 @@ host_triplet = @host@
 subdir = .
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
-	$(srcdir)/vte-uninstalled.pc.in $(srcdir)/vte.pc.in \
+	$(srcdir)/deepinvte-uninstalled.pc.in $(srcdir)/deepinvte.pc.in \
 	$(top_srcdir)/configure AUTHORS COPYING ChangeLog NEWS compile \
 	config.guess config.sub depcomp install-sh ltmain.sh missing \
 	mkinstalldirs
@@ -53,8 +53,8 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = vte${VTE_PC_VERSION}.pc \
-	vte${VTE_PC_VERSION}-uninstalled.pc
+CONFIG_CLEAN_FILES = deepinvte${DEEPINVTE_PC_VERSION}.pc \
+	deepinvte${DEEPINVTE_PC_VERSION}-uninstalled.pc
 CONFIG_CLEAN_VPATH_FILES =
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
@@ -263,21 +263,21 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-VTE_API_MAJOR_VERSION = @VTE_API_MAJOR_VERSION@
-VTE_API_MINOR_VERSION = @VTE_API_MINOR_VERSION@
-VTE_API_VERSION = @VTE_API_VERSION@
-VTE_API_VERSION_U = @VTE_API_VERSION_U@
-VTE_CFLAGS = @VTE_CFLAGS@
-VTE_DEFAULT_EMULATION = @VTE_DEFAULT_EMULATION@
-VTE_LDFLAGS = @VTE_LDFLAGS@
-VTE_LIBRARY_SUFFIX_U = @VTE_LIBRARY_SUFFIX_U@
-VTE_LIBS = @VTE_LIBS@
-VTE_MAJOR_VERSION = @VTE_MAJOR_VERSION@
-VTE_MICRO_VERSION = @VTE_MICRO_VERSION@
-VTE_MINOR_VERSION = @VTE_MINOR_VERSION@
-VTE_PC_VERSION = @VTE_PC_VERSION@
-VTE_PKGS = @VTE_PKGS@
-VTE_SEAL_CFLAGS = @VTE_SEAL_CFLAGS@
+DEEPINVTE_API_MAJOR_VERSION = @DEEPINVTE_API_MAJOR_VERSION@
+DEEPINVTE_API_MINOR_VERSION = @DEEPINVTE_API_MINOR_VERSION@
+DEEPINVTE_API_VERSION = @DEEPINVTE_API_VERSION@
+DEEPINVTE_API_VERSION_U = @DEEPINVTE_API_VERSION_U@
+DEEPINVTE_CFLAGS = @DEEPINVTE_CFLAGS@
+DEEPINVTE_DEFAULT_EMULATION = @DEEPINVTE_DEFAULT_EMULATION@
+DEEPINVTE_LDFLAGS = @DEEPINVTE_LDFLAGS@
+DEEPINVTE_LIBRARY_SUFFIX_U = @DEEPINVTE_LIBRARY_SUFFIX_U@
+DEEPINVTE_LIBS = @DEEPINVTE_LIBS@
+DEEPINVTE_MAJOR_VERSION = @DEEPINVTE_MAJOR_VERSION@
+DEEPINVTE_MICRO_VERSION = @DEEPINVTE_MICRO_VERSION@
+DEEPINVTE_MINOR_VERSION = @DEEPINVTE_MINOR_VERSION@
+DEEPINVTE_PC_VERSION = @DEEPINVTE_PC_VERSION@
+DEEPINVTE_PKGS = @DEEPINVTE_PKGS@
+DEEPINVTE_SEAL_CFLAGS = @DEEPINVTE_SEAL_CFLAGS@
 WARN_CFLAGS = @WARN_CFLAGS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
@@ -348,7 +348,7 @@ EXTRA_DIST = \
 
 DISTCLEANFILES = 
 pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = vte$(VTE_PC_VERSION).pc
+pkgconfig_DATA = deepinvte$(DEEPINVTE_PC_VERSION).pc
 DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-gtk-doc \
 	--disable-introspection \
@@ -432,9 +432,9 @@ $(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 
 distclean-hdr:
 	-rm -f config.h stamp-h1
-vte${VTE_PC_VERSION}.pc: $(top_builddir)/config.status $(srcdir)/vte.pc.in
+deepinvte${DEEPINVTE_PC_VERSION}.pc: $(top_builddir)/config.status $(srcdir)/deepinvte.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-vte${VTE_PC_VERSION}-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/vte-uninstalled.pc.in
+deepinvte${DEEPINVTE_PC_VERSION}-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/deepinvte-uninstalled.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:

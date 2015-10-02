@@ -1,5 +1,5 @@
 # translation of el.po to Greek
-# Greek translation of vte.
+# Greek translation of deepinvte.
 # Copyright (C) Free Software Foundation, 2003
 # This file is distributed under the same license as the PACKAGE package.
 # kostas: 21messages, 28Jan2003, initial translation
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/iso2022.c:771 ../src/iso2022.c:779 ../src/iso2022.c:810
-#: ../src/vte.c:2254
+#: ../src/deepinvte.c:2254
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "Αδυναμία μετατροπής χαρακτήρων από %s σε %s."
@@ -47,46 +47,46 @@ msgid "Duplicate (%s/%s)!"
 msgstr "Διπλότυπο (%s/%s)!"
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:965
+#: ../src/deepinvteapp.c:965
 msgid "Could not open console.\n"
 msgstr "Αδυναμία ανοίγματος κονσόλας.\n"
 
-#: ../src/vteapp.c:1056
+#: ../src/deepinvteapp.c:1056
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "Αδυναμία ανάλυσης των δεδομένων της παραμέτρου --geometry"
 
-#: ../src/vte.c:1280
+#: ../src/deepinvte.c:1280
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "Σφάλμα σύνταξης κανονικής έκφρασης \"%s\"."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:4362
+#: ../src/deepinvte.c:4362
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "Σφάλμα ανάγνωσης από θυγατρική διεργασία: %s."
 
-#: ../src/vte.c:4489
+#: ../src/deepinvte.c:4489
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr ""
 "Αδυναμία αποστολής δεδομένων σε θυγατρική διεργασία, μη έγκυρη μετατροπή "
 "κωδικοσελίδας"
 
-#: ../src/vte.c:4500 ../src/vte.c:5531
+#: ../src/deepinvte.c:4500 ../src/deepinvte.c:5531
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr ""
 "Σφάλμα (%s) μετατροπής δεδομένων από θυγατρική διεργασία, γίνεται παραίτηση."
 
-#: ../src/vte.c:7725
+#: ../src/deepinvte.c:7725
 #, c-format
 msgid "Error reading PTY size, using defaults: %s\n"
 msgstr "Σφάλμα ανάγνωσης μεγέθους PTY, χρήση προεπιλογών: %s.\n"
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:13297
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_conv_open() απέτυχε να ορίσει χαρακτήρες λέξης"
+#: ../src/deepinvte.c:13297
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_conv_open() απέτυχε να ορίσει χαρακτήρες λέξης"
 
 #~ msgid "can not run %s"
 #~ msgstr "αδυναμία εκτέλεσης %s"

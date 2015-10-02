@@ -3,7 +3,7 @@ cleaning it as fast as possible and aiming for a 1.0 release "next year".
 Please contact people listed in filed MAINTAINERS if you intend to hack
 on it, especially if you want to commit stuff.
 
-Vte is different from other terminal emulators in that instead of hard
+Deepinvte is different from other terminal emulators in that instead of hard
 coding behavior of a few select terminals, it can emulate any terminal
 simply by reading its terminfo capabilities file.  The idea being that
 if applications can communicate with any terminal by reading its

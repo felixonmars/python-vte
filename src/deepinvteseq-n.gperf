@@ -1,0 +1,131 @@
+/* run "make gperf" after modifying this file */
+
+%struct-type
+%language=ANSI-C
+%includes
+%enum
+%readonly-tables
+%define slot-name seq
+%define hash-function-name deepinvteseq_n_hash
+%define lookup-function-name deepinvteseq_n_lookup
+
+%compare-lengths
+%pic
+%define string-pool-name deepinvteseq_n_pool
+
+struct deepinvteseq_n_struct {
+	int seq;
+	DeepinvteTerminalSequenceHandler handler;
+};
+
+%%
+#"..rp", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"..sa", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"index", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_index)
+"decset", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_decset)
+#"repeat", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"tab-set", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_st)
+"decreset", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_decreset)
+"set-mode", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_mode)
+"cursor-up", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_UP)
+"form-feed", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_form_feed)
+"next-line", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_next_line)
+"save-mode", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_save_mode)
+"scroll-up", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_scroll_up)
+"tab-clear", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_tab_clear)
+"full-reset", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_full_reset)
+#"media-copy", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"reset-mode", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_reset_mode)
+"soft-reset", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_soft_reset)
+"cursor-down", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_DO)
+#"memory-lock", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"save-cursor", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_sc)
+"scroll-down", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_scroll_down)
+"change-color", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_change_color)
+"delete-lines", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_delete_lines)
+#"double-width", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"insert-lines", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_insert_lines)
+"restore-mode", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_restore_mode)
+#"single-width", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"vertical-tab", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_vertical_tab)
+"erase-in-line", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_erase_in_line)
+#"memory-unlock", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"normal-keypad", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_normal_keypad)
+"reverse-index", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_reverse_index)
+#"7-bit-controls", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"8-bit-controls", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-logfile", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"cursor-forward", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_RI)
+#"dec-media-copy", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"restore-cursor", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_rc)
+"set-icon-title", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_icon_title)
+"cursor-back-tab", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_bt)
+"cursor-backward", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_LE)
+"cursor-position", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_cursor_position)
+#"single-shift-g2", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"single-shift-g3", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-font-name", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"cursor-next-line", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_cursor_next_line)
+"erase-characters", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_erase_characters)
+"erase-in-display", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_erase_in_display)
+"set-window-title", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_window_title)
+"cursor-lower-left", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_cursor_lower_left)
+"delete-characters", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_DC)
+"application-keypad", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_application_keypad)
+#"change-font-number", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"return-terminal-id", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_return_terminal_id)
+#"end-of-guarded-area", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"utf-8-character-set", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_utf_8_charset)
+"window-manipulation", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_window_manipulation)
+"change-cursor-colors", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_change_cursor_color)
+"character-attributes", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_character_attributes)
+"device-status-report", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_device_status_report)
+"set-scrolling-region", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_scrolling_region)
+"set-scrolling-region-from-start", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_scrolling_region_from_start)
+"set-scrolling-region-to-end", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_scrolling_region_to_end)
+#"set-text-property-21", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"set-text-property-2L", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"cursor-preceding-line", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_cursor_preceding_line)
+#"device-control-string", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"screen-alignment-test", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_screen_alignment_test)
+#"select-locator-events", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"set-conformance-level", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"start-of-guarded-area", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"double-height-top-half", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"line-position-absolute", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_line_position_absolute)
+"return-terminal-status", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_return_terminal_status)
+#"change-highlight-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"enable-filter-rectangle", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"insert-blank-characters", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_insert_blank_characters)
+#"invoke-g2-character-set", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"invoke-g3-character-set", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"iso8859-1-character-set", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_local_charset)
+#"selective-erase-in-line", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"ansi-conformance-level-1", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"ansi-conformance-level-2", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"ansi-conformance-level-3", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-background-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-foreground-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"dec-device-status-report", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_dec_device_status_report)
+#"enable-locator-reporting", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"request-locator-position", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"cursor-character-absolute", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_cursor_character_absolute)
+"cursor-forward-tabulation", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_ta)
+#"double-height-bottom-half", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"set-icon-and-window-title", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_set_icon_and_window_title)
+#"selective-erase-in-display", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"character-position-absolute", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_character_position_absolute)
+"request-terminal-parameters", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_request_terminal_parameters)
+#"select-character-protection", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-tek-background-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-tek-foreground-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"invoke-g1-character-set-as-gr", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"invoke-g2-character-set-as-gr", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"invoke-g3-character-set-as-gr", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"initiate-hilite-mouse-tracking", DEEPINVTE_SEQUENCE_HANDLER_NULL
+"send-primary-device-attributes", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_send_primary_device_attributes)
+"linux-console-cursor-attributes", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_noop)
+"horizontal-and-vertical-position", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_horizontal_and_vertical_position)
+"send-secondary-device-attributes", DEEPINVTE_SEQUENCE_HANDLER(deepinvte_sequence_handler_send_secondary_device_attributes)
+#"change-mouse-cursor-background-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL
+#"change-mouse-cursor-foreground-colors", DEEPINVTE_SEQUENCE_HANDLER_NULL

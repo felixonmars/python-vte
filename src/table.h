@@ -18,36 +18,36 @@
 
 /* The interfaces in this file are subject to change at any time. */
 
-#ifndef vte_table_h_included
-#define vte_table_h_included
+#ifndef deepinvte_table_h_included
+#define deepinvte_table_h_included
 
 
 #include <glib-object.h>
 
 G_BEGIN_DECLS
 
-struct _vte_table;
+struct _deepinvte_table;
 
 /* Create an empty, one-level table. */
-struct _vte_table *_vte_table_new(void);
+struct _deepinvte_table *_deepinvte_table_new(void);
 
 /* Free a table tree. */
-void _vte_table_free(struct _vte_table *table);
+void _deepinvte_table_free(struct _deepinvte_table *table);
 
 /* Add a string to the matching tree. */
-void _vte_table_add(struct _vte_table *table,
+void _deepinvte_table_add(struct _deepinvte_table *table,
 		    const char *pattern, gssize length,
 		    const char *result, GQuark quark);
 
 /* Check if a string matches something in the tree. */
-const char *_vte_table_match(struct _vte_table *table,
+const char *_deepinvte_table_match(struct _deepinvte_table *table,
 			     const gunichar *pattern, gssize length,
 			     const char **res, const gunichar **consumed,
 			     GQuark *quark, GValueArray **array);
 /* Dump out the contents of a tree. */
-void _vte_table_print(struct _vte_table *table);
+void _deepinvte_table_print(struct _deepinvte_table *table);
 
-extern const struct _vte_matcher_class _vte_matcher_table;
+extern const struct _deepinvte_matcher_class _deepinvte_matcher_table;
 
 G_END_DECLS
 

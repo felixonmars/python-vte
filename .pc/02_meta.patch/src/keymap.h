@@ -18,21 +18,21 @@
 
 /* The interfaces in this file are subject to change at any time. */
 
-#ifndef vte_keymap_h_included
-#define vte_keymap_h_included
+#ifndef deepinvte_keymap_h_included
+#define deepinvte_keymap_h_included
 
 #include <glib.h>
 #include <gdk/gdk.h>
-#include "vtetc.h"
+#include "deepinvtetc.h"
 
 G_BEGIN_DECLS
 
-#define VTE_META_MASK		GDK_META_MASK
-#define VTE_NUMLOCK_MASK	GDK_MOD2_MASK
+#define DEEPINVTE_META_MASK		GDK_META_MASK
+#define DEEPINVTE_NUMLOCK_MASK	GDK_MOD2_MASK
 
 /* Map the specified keyval/modifier setup, dependent on the mode, to either
  * a literal string or a capability name. */
-void _vte_keymap_map(guint keyval,
+void _deepinvte_keymap_map(guint keyval,
 		     GdkModifierType modifiers,
 		     gboolean sun_mode,
 		     gboolean hp_mode,
@@ -40,17 +40,17 @@ void _vte_keymap_map(guint keyval,
 		     gboolean vt220_mode,
 		     gboolean app_cursor_keys,
 		     gboolean app_keypad_keys,
-		     struct _vte_termcap *termcap,
+		     struct _deepinvte_termcap *termcap,
 		     const char *term,
 		     char **normal,
 		     gssize *normal_length,
 		     const char **special);
 
 /* Return TRUE if a keyval is just a modifier key. */
-gboolean _vte_keymap_key_is_modifier(guint keyval);
+gboolean _deepinvte_keymap_key_is_modifier(guint keyval);
 
 /* Add modifiers to the sequence if they're needed. */
-void _vte_keymap_key_add_key_modifiers(guint keyval,
+void _deepinvte_keymap_key_add_key_modifiers(guint keyval,
 				       GdkModifierType modifiers,
 				       gboolean sun_mode,
 				       gboolean hp_mode,

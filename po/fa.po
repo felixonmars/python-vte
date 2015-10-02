@@ -1,4 +1,4 @@
-# translation of vte to Persian
+# translation of deepinvte to Persian
 # Copyright (C) 2003 The FarsiWeb Project Group
 # Copyright (C) 2010 The IFSUG Translation Group
 # Roozbeh Pournader <roozbeh@sharif.edu>, 2003
@@ -6,8 +6,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vte\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=vte&component=general\n"
+"Project-Id-Version: deepinvte\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=deepinvte&component=general\n"
 "POT-Creation-Date: 2011-02-02 17:46+0000\n"
 "PO-Revision-Date: 2011-02-03 12:40+0330\n"
 "Last-Translator: Mahyar Moghimi <mahyar.moqimi@gmail.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: ../src/iso2022.c:779
 #: ../src/iso2022.c:787
 #: ../src/iso2022.c:818
-#: ../src/vte.c:2279
+#: ../src/deepinvte.c:2279
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "نمی‌توان نویسه‌ها را از %s به %s تبدیل کرد."
@@ -46,44 +46,44 @@ msgid "Duplicate (%s/%s)!"
 msgstr "تکراری (%s/%s)!"
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:981
+#: ../src/deepinvteapp.c:981
 msgid "Could not open console.\n"
 msgstr "نمی‌توان پیشانه را باز کرد.\n"
 
-#: ../src/vteapp.c:1074
+#: ../src/deepinvteapp.c:1074
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "عدم امکان تجزیه مشخصات geometry ارسال شده به geometry--"
 
-#: ../src/vte.c:1305
+#: ../src/deepinvte.c:1305
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "خطا در ترجمه‌ی عبارت باقاعده‌ی \"%s\"."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:4390
+#: ../src/deepinvte.c:4390
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "خطا در خواندن از فرزند: %s."
 
-#: ../src/vte.c:4517
+#: ../src/deepinvte.c:4517
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr "عدم امکان ارسال داده به فرزند. مبدل کدگذاری نامعتبر"
 
-#: ../src/vte.c:4528
-#: ../src/vte.c:5590
+#: ../src/deepinvte.c:4528
+#: ../src/deepinvte.c:5590
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr "خطا (%s) در هنگام تبدیل داده برای فرزند. درحال رها کردن."
 
-#: ../src/vte.c:7775
+#: ../src/deepinvte.c:7775
 #, c-format
 msgid "Error reading PTY size, using defaults: %s\n"
 msgstr "خطا در خواندن اندازه‌ی PTY، درحال استفاده از پیش‌فرض‌ها: %s\n"
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:13593
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "‎_vte_conv_open()‎ نتوانست نویسه‌های کلمه را تنظیم کند"
+#: ../src/deepinvte.c:13593
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "‎_deepinvte_conv_open()‎ نتوانست نویسه‌های کلمه را تنظیم کند"
 
 #~ msgid "can not run %s"
 #~ msgstr "نمی‌توان %s را اجرا کرد"

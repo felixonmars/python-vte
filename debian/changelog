@@ -1,10 +1,10 @@
-vte (1:0.28.2-5ubuntu1) quantal; urgency=low
+deepinvte (1:0.28.2-5ubuntu1) quantal; urgency=low
 
   * Resynchronise with Debian (libexecdir fix closes LP: #864609).
     Remaining changes:
     - debian/patches/91_keep_fds.patch:
-      - vte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN when calling
-        vte_terminal_fork_command_full().
+      - deepinvte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN when calling
+        deepinvte_terminal_fork_command_full().
     - debian/patches/93_add_alt_screen_scroll_toggle.patch:
       - Handle scrolling differently when using alternate screen or
         scrolling is restricted.
@@ -13,13 +13,13 @@ vte (1:0.28.2-5ubuntu1) quantal; urgency=low
     - debian/patches/backscroll-stream-mem.patch:
       - Provide a memory-based scrollback stream backend to avoid hitting
         disk with terminal contents.
-  * Add version for vte_terminal_set_alternate_screen_scroll to
-    libvte9.symbols (probably a bit too tight, but due to changelog
+  * Add version for deepinvte_terminal_set_alternate_screen_scroll to
+    libdeepinvte9.symbols (probably a bit too tight, but due to changelog
     truncation this is the best I could readily manage).
 
  -- Colin Watson <cjwatson@ubuntu.com>  Tue, 09 Oct 2012 02:55:15 +0100
 
-vte (1:0.28.2-5) unstable; urgency=medium
+deepinvte (1:0.28.2-5) unstable; urgency=medium
 
   * Update repository URL.
   * 03_CVE-2012-2738.patch, 04_CVE-2012-2738.patch: backport upstream 
@@ -27,19 +27,19 @@ vte (1:0.28.2-5) unstable; urgency=medium
 
  -- Josselin Mouette <joss@debian.org>  Sat, 23 Jun 2012 16:02:46 +0200
 
-vte (1:0.28.2-4) unstable; urgency=low
+deepinvte (1:0.28.2-4) unstable; urgency=low
 
   * debian/control.in:
     - Remove obsolete Conflicts and Replaces.
   * debian/rules:
-    - Correctly pass libexecdir to configure so libvte has the correct path to
+    - Correctly pass libexecdir to configure so libdeepinvte has the correct path to
       gnome-pty-helper. Closes: #645104
-  * Add symbols file for libvte9 for improved shlibs dependencies and bump
+  * Add symbols file for libdeepinvte9 for improved shlibs dependencies and bump
     shlibs accordingly. Closes: #633798
 
  -- Michael Biebl <biebl@debian.org>  Sun, 11 Dec 2011 23:04:54 +0100
 
-vte (1:0.28.2-3ubuntu2) precise; urgency=low
+deepinvte (1:0.28.2-3ubuntu2) precise; urgency=low
 
   * Add debian/patches/backscroll-stream-mem.patch: provide a memory-based
     scrollback stream backend to avoid hitting disk with terminal contents
@@ -47,12 +47,12 @@ vte (1:0.28.2-3ubuntu2) precise; urgency=low
 
  -- Kees Cook <kees@ubuntu.com>  Wed, 21 Mar 2012 13:36:14 -0700
 
-vte (1:0.28.2-3ubuntu1) precise; urgency=low
+deepinvte (1:0.28.2-3ubuntu1) precise; urgency=low
 
   * Merged from Debian unstable, remaining changes:
     - debian/patches/91_keep_fds.patch:
-      - vte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN
-        when calling vte_terminal_fork_command_full().
+      - deepinvte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN
+        when calling deepinvte_terminal_fork_command_full().
     - debian/patches/93_add_alt_screen_scroll_toggle.patch:
       - Handle scrolling differently when using alternate screen or
         scrolling is restricted.
@@ -65,14 +65,14 @@ vte (1:0.28.2-3ubuntu1) precise; urgency=low
 
  -- Michael Terry <mterry@ubuntu.com>  Sun, 11 Dec 2011 12:16:43 -0500
 
-vte (1:0.28.2-3) unstable; urgency=low
+deepinvte (1:0.28.2-3) unstable; urgency=low
 
   * 02_meta.patch: workaround for Meta key being broken since the GTK+
     2.24.8 upgrade. Closes: #648760.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 19 Nov 2011 14:06:11 +0100
 
-vte (1:0.28.2-2) experimental; urgency=low
+deepinvte (1:0.28.2-2) experimental; urgency=low
 
   * Drop all GTK+3 packages and dependencies. This version will remain 
     for GTK+2 support until no packages use it anymore.
@@ -82,7 +82,7 @@ vte (1:0.28.2-2) experimental; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Sat, 12 Nov 2011 15:46:30 +0100
 
-vte (1:0.28.2-1) unstable; urgency=low
+deepinvte (1:0.28.2-1) unstable; urgency=low
 
   * New upstream release.
   * debian/watch:
@@ -96,60 +96,60 @@ vte (1:0.28.2-1) unstable; urgency=low
 
  -- Michael Biebl <biebl@debian.org>  Wed, 19 Oct 2011 03:41:29 +0200
 
-vte (1:0.28.2-0ubuntu3) precise; urgency=low
+deepinvte (1:0.28.2-0ubuntu3) precise; urgency=low
 
   * debian/patches/gtk32-meta-map.patch: Patch from upstream bugzilla to
     deal with the new meta mapping in GTK 3.2.2+ (LP: #890555)
 
  -- Luke Yelavich <themuso@ubuntu.com>  Wed, 16 Nov 2011 21:38:44 +1100
 
-vte (1:0.28.2-0ubuntu2) oneiric; urgency=low
+deepinvte (1:0.28.2-0ubuntu2) oneiric; urgency=low
 
   * debian/patches/fix_gtk3_accessibility.patch: Slightly backported and
     tweaked patch from upstream bug #654630 to fix GTK3 accessibility post
     GTK/gail refactor, the original patch plus some suggested tweaks in the
     bug was used to preserve GTK2 support, can be dropped once we move to
-    vte 0.29
+    deepinvte 0.29
 
  -- Luke Yelavich <themuso@ubuntu.com>  Fri, 09 Sep 2011 10:31:22 +1000
 
-vte (1:0.28.2-0ubuntu1) oneiric; urgency=low
+deepinvte (1:0.28.2-0ubuntu1) oneiric; urgency=low
 
   * New upstream release. Do not upgrade to 0.29 yet, as this drops GTK2
-    support, and we still have a ton of rdepends of libvte9.
+    support, and we still have a ton of rdepends of libdeepinvte9.
 
  -- Martin Pitt <martin.pitt@ubuntu.com>  Wed, 07 Sep 2011 10:06:44 +0200
 
-vte (1:0.28.1-2) unstable; urgency=low
+deepinvte (1:0.28.1-2) unstable; urgency=low
 
-  * libvte-doc.links: dropped. Closes: #631881.
-  * libvte-common.postinst: do the symlink dance for 
-    /usr/share/vte/termcap. Closes: #611826, #631824, #631801.
+  * libdeepinvte-doc.links: dropped. Closes: #631881.
+  * libdeepinvte-common.postinst: do the symlink dance for 
+    /usr/share/deepinvte/termcap. Closes: #611826, #631824, #631801.
 
  -- Josselin Mouette <joss@debian.org>  Tue, 28 Jun 2011 18:52:26 +0200
 
-vte (1:0.28.1-1ubuntu2) oneiric; urgency=low
+deepinvte (1:0.28.1-1ubuntu2) oneiric; urgency=low
 
   * Switch to dh_python2. (LP: #788514)
 
  -- Barry Warsaw <barry@ubuntu.com>  Thu, 11 Aug 2011 14:18:14 -0400
 
-vte (1:0.28.1-1ubuntu1) oneiric; urgency=low
+deepinvte (1:0.28.1-1ubuntu1) oneiric; urgency=low
 
   * Merge from debian unstable.  Remaining changes:
     - Add 93_add_alt_screen_scroll_toggle.patch: Handle scrolling differently
       when using alternate screen or scrolling is restricted.
     - Add lp246701_scroll_region_updates.patch: Bug fix. (LP #246701)
     - 91_keep_fds.patch:
-      vte-2.90 does not yet support G_SPAWN_LEAVE_DESCRIPTORS_OPEN
-      when calling vte_terminal_fork_command_full() until that is
+      deepinvte-2.90 does not yet support G_SPAWN_LEAVE_DESCRIPTORS_OPEN
+      when calling deepinvte_terminal_fork_command_full() until that is
       fixed we need to keep this patch
 
  -- Michael Vogt <michael.vogt@ubuntu.com>  Thu, 16 Jun 2011 17:59:49 +0200
 
-vte (1:0.28.1-1) unstable; urgency=low
+deepinvte (1:0.28.1-1) unstable; urgency=low
 
-  * Tighten dependencies on libvte-common.
+  * Tighten dependencies on libdeepinvte-common.
   * New upstream release.
     + CVE-2011-2198: fix memory exhaustion by using special character 
       sequences. Closes: #629688.
@@ -157,27 +157,27 @@ vte (1:0.28.1-1) unstable; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Wed, 15 Jun 2011 21:47:56 +0200
 
-vte (1:0.28.0-2) experimental; urgency=low
+deepinvte (1:0.28.0-2) experimental; urgency=low
 
   * Fix long description, thanks Teemu Ikonen. Closes: #623219.
-  * Drop useless libvte-dev dependency on python-vte. Closes: #549015.
-  * libvte-common Breaks libvte9 < 1:0.28. Closes: #616394, #611826.
-  * python-vte Breaks python-apt << 0.8.0~exp2. Closes: #621483.
+  * Drop useless libdeepinvte-dev dependency on python-deepinvte. Closes: #549015.
+  * libdeepinvte-common Breaks libdeepinvte9 < 1:0.28. Closes: #616394, #611826.
+  * python-deepinvte Breaks python-apt << 0.8.0~exp2. Closes: #621483.
   * Fix udeb sourcedir, thanks Colin Watson. Closes: #627555.
   * 01_scroll_notebook.patch: new patch. Allow to switch tabs with 
     Alt+wheel with the latest gtk+3.0.
 
  -- Josselin Mouette <joss@debian.org>  Sun, 05 Jun 2011 02:06:40 +0200
 
-vte (1:0.28.0-1ubuntu3) oneiric; urgency=low
+deepinvte (1:0.28.0-1ubuntu3) oneiric; urgency=low
 
   * readd 91_keep_fds.patch for now. gdebi-gtk needs it until
-    its ported to gtk3/vte3 where the required functionatlity
+    its ported to gtk3/deepinvte3 where the required functionatlity
     is exposed via GI
 
  -- Michael Vogt <michael.vogt@ubuntu.com>  Wed, 25 May 2011 17:42:27 +0200
 
-vte (1:0.28.0-1ubuntu2) oneiric; urgency=low
+deepinvte (1:0.28.0-1ubuntu2) oneiric; urgency=low
 
   * Use DEB_DH_INSTALL_ARGS_$(udeb) rather than
     DEB_DH_INSTALL_SOURCEDIR_$(udeb), so that we actually use the udeb build
@@ -185,11 +185,11 @@ vte (1:0.28.0-1ubuntu2) oneiric; urgency=low
 
  -- Colin Watson <cjwatson@ubuntu.com>  Sat, 21 May 2011 23:14:42 +0100
 
-vte (1:0.28.0-1ubuntu1) oneiric; urgency=low
+deepinvte (1:0.28.0-1ubuntu1) oneiric; urgency=low
 
-  * Drop gir1.2-vte-0.0. We just have two reverse dependencies which will be
-    moved to GTK3 and gir1.2-vte-2.90.
-  * Drop 91_keep_fds.patch. The vte_terminal_forkpty API is deprecated, was
+  * Drop gir1.2-deepinvte-0.0. We just have two reverse dependencies which will be
+    moved to GTK3 and gir1.2-deepinvte-2.90.
+  * Drop 91_keep_fds.patch. The deepinvte_terminal_forkpty API is deprecated, was
     closed upstream as "wontfix".
   * Drop lp621927_set_default_term.patch, fixed upstream in a different way.
   * Merge with Debian experimental. Remaining Ubuntu changes:
@@ -199,7 +199,7 @@ vte (1:0.28.0-1ubuntu1) oneiric; urgency=low
 
  -- Martin Pitt <martin.pitt@ubuntu.com>  Tue, 17 May 2011 13:08:32 +0200
 
-vte (1:0.28.0-1) experimental; urgency=low
+deepinvte (1:0.28.0-1) experimental; urgency=low
 
   * Team upload.
   * New upstream release.
@@ -212,16 +212,16 @@ vte (1:0.28.0-1) experimental; urgency=low
 
  -- Raphaël Hertzog <hertzog@debian.org>  Thu, 14 Apr 2011 20:27:53 +0000
 
-vte (1:0.27.90-2) experimental; urgency=low
+deepinvte (1:0.27.90-2) experimental; urgency=low
 
-  * Drop unneeded dependency on libvte-common from gir1.2-vte-2.90.
+  * Drop unneeded dependency on libdeepinvte-common from gir1.2-deepinvte-2.90.
 
  -- Jordi Mallach <jordi@debian.org>  Wed, 06 Apr 2011 11:31:01 +0200
 
-vte (1:0.27.90-1) experimental; urgency=low
+deepinvte (1:0.27.90-1) experimental; urgency=low
 
   * Make the -dev package depend on the gir package.
-  * Force the upgrade of libvte-common for the new termcap definitions.
+  * Force the upgrade of libdeepinvte-common for the new termcap definitions.
   * New upstream pre-release.
   * Use dh-autoreconf; drop 90_autoreconf.patch.
   * Pass PYTHON= as configure argument instead of environment, so that 
@@ -233,7 +233,7 @@ vte (1:0.27.90-1) experimental; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Thu, 31 Mar 2011 10:34:47 +0530
 
-vte (1:0.27.5-1) experimental; urgency=low
+deepinvte (1:0.27.5-1) experimental; urgency=low
 
   * debian/control.in:
     + Drop obsolete dpkg-dev build dependency.
@@ -247,7 +247,7 @@ vte (1:0.27.5-1) experimental; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 19 Feb 2011 14:23:13 +0000
 
-vte (1:0.27.4-1) experimental; urgency=low
+deepinvte (1:0.27.4-1) experimental; urgency=low
 
   * Switch to CDBS' flavors system.
   * Bump debhelper compatibility to 8.
@@ -257,7 +257,7 @@ vte (1:0.27.4-1) experimental; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 12 Jan 2011 22:45:34 +0000
 
-vte (1:0.24.3-2) unstable; urgency=low
+deepinvte (1:0.24.3-2) unstable; urgency=low
 
   [ Emilio Pozuelo Monfort ]
   * debian/patches/12_python_reaper.patch:
@@ -268,7 +268,7 @@ vte (1:0.24.3-2) unstable; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Sat, 06 Nov 2010 12:48:02 +0100
 
-vte (1:0.24.3-1) unstable; urgency=low
+deepinvte (1:0.24.3-1) unstable; urgency=low
 
   * New upstream bugfix release:
     + debian/patches/90_autoreconf.patch:
@@ -276,7 +276,7 @@ vte (1:0.24.3-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Thu, 15 Jul 2010 20:30:04 +0200
 
-vte (1:0.24.1-1) unstable; urgency=low
+deepinvte (1:0.24.1-1) unstable; urgency=low
 
   * New upstream bugfix release:
     + debian/patches/01_transparent_crash.patch:
@@ -290,9 +290,9 @@ vte (1:0.24.1-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Mon, 03 May 2010 20:11:29 +0200
 
-vte (1:0.24.0-3) unstable; urgency=low
+deepinvte (1:0.24.0-3) unstable; urgency=low
 
-  * debian/python-vte.install:
+  * debian/python-deepinvte.install:
     - Also install bindings for python2.6 (don't hardcode site-packages).
   * debian/control.in,
     debian/rules,
@@ -305,7 +305,7 @@ vte (1:0.24.0-3) unstable; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 21 Apr 2010 14:18:44 +0200
 
-vte (1:0.24.0-2) unstable; urgency=low
+deepinvte (1:0.24.0-2) unstable; urgency=low
 
   * 01_transparent_crash.patch: patch by Tetralet to fix a crash when 
     the background file is missing, or when the transparent background 
@@ -313,7 +313,7 @@ vte (1:0.24.0-2) unstable; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Fri, 09 Apr 2010 18:23:02 +0200
 
-vte (1:0.24.0-1) unstable; urgency=low
+deepinvte (1:0.24.0-1) unstable; urgency=low
 
   * New upstream stable release:
     + debian/rules:
@@ -324,7 +324,7 @@ vte (1:0.24.0-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 31 Mar 2010 11:11:22 +0200
 
-vte (1:0.23.5-4) experimental; urgency=low
+deepinvte (1:0.23.5-4) experimental; urgency=low
 
   [ Cyril Brulebois ]
   * Switch udeb from DirectFB to Xlib to prepare the move to an X11-based
@@ -344,14 +344,14 @@ vte (1:0.23.5-4) experimental; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 16 Mar 2010 22:20:16 +0100
 
-vte (1:0.23.5-3) experimental; urgency=low
+deepinvte (1:0.23.5-3) experimental; urgency=low
 
   * debian/rules:
     + Update shlibs version to >= 0.23.5.
 
  -- Sebastian Dröge <slomo@debian.org>  Thu, 14 Jan 2010 09:02:23 +0100
 
-vte (1:0.23.5-2) experimental; urgency=low
+deepinvte (1:0.23.5-2) experimental; urgency=low
 
   * New upstream development release:
     + debian/patches/90_autoreconf.patch:
@@ -363,7 +363,7 @@ vte (1:0.23.5-2) experimental; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Thu, 14 Jan 2010 08:17:53 +0100
 
-vte (1:0.22.5-1) unstable; urgency=low
+deepinvte (1:0.22.5-1) unstable; urgency=low
 
   * New upstream release.
     - debian/patches/90_autoreconf.patch:
@@ -371,7 +371,7 @@ vte (1:0.22.5-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 18 Nov 2009 07:40:57 +0100
 
-vte (1:0.22.4-1) unstable; urgency=low
+deepinvte (1:0.22.4-1) unstable; urgency=low
 
   * New upstream release.
     - debian/patches/90_autoreconf.patch:
@@ -379,7 +379,7 @@ vte (1:0.22.4-1) unstable; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 08 Nov 2009 21:44:54 +0100
 
-vte (1:0.22.3-1) unstable; urgency=low
+deepinvte (1:0.22.3-1) unstable; urgency=low
 
   * New upstream bugfix release:
     + debian/patches/70_python_env.patch:
@@ -389,17 +389,17 @@ vte (1:0.22.3-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 27 Oct 2009 09:35:46 +0100
 
-vte (1:0.22.2-2) unstable; urgency=low
+deepinvte (1:0.22.2-2) unstable; urgency=low
 
   * debian/patches/70_python_env.patch:
     - Fix Python environment passing, GNOME #587894.
 
  -- Luca Falavigna <dktrkranz@debian.org>  Sat, 10 Oct 2009 13:43:27 +0200
 
-vte (1:0.22.2-1) unstable; urgency=low
+deepinvte (1:0.22.2-1) unstable; urgency=low
 
   * New upstream bugfix release.
-    - debian/patches/01_vte_sequence_handler_cd_crash.patch:
+    - debian/patches/01_deepinvte_sequence_handler_cd_crash.patch:
       + Removed, applied upstream.
     - debian/patches/90_autoreconf.patch:
       + Refreshed.
@@ -407,14 +407,14 @@ vte (1:0.22.2-1) unstable; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 29 Sep 2009 14:06:41 +0200
 
-vte (1:0.22.1-2) unstable; urgency=low
+deepinvte (1:0.22.1-2) unstable; urgency=low
 
-  * debian/patches/01_vte_sequence_handler_cd_crash.patch:
+  * debian/patches/01_deepinvte_sequence_handler_cd_crash.patch:
     - Patch from Matijs van Zuijlen to fix a crash. Closes: #548388.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 27 Sep 2009 00:45:48 +0200
 
-vte (1:0.22.1-1) unstable; urgency=low
+deepinvte (1:0.22.1-1) unstable; urgency=low
 
   * New upstream bugfix release.
     - Fix crash on terminal reset. Closes: #548319.
@@ -426,14 +426,14 @@ vte (1:0.22.1-1) unstable; urgency=low
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 26 Sep 2009 00:01:19 +0200
 
-vte (1:0.22.0-2) unstable; urgency=low
+deepinvte (1:0.22.0-2) unstable; urgency=low
 
   * 01_background_ncurses.patch: stolen upstream. Fix background color 
     in ncurses applications. Closes: #548241.
 
  -- Josselin Mouette <joss@debian.org>  Thu, 24 Sep 2009 22:49:17 +0200
 
-vte (1:0.22.0-1) unstable; urgency=low
+deepinvte (1:0.22.0-1) unstable; urgency=low
 
   [ Emilio Pozuelo Monfort ]
   * debian/patches/01_bashisms.patch: forwarded, add header.
@@ -443,7 +443,7 @@ vte (1:0.22.0-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 22 Sep 2009 13:34:21 +0200
 
-vte (1:0.20.5-1) unstable; urgency=low
+deepinvte (1:0.20.5-1) unstable; urgency=low
 
   * New upstream bugfix release, undoing the unintended
     soname bump (Closes: #532552):
@@ -455,7 +455,7 @@ vte (1:0.20.5-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 10 Jun 2009 07:07:43 +0200
 
-vte (1:0.20.4-1) unstable; urgency=low
+deepinvte (1:0.20.4-1) unstable; urgency=low
 
   [ Josselin Mouette ]
   * Add libglib2.0-doc, libgtk2.0-doc and libatk1.0-doc to b-d-i to 
@@ -474,7 +474,7 @@ vte (1:0.20.4-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 02 Jun 2009 07:01:29 +0200
 
-vte (1:0.20.1-1) unstable; urgency=low
+deepinvte (1:0.20.1-1) unstable; urgency=low
 
   [ Luca Bruno ]
   * New upstream release.
@@ -498,7 +498,7 @@ vte (1:0.20.1-1) unstable; urgency=low
       + Specify libpango1.0-dev version needed is 1.22.0.
     - Build-Depends:
       + Added libgladeui-1-dev.
-    - libvte-dev Depends:
+    - libdeepinvte-dev Depends:
       + Removed libatk1.0-dev, libsm-dev, libice-dev, zlib1g-dev and
         libx11-dev.
     - Update Standards-Version to 3.8.1, no additional changes needed.
@@ -507,29 +507,29 @@ vte (1:0.20.1-1) unstable; urgency=low
     - Add -DX_DISPLAY_MISSING to udeb CFLAGS.
     - Add --enable-glade-catalogue to DEB_CONFIGURE_EXTRA_FLAGS to install
       gladeui files.
-  * debian/libvte-common.install:
+  * debian/libdeepinvte-common.install:
     - Install gladeui files under /usr/share/glade3.
 
   [ Josselin Mouette ]
   * New upstream release.
-  * Install the Python development files in libvte-dev and make this 
-    package provide python-vte-dev, just in case.
+  * Install the Python development files in libdeepinvte-dev and make this 
+    package provide python-deepinvte-dev, just in case.
   * Fix dh_pysupport invocation.
   * Bump shlibs to version 1:0.19.4.
-  * Remove libvte-dev dependency on ncurses.
-  * Remove incorrect Provides: in python-vte.
+  * Remove libdeepinvte-dev dependency on ncurses.
+  * Remove incorrect Provides: in python-deepinvte.
   * Switch to quilt to manage patches.
   * 90_autoreconf.patch: updated for the new version.
 
  -- Josselin Mouette <joss@debian.org>  Thu, 23 Apr 2009 00:41:20 +0200
 
-vte (1:0.17.4-2) unstable; urgency=low
+deepinvte (1:0.17.4-2) unstable; urgency=low
 
   * Upload to unstable.
 
  -- Josselin Mouette <joss@debian.org>  Wed, 04 Mar 2009 13:55:08 +0100
 
-vte (1:0.17.4-1) experimental; urgency=low
+deepinvte (1:0.17.4-1) experimental; urgency=low
 
   * New upstream release:
     + debian/control.in:
@@ -546,17 +546,17 @@ vte (1:0.17.4-1) experimental; urgency=low
     + debian/patches/92_full_bold_fonts.patch:
       - Patch from the Ubuntu package to first check if a bold variant
         of a font exists before using "pseudo-bolding".
-    + debian/python-vte.examples:
+    + debian/python-deepinvte.examples:
       - Add some more examples, taken from the Ubuntu package.
   * debian/watch:
     + Updated for new versions.
 
  -- Sebastian Dröge <slomo@debian.org>  Mon, 24 Nov 2008 10:15:11 +0100
 
-vte (1:0.16.14-4) unstable; urgency=low
+deepinvte (1:0.16.14-4) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * libvte-doc.links: add a link in /usr/share/doc to the documentation.
+  * libdeepinvte-doc.links: add a link in /usr/share/doc to the documentation.
     Closes: #495356.
 
   [ Loic Minier ]
@@ -568,17 +568,17 @@ vte (1:0.16.14-4) unstable; urgency=low
 
  -- Josselin Mouette <joss@debian.org>  Fri, 24 Oct 2008 18:53:48 +0200
 
-vte (1:0.16.14-3) unstable; urgency=low
+deepinvte (1:0.16.14-3) unstable; urgency=low
 
   * Fix 1:0.16.14-2 changelog entry.
   * Upload to unstable.
 
  -- Loic Minier <lool@dooz.org>  Mon, 04 Aug 2008 12:21:58 +0200
 
-vte (1:0.16.14-2) experimental; urgency=low
+deepinvte (1:0.16.14-2) experimental; urgency=low
 
   [ Loic Minier ]
-  * Properly anchor libvteN regexp.
+  * Properly anchor libdeepinvteN regexp.
   * Misc cleanups of the below changelog and patches.
 
   [ Jérémy Bobbio ]
@@ -593,8 +593,8 @@ vte (1:0.16.14-2) experimental; urgency=low
     using the builtin termcap support instead.
   * New patch, 90_autoreconf, run autoreconf for 20_make_ft2_optional,
     29_add_am_prog_cc_c_o_for_buffer_c, and 25_optional_ncurses.
-  * Re-enable libvte9-udeb build.
-     - Drop libvte-common dep in the udeb.
+  * Re-enable libdeepinvte9-udeb build.
+     - Drop libdeepinvte-common dep in the udeb.
      - Configure the udeb without pangox and ft2 and with a static ncurses.
   * New patch, 60_termcap-home-end, defines home/end in the builtin termcap
     support file.
@@ -605,28 +605,28 @@ vte (1:0.16.14-2) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Thu, 26 Jun 2008 20:44:36 +0200
 
-vte (1:0.16.14-1) unstable; urgency=low
+deepinvte (1:0.16.14-1) unstable; urgency=low
 
   * New upstream bugfix release.
 
  -- Sebastian Dröge <slomo@debian.org>  Thu, 05 Jun 2008 12:21:06 +0200
 
-vte (1:0.16.13-1) unstable; urgency=low
+deepinvte (1:0.16.13-1) unstable; urgency=low
 
   [ Emilio Pozuelo Monfort ]
   * debian/control.in:
-    - Fix libvte-doc short description, which was refering to
+    - Fix libdeepinvte-doc short description, which was refering to
       development files instead of documentation.
 
   [ Loic Minier ]
-  * Drop head -n1 from libvteN computation.
+  * Drop head -n1 from libdeepinvteN computation.
 
   [ Sebastian Dröge ]
   * New upstream bugfix release.
 
  -- Sebastian Dröge <slomo@debian.org>  Mon, 10 Mar 2008 21:51:56 +0100
 
-vte (1:0.16.12-1) unstable; urgency=low
+deepinvte (1:0.16.12-1) unstable; urgency=low
 
   * New upstream bugfix release.
   * debian/control.in:
@@ -634,23 +634,23 @@ vte (1:0.16.12-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 09 Jan 2008 19:42:18 +0100
 
-vte (1:0.16.11-1) unstable; urgency=low
+deepinvte (1:0.16.11-1) unstable; urgency=low
 
   [ Loic Minier ]
-  * Tighten libvte package name extraction.
+  * Tighten libdeepinvte package name extraction.
 
   [ Sebastian Dröge ]
   * New upstream bugfix release.
 
  -- Sebastian Dröge <slomo@debian.org>  Mon, 17 Dec 2007 21:52:05 +0100
 
-vte (1:0.16.10-1) unstable; urgency=low
+deepinvte (1:0.16.10-1) unstable; urgency=low
 
   * New upstream bugfix release.
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 04 Dec 2007 12:13:11 +0100
 
-vte (1:0.16.9-1) unstable; urgency=low
+deepinvte (1:0.16.9-1) unstable; urgency=low
 
   * New upstream release, with API additions:
     + debian/rules:
@@ -658,7 +658,7 @@ vte (1:0.16.9-1) unstable; urgency=low
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 18 Sep 2007 10:28:08 +0200
 
-vte (1:0.16.8-1) unstable; urgency=low
+deepinvte (1:0.16.8-1) unstable; urgency=low
 
   [ Alan Baghumian ]
   * New upstream release:
@@ -671,7 +671,7 @@ vte (1:0.16.8-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Mon, 30 Jul 2007 20:25:31 +0200
 
-vte (1:0.16.6-3) unstable; urgency=low
+deepinvte (1:0.16.6-3) unstable; urgency=low
 
   * Cleanup changelog.
   * Drop patch 61_ctrl-and-shift-arrows as it breaks up/down history;
@@ -679,7 +679,7 @@ vte (1:0.16.6-3) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Wed, 25 Jul 2007 09:43:04 +0200
 
-vte (1:0.16.6-2) unstable; urgency=low
+deepinvte (1:0.16.6-2) unstable; urgency=low
 
   * Drop patch 41_from_upstream_fix_nvi_scrolling; fixed differently upstream
     since 0.16.2; see GNOME #417652.
@@ -690,7 +690,7 @@ vte (1:0.16.6-2) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Tue, 24 Jul 2007 09:06:47 +0200
 
-vte (1:0.16.6-1) unstable; urgency=low
+deepinvte (1:0.16.6-1) unstable; urgency=low
 
   * Pass proper configure flags to the udeb.
   * Generate proper shlibs for the udeb.
@@ -703,20 +703,20 @@ vte (1:0.16.6-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Tue, 19 Jun 2007 11:08:11 +0200
 
-vte (1:0.16.5-2) experimental; urgency=low
+deepinvte (1:0.16.5-2) experimental; urgency=low
 
-  * Add a new libvte9-udeb package.
+  * Add a new libdeepinvte9-udeb package.
 
  -- Loic Minier <lool@dooz.org>  Mon, 18 Jun 2007 23:10:47 +0200
 
-vte (1:0.16.5-1) unstable; urgency=low
+deepinvte (1:0.16.5-1) unstable; urgency=low
 
   * New upstream release
   * Dropped 20_fix_strange_lines.patch, merged upstream
 
  -- Alan Baghumian <alan@technotux.org>  Wed, 06 Jun 2007 11:05:11 +0330
 
-vte (1:0.16.4-1) unstable; urgency=low
+deepinvte (1:0.16.4-1) unstable; urgency=low
 
   * New upstream release
     + fix ctrl-key combinations yielding just key.
@@ -727,13 +727,13 @@ vte (1:0.16.4-1) unstable; urgency=low
 
  -- Alan Baghumian <alan@technotux.org>  Sun, 03 Jun 2007 17:25:27 +0330
 
-vte (1:0.16.3-1) unstable; urgency=low
+deepinvte (1:0.16.3-1) unstable; urgency=low
 
   * New upstream release; no API change.
 
  -- Loic Minier <lool@dooz.org>  Fri, 27 Apr 2007 23:29:59 +0200
 
-vte (1:0.16.2-1) unstable; urgency=low
+deepinvte (1:0.16.2-1) unstable; urgency=low
 
   * Upload to unstable; drop check-dist include.
   * Wrap build-deps and deps.
@@ -741,7 +741,7 @@ vte (1:0.16.2-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Tue, 24 Apr 2007 14:55:49 +0200
 
-vte (1:0.16.1-1) experimental; urgency=low
+deepinvte (1:0.16.1-1) experimental; urgency=low
 
   * New upstream release; no API change.
     - Fixes output of incorrect colours; closes: #416125.
@@ -751,14 +751,14 @@ vte (1:0.16.1-1) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Tue, 10 Apr 2007 17:31:28 +0200
 
-vte (1:0.16.0-2) experimental; urgency=low
+deepinvte (1:0.16.0-2) experimental; urgency=low
 
   * New patch, 50_expose-and-delayed-redraws-race, fixes a race between expose
     and delayed redraws; GNOME #419116; closes: #415730.
 
  -- Loic Minier <lool@dooz.org>  Wed, 21 Mar 2007 17:44:46 +0100
 
-vte (1:0.16.0-1) experimental; urgency=low
+deepinvte (1:0.16.0-1) experimental; urgency=low
 
   * New upstream major stable release; API additions.
     - Build-depend on libpango1.0-dev and libxft-dev.
@@ -772,14 +772,14 @@ vte (1:0.16.0-1) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Sun, 18 Mar 2007 11:08:13 +0100
 
-vte (1:0.14.2-1) experimental; urgency=low
+deepinvte (1:0.14.2-1) experimental; urgency=low
 
   * Add a get-orig-source target to retrieve the upstream tarball.
   * Include the new check-dist Makefile to prevent accidental uploads to
     unstable; bump build-dep on gnome-pkg-tools to >= 0.10.
-  * Drop version in the dependency on libvte-common to permit installing two
-    libvte shared library packages at the same time; the files in
-    libvte-common are translations and a termcap file which didn't change
+  * Drop version in the dependency on libdeepinvte-common to permit installing two
+    libdeepinvte shared library packages at the same time; the files in
+    libdeepinvte-common are translations and a termcap file which didn't change
     since 2002 which is supposedly eternally backward compatible, hence this
     should only result in some untranslated text.
   * Merge 1:0.12.2-5 / SVN revs 7195:8677.
@@ -788,13 +788,13 @@ vte (1:0.14.2-1) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Thu,  1 Mar 2007 11:30:40 +0100
 
-vte (1:0.14.1-1) experimental; urgency=low
+deepinvte (1:0.14.1-1) experimental; urgency=low
 
   * New upstream release.
 
  -- Josselin Mouette <joss@debian.org>  Tue, 21 Nov 2006 20:37:02 +0100
 
-vte (1:0.14.0-1) experimental; urgency=low
+deepinvte (1:0.14.0-1) experimental; urgency=low
 
   * New upstream release; no API change.
   * Preemptively fix the 12_python_reaper patch to work with newer codegen,
@@ -803,24 +803,24 @@ vte (1:0.14.0-1) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Tue,  5 Sep 2006 16:43:37 +0200
 
-vte (1:0.13.7-1) experimental; urgency=low
+deepinvte (1:0.13.7-1) experimental; urgency=low
 
   * New upstream development release; no API change.
 
  -- Loic Minier <lool@dooz.org>  Fri, 25 Aug 2006 20:20:03 +0200
 
-vte (1:0.13.6-1) experimental; urgency=low
+deepinvte (1:0.13.6-1) experimental; urgency=low
 
   * New upstream development release; no API change.
   * Merge 1:0.12.2-3.
 
  -- Loic Minier <lool@dooz.org>  Wed, 23 Aug 2006 15:56:50 +0200
 
-vte (1:0.13.5-1) experimental; urgency=low
+deepinvte (1:0.13.5-1) experimental; urgency=low
 
   * New upstream development releases, with API changes.
     - Target at experimental.
-    - Rename livte4 to libvte9 for the new SONAME.
+    - Rename lideepinvte4 to libdeepinvte9 for the new SONAME.
     - Bump shlibs to >= 1:0.13.3.
     - Drop 08_set_backspace_to_utf8 patch, merged upstream.
     - Drop 09_multiscreen_safe, fixed upstream.
@@ -829,25 +829,25 @@ vte (1:0.13.5-1) experimental; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Wed,  9 Aug 2006 22:45:15 +0200
 
-vte (1:0.12.2-5) unstable; urgency=medium
+deepinvte (1:0.12.2-5) unstable; urgency=medium
 
   * Add a get-orig-source target to retrieve the upstream tarball.
   * New patch, 20_gtk-style-attach-crash, fixes crash in gtk_style_attach when
-    changing icon theme; backported from GNOME #399282 / vte 0.14.2; see also
+    changing icon theme; backported from GNOME #399282 / deepinvte 0.14.2; see also
     GNOME #353498.
   * Stop shipping *.a and *.la files for Python modules.
 
  -- Loic Minier <lool@dooz.org>  Mon, 26 Feb 2007 14:15:57 +0100
 
-vte (1:0.12.2-4) unstable; urgency=medium
+deepinvte (1:0.12.2-4) unstable; urgency=medium
 
   * Remove references to the forgotten hardcoded python2.3 and python2.4
-    version from the python-vte.install file, thanks Daniel Holbach.
+    version from the python-deepinvte.install file, thanks Daniel Holbach.
   * Urgency medium since this will cause FTBFS in the future.
 
  -- Loic Minier <lool@dooz.org>  Tue,  5 Sep 2006 16:36:09 +0200
 
-vte (1:0.12.2-3) unstable; urgency=medium
+deepinvte (1:0.12.2-3) unstable; urgency=medium
 
   * Drop useless DEB_PYTHON_SYSTEM=pysupport.
   * Rework package build completely to follow pyversions --requested.
@@ -856,10 +856,10 @@ vte (1:0.12.2-3) unstable; urgency=medium
 
  -- Loic Minier <lool@dooz.org>  Wed, 23 Aug 2006 15:44:03 +0200
 
-vte (1:0.12.2-2) unstable; urgency=low
+deepinvte (1:0.12.2-2) unstable; urgency=low
 
   [ Loic Minier ]
-  * Remove versions in Conflicts/Replaces with python2.X-vte.
+  * Remove versions in Conflicts/Replaces with python2.X-deepinvte.
 
   [ Josselin Mouette ]
   * 12_python_reaper.patch: patch from Michael Vogt to add a python
@@ -870,7 +870,7 @@ vte (1:0.12.2-2) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Wed,  9 Aug 2006 22:15:22 +0200
 
-vte (1:0.12.2-1) unstable; urgency=low
+deepinvte (1:0.12.2-1) unstable; urgency=low
 
   [ Loic Minier ]
   * New upstream release.
@@ -881,22 +881,22 @@ vte (1:0.12.2-1) unstable; urgency=low
   [ Gustavo Franco ]
   * Python New Policy Transition. (Closes: #373405)
     - debian/control:
-      - python-vte now provides Python 2.3 and 2.4 vte Python bindings.
+      - python-deepinvte now provides Python 2.3 and 2.4 deepinvte Python bindings.
       - Add python-support as Build-Depends.
-      - Fix python-vte package description.
+      - Fix python-deepinvte package description.
     - debian/rules:
       - Add DEB_PYTHON_SYSTEM variable and set to pysupport.
-      - Make the needed changes to provide Python 2.3 and 2.4 vte Python
-        bindings in the same binary package (python-vte).
+      - Make the needed changes to provide Python 2.3 and 2.4 deepinvte Python
+        bindings in the same binary package (python-deepinvte).
       - Remove dh_python call since it's no more needed.
-      - Add dh_pysupport call in binary-install/python-vte target.
-    - Remove debian/python{2.3,2.4}-vte.install
-    - Add debian/python-vte.install
+      - Add dh_pysupport call in binary-install/python-deepinvte target.
+    - Remove debian/python{2.3,2.4}-deepinvte.install
+    - Add debian/python-deepinvte.install
   * Set debhelper compatibility to 5.
 
  -- Gustavo Franco <stratus@debian.org>  Tue, 11 Jul 2006 01:06:36 -0300
 
-vte (1:0.12.1-1) unstable; urgency=low
+deepinvte (1:0.12.1-1) unstable; urgency=low
 
   [ Josselin Mouette ]
   * Set fatalerror as the primary maintainer.
@@ -905,8 +905,8 @@ vte (1:0.12.1-1) unstable; urgency=low
     + Use ${source:Version} and ${binary:Version}.
 
   [ Loic Minier ]
-  * Stop shipping /usr/lib/*.la files in libvte-dev.
-    [debian/libvte-dev.install]
+  * Stop shipping /usr/lib/*.la files in libdeepinvte-dev.
+    [debian/libdeepinvte-dev.install]
   * New upstream release, with API additions.
     - Bump up libgtk2.0-dev build-dep to >=  2.6.0.
       [debian/control, debian/control.in]
@@ -927,13 +927,13 @@ vte (1:0.12.1-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Fri, 12 May 2006 16:11:16 +0200
 
-vte (1:0.12.0-2) unstable; urgency=low
+deepinvte (1:0.12.0-2) unstable; urgency=low
 
   * Drop references to libXcursor.la
 
  -- Guilherme de S. Pastore <gpastore@debian.org>  Fri, 21 Apr 2006 12:49:11 -0300
 
-vte (1:0.12.0-1) unstable; urgency=low
+deepinvte (1:0.12.0-1) unstable; urgency=low
 
   * New upstream release.
   * debian/patches/20_restricted_region_readjustment.patch:
@@ -947,40 +947,40 @@ vte (1:0.12.0-1) unstable; urgency=low
 
  -- Guilherme de S. Pastore <guilherme.pastore@terra.com.br>  Sun,  2 Apr 2006 12:15:57 -0300
 
-vte (1:0.11.20-3) unstable; urgency=low
+deepinvte (1:0.11.20-3) unstable; urgency=low
 
   * Fix Python build-deps, thanks Jan Lübbe.
     [debian/control, debian/control.in]
 
  -- Loic Minier <lool@dooz.org>  Mon, 27 Feb 2006 09:55:30 +0100
 
-vte (1:0.11.20-2) unstable; urgency=low
+deepinvte (1:0.11.20-2) unstable; urgency=low
 
-  * Merge nice patch from Jan Lübbe to build vte's python bindings for python
+  * Merge nice patch from Jan Lübbe to build deepinvte's python bindings for python
     2.3 and 2.4. (Closes: #353434)
-    [debian/control, debian/control.in, debian/python-vte.install,
-    debian/python2.3-vte.install, debian/python2.4-vte.install, debian/rules]
+    [debian/control, debian/control.in, debian/python-deepinvte.install,
+    debian/python2.3-deepinvte.install, debian/python2.4-deepinvte.install, debian/rules]
   * Tune up the descriptions slightly.
     [debian/control, debian/control.in]
-  * Let python2.3-vte replace previous versions of python-vte.
+  * Let python2.3-deepinvte replace previous versions of python-deepinvte.
     [debian/control, debian/control.in]
 
  -- Loic Minier <lool@dooz.org>  Sun, 26 Feb 2006 21:34:54 +0100
 
-vte (1:0.11.20-1) unstable; urgency=low
+deepinvte (1:0.11.20-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Loic Minier <lool@dooz.org>  Sun, 26 Feb 2006 11:28:15 +0100
 
-vte (1:0.11.19-1) unstable; urgency=low
+deepinvte (1:0.11.19-1) unstable; urgency=low
 
   * New upstream release.
     - Shift+Insert pasting works as in the past. (Closes: #354275)
 
  -- Loic Minier <lool@dooz.org>  Sat, 25 Feb 2006 17:45:13 +0100
 
-vte (1:0.11.18-1) unstable; urgency=low
+deepinvte (1:0.11.18-1) unstable; urgency=low
 
   * New upstream release.
     - Drop double free() fix (merged upstream).
@@ -988,7 +988,7 @@ vte (1:0.11.18-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Sun, 12 Feb 2006 20:55:57 +0100
 
-vte (1:0.11.17-1) unstable; urgency=low
+deepinvte (1:0.11.17-1) unstable; urgency=low
 
   * New upstream release.
     - This release backs out all changes made to the .pc file in
@@ -1000,19 +1000,19 @@ vte (1:0.11.17-1) unstable; urgency=low
     - Drop patch adding console sequesnces to save/restore cursor position
       (merged upstream).
       [debian/patches/05_cursor_position.patch]
-    - Drop relibtoolizing patch as the person bootstrapping vte for GNOME was
+    - Drop relibtoolizing patch as the person bootstrapping deepinvte for GNOME was
       visibly running Debian. :)
       [debian/patches/70_relibtoolize.patch]
 
  -- Loic Minier <lool@dooz.org>  Sun, 29 Jan 2006 18:35:39 +0100
 
-vte (1:0.11.16-1) unstable; urgency=low
+deepinvte (1:0.11.16-1) unstable; urgency=low
 
   * New upstream release.
     - Drop patch to use .private pkg-config pseudo-headers (included
       upstream).
       [debian/patches/30_pkg-config-private-fields.patch]
-    - No need to "rm python/vte.c", this is not distributed upstream anymore.
+    - No need to "rm python/deepinvte.c", this is not distributed upstream anymore.
       [debian/rules]
     - Drop patch to fix gdk warnings (included upstream).
       [debian/patches/20_gdk-warning.patch]
@@ -1021,7 +1021,7 @@ vte (1:0.11.16-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Mon, 23 Jan 2006 22:15:53 +0100
 
-vte (1:0.11.15-4) unstable; urgency=low
+deepinvte (1:0.11.15-4) unstable; urgency=low
 
   * Build-depend on libfreetype6-dev (>= 2.0.2) to match the checks in
     configure.in. (Closes: #340412)
@@ -1034,29 +1034,29 @@ vte (1:0.11.15-4) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Wed, 23 Nov 2005 15:23:11 +0100
 
-vte (1:0.11.15-3) unstable; urgency=high
+deepinvte (1:0.11.15-3) unstable; urgency=high
 
-  * Force regeneration of the python bindings by removing python/vte.c.
+  * Force regeneration of the python bindings by removing python/deepinvte.c.
     (Closes: #334001, #334668, #338090)
     [debian/rules]
 
  -- Loic Minier <lool@dooz.org>  Tue,  8 Nov 2005 22:38:50 +0100
 
-vte (1:0.11.15-2) unstable; urgency=high
+deepinvte (1:0.11.15-2) unstable; urgency=high
 
   * Urgency high for RC bug fix.
   * Add libsm-dev, libice-dev, zlib1g-dev, libncurses5-dev | libncurses-dev,
-    libx11-dev, and libfontconfig1-dev deps to vte-dev, according to its .pc
+    libx11-dev, and libfontconfig1-dev deps to deepinvte-dev, according to its .pc
     file. (Closes: #259671) [debian/control, debian/control.in]
 
  -- Loic Minier <lool@dooz.org>  Sun, 16 Oct 2005 22:21:33 +0200
 
-vte (1:0.11.15-1) unstable; urgency=low
+deepinvte (1:0.11.15-1) unstable; urgency=low
 
   [ Sebastien Bacher ]
   * debian/control.in:
     - use ${python:Depends}.
-  * debian/python-vte.install:
+  * debian/python-deepinvte.install:
     - don't use a specific python version.
   * debian/rules:
     - use dh_python.
@@ -1064,8 +1064,8 @@ vte (1:0.11.15-1) unstable; urgency=low
   [ Loic Minier ]
   * New upstream releases.
     - Fix confusion between py_palette and item in
-      _wrap_vte_terminal_set_colors(), doesn't segfault anymore in
-      vte.Terminal.set_colors(). (Closes: #319987)
+      _wrap_deepinvte_terminal_set_colors(), doesn't segfault anymore in
+      deepinvte.Terminal.set_colors(). (Closes: #319987)
   * Add CDBS' utils.
   * Drop obsolete patches. [debian/patches/02_path_xtra.patch,
     debian/patches/03_path_xtra-2.patch,
@@ -1077,16 +1077,16 @@ vte (1:0.11.15-1) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Sun, 11 Sep 2005 16:03:32 +0200
 
-vte (1:0.11.13-4) unstable; urgency=high
+deepinvte (1:0.11.13-4) unstable; urgency=high
 
   * Urgency high for testing targetted RC bugfix.
-  * Add dependencies to libvte-dev on libxft-dev, libfreetype6-dev,
-    libatk1.0-dev, libpango1.0-dev, libglib2.0-dev to conform with libvte.la's
+  * Add dependencies to libdeepinvte-dev on libxft-dev, libfreetype6-dev,
+    libatk1.0-dev, libpango1.0-dev, libglib2.0-dev to conform with libdeepinvte.la's
     dependency_libs. [debian/control, debian/control.in] (Closes: #259671)
 
  -- Loic Minier <lool@dooz.org>  Sun, 31 Jul 2005 16:01:15 +0200
 
-vte (1:0.11.13-3) unstable; urgency=low
+deepinvte (1:0.11.13-3) unstable; urgency=low
 
   * Fix Gdk warnings with a patch from upstream. (Closes: #316940, #318549)
     [debian/patches/20_gdk-warning.patch]
@@ -1094,29 +1094,29 @@ vte (1:0.11.13-3) unstable; urgency=low
 
  -- Loic Minier <lool@dooz.org>  Thu, 21 Jul 2005 20:01:23 +0200
 
-vte (1:0.11.13-2) unstable; urgency=low
+deepinvte (1:0.11.13-2) unstable; urgency=low
 
   * Rebuild on an unstable box to avoid dependencies in experimental.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 30 Apr 2005 19:07:20 +0200
 
-vte (1:0.11.13-1) unstable; urgency=low
+deepinvte (1:0.11.13-1) unstable; urgency=low
 
   * New upstream version
   * Added a new package that contains the documentation (Closes: #300742)
   * debian/patches:
-    - 01_vtemodule.patch: applied
+    - 01_deepinvtemodule.patch: applied
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Tue, 19 Apr 2005 23:05:02 +0200
 
-vte (1:0.11.12-1) unstable; urgency=low
+deepinvte (1:0.11.12-1) unstable; urgency=low
 
   * New upstream version. Lots of patches in Gnome's bugzilla have been
     applied.
   * debian/patches :
     - Merged patches :
         05_performance_boost.patch
-        10_redraw_vte_screen.patch 
+        10_redraw_deepinvte_screen.patch 
         12_fix_display_corrption_in_utf8.patch
     - Splitted 02_path_xtra.patch into to patches :
         02_path_xtra.patch contains the configure.in patch
@@ -1125,7 +1125,7 @@ vte (1:0.11.12-1) unstable; urgency=low
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Thu,  3 Mar 2005 23:54:07 +0100
 
-vte (1:0.11.11-6) unstable; urgency=low
+deepinvte (1:0.11.11-6) unstable; urgency=low
 
   * Added patches from Emil Soleyman-Zomalan <emil@nishra.com>.
   * debian/patches:
@@ -1138,11 +1138,11 @@ vte (1:0.11.11-6) unstable; urgency=low
     - Set backspace behavior to utf8 (depends on utf8 locale)
         08_set_backspace_to_utf8.patch
         http://bugs.gnome.org/show_bug.cgi?id=158200
-    - Make vte multi-screen safe
+    - Make deepinvte multi-screen safe
         09_multiscreen_safe.patch
         http://bugs.gnome.org/show_bug.cgi?id=160782
-    - Redraw vte screen with correct background color
-        10_redraw_vte_screen.patch
+    - Redraw deepinvte screen with correct background color
+        10_redraw_deepinvte_screen.patch
         http://bugs.gnome.org/show_bug.cgi?id=125364
     - Hide manifestation of PageUp behavior with less (Closes: #285143)
         11_hide_pageup_behavior.patch
@@ -1153,7 +1153,7 @@ vte (1:0.11.11-6) unstable; urgency=low
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Wed, 22 Dec 2004 01:32:58 +0100
 
-vte (1:0.11.11-5) unstable; urgency=low
+deepinvte (1:0.11.11-5) unstable; urgency=low
 
   * debian/patches:
     - Relibtoolized 02_path_xtra.patch (Closes: #259671)
@@ -1162,14 +1162,14 @@ vte (1:0.11.11-5) unstable; urgency=low
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Thu, 12 Aug 2004 14:00:51 +0200
 
-vte (1:0.11.11-4) unstable; urgency=low
+deepinvte (1:0.11.11-4) unstable; urgency=low
 
   * GNOME team upload.
   * debian/rules: add epoch to shlib declaration (closes: #253120).
 
  -- Jordi Mallach <jordi@debian.org>  Sun, 20 Jun 2004 17:24:12 +0200
 
-vte (1:0.11.11-3) unstable; urgency=low
+deepinvte (1:0.11.11-3) unstable; urgency=low
 
   * Gnome Team Upload.
   * debian/rules:
@@ -1177,19 +1177,19 @@ vte (1:0.11.11-3) unstable; urgency=low
 
  -- Sebastien Bacher <seb128@debian.org>  Tue,  8 Jun 2004 00:55:25 +0200
 
-vte (1:0.11.11-2) unstable; urgency=low
+deepinvte (1:0.11.11-2) unstable; urgency=low
 
   * GNOME Team Upload.
   * Upload in unstable.
 
  -- Sebastien Bacher <seb128@debian.org>  Thu, 27 May 2004 00:15:35 +0200
 
-vte (1:0.11.11-1) experimental; urgency=low
+deepinvte (1:0.11.11-1) experimental; urgency=low
 
   * New upstream version
     - Removes all former patches, as they're no more needed
-    - Add a patch for correcting init_vte typos.
-    - This version add more documentation in python-vte module (Closes: #225296)
+    - Add a patch for correcting init_deepinvte typos.
+    - This version add more documentation in python-deepinvte module (Closes: #225296)
     - New build dependency on gtk-doc-tools
   * Added a patch for using AC_PATH_XTRA with Debian's enhancements.
   * Added a patch for supporting some save/restore cursor position console
@@ -1197,48 +1197,48 @@ vte (1:0.11.11-1) experimental; urgency=low
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Sun,  2 May 2004 22:37:25 +0200
 
-vte (1:0.11.10-8) unstable; urgency=low
+deepinvte (1:0.11.10-8) unstable; urgency=low
 
   * debian/patches:
-    - Added a patch to support the vte_terminal_fork_pty call coming from
+    - Added a patch to support the deepinvte_terminal_fork_pty call coming from
     upstream cvs (Closes: #241485)
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Sun, 18 Apr 2004 14:18:56 +0200
 
-vte (1:0.11.10-7) unstable; urgency=low
+deepinvte (1:0.11.10-7) unstable; urgency=low
 
   * The gnome-pty-helper didn't have the right permissions, so it couldn't
   update the utmp files. (Closes: #240279)
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Tue, 30 Mar 2004 01:15:47 +0200
 
-vte (1:0.11.10-6) unstable; urgency=low
+deepinvte (1:0.11.10-6) unstable; urgency=low
 
   * Fixed build-dependencies (Closes: #238470)
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Wed, 17 Mar 2004 19:25:26 +0100
 
-vte (1:0.11.10-5) unstable; urgency=low
+deepinvte (1:0.11.10-5) unstable; urgency=low
 
   * New maintainer (Closes: #234970)
   * Switched from debhelper to cdbs for the packaging
 
  -- Arnaud Patard <arnaud.patard@rtp-net.org>  Sun, 29 Feb 2004 19:41:29 +0100
 
-vte (1:0.11.10-4) unstable; urgency=low
+deepinvte (1:0.11.10-4) unstable; urgency=low
 
   * This package suck more and more, slow, broken and upstream don't care,
     thus orpahned.
 
  -- Christian Marillat <marillat@debian.org>  Thu, 26 Feb 2004 21:48:39 +0100
 
-vte (1:0.11.10-3) unstable; urgency=low
+deepinvte (1:0.11.10-3) unstable; urgency=low
 
   * New patch 02_link.dpatch to fix broken linkage (Closes: #220108)
 
  -- Christian Marillat <marillat@debian.org>  Sun, 30 Nov 2003 17:21:07 +0100
 
-vte (1:0.11.10-2) unstable; urgency=low
+deepinvte (1:0.11.10-2) unstable; urgency=low
 
   * Add patch for less artifacts (Closes: #218399)
   * NMU aren't walcome when I've tagged this bug pending two days ago. Don't
@@ -1246,32 +1246,32 @@ vte (1:0.11.10-2) unstable; urgency=low
 
  -- Christian Marillat <marillat@debian.org>  Mon,  3 Nov 2003 19:13:10 +0100
 
-vte (1:0.11.10-1) unstable; urgency=low
+deepinvte (1:0.11.10-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Sun, 19 Oct 2003 11:32:07 +0200
 
-vte (1:0.10.29-6) unstable; urgency=low
+deepinvte (1:0.10.29-6) unstable; urgency=low
 
   * Re-apply cursor blinking patch (Closes: #186764, #211818)
 
  -- Christian Marillat <marillat@debian.org>  Tue, 30 Sep 2003 22:50:18 +0200
 
-vte (1:0.10.29-5) unstable; urgency=low
+deepinvte (1:0.10.29-5) unstable; urgency=low
 
   * Add libxrender-dev in Builde-Depends and Depends for the -dev package (Closes: #208533)
 
  -- Christian Marillat <marillat@debian.org>  Wed,  3 Sep 2003 18:19:51 +0200
 
-vte (1:0.10.29-4) unstable; urgency=low
+deepinvte (1:0.10.29-4) unstable; urgency=low
 
-  * Fix python dependencies in python-vte (Closes: #206285)
+  * Fix python dependencies in python-deepinvte (Closes: #206285)
   * New patch to fix a bug with the blinking (Closes: #186764)
 
  -- Christian Marillat <marillat@debian.org>  Wed, 20 Aug 2003 16:29:34 +0200
 
-vte (1:0.10.29-3) unstable; urgency=low
+deepinvte (1:0.10.29-3) unstable; urgency=low
 
   * debian/control Add python-gtk2-dev in build-depends
   * python package need to depends on a versioned python-gtk2 (>= 1.99.17-2)
@@ -1279,102 +1279,102 @@ vte (1:0.10.29-3) unstable; urgency=low
 
  -- Christian Marillat <marillat@debian.org>  Tue, 19 Aug 2003 20:43:43 +0200
 
-vte (1:0.10.29-2) unstable; urgency=low
+deepinvte (1:0.10.29-2) unstable; urgency=low
 
   * debian/rules remove an old  CC=gcc-3.2 (Closes: #196911)
 
  -- Christian Marillat <marillat@debian.org>  Tue, 10 Jun 2003 20:33:06 +0200
 
-vte (1:0.10.29-1) unstable; urgency=low
+deepinvte (1:0.10.29-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Mon,  9 Jun 2003 22:26:53 +0200
 
-vte (1:0.10.28-1) unstable; urgency=low
+deepinvte (1:0.10.28-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Tue, 13 May 2003 09:07:26 +0200
 
-vte (1:0.10.27-1) unstable; urgency=low
+deepinvte (1:0.10.27-1) unstable; urgency=low
 
   * New upstream release.
   * Fix fonts size (Closes: #186705)
 
  -- Christian Marillat <marillat@debian.org>  Mon,  5 May 2003 13:13:52 +0200
 
-vte (0.11.0-2) unstable; urgency=low
+deepinvte (0.11.0-2) unstable; urgency=low
 
   * Update section
   * Fix crash on exit (Closes: #186593)
 
  -- Christian Marillat <marillat@debian.org>  Fri,  4 Apr 2003 12:49:57 +0200
 
-vte (0.11.0-1) unstable; urgency=low
+deepinvte (0.11.0-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Wed, 26 Mar 2003 21:26:39 +0100
 
-vte (0.10.26-1) unstable; urgency=low
+deepinvte (0.10.26-1) unstable; urgency=low
 
   * New upstream release.
   * Fix text wrapping (Closes: #183337)
 
  -- Christian Marillat <marillat@debian.org>  Tue,  4 Mar 2003 21:09:31 +0100
 
-vte (0.10.25-1) unstable; urgency=low
+deepinvte (0.10.25-1) unstable; urgency=low
 
   * new upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Tue, 25 Feb 2003 01:39:37 +0100
 
-vte (0.10.23-1) unstable; urgency=low
+deepinvte (0.10.23-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Fri, 21 Feb 2003 20:56:58 +0100
 
-vte (0.10.22-1) unstable; urgency=low
+deepinvte (0.10.22-1) unstable; urgency=low
 
   * New upstream release.
   * Fix tab focus (Closes: #180370)
 
  -- Christian Marillat <marillat@debian.org>  Thu, 20 Feb 2003 10:17:29 +0100
 
-vte (0.10.20-1) unstable; urgency=low
+deepinvte (0.10.20-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Sat, 15 Feb 2003 02:00:29 +0100
 
-vte (0.10.19-1) unstable; urgency=low
+deepinvte (0.10.19-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Thu, 13 Feb 2003 10:42:34 +0100
 
-vte (0.10.17-1) unstable; urgency=low
+deepinvte (0.10.17-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Mon,  3 Feb 2003 15:56:24 +0100
 
-vte (0.10.16-1) unstable; urgency=low
+deepinvte (0.10.16-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Fri, 31 Jan 2003 18:06:35 +0100
 
-vte (0.10.15-1) unstable; urgency=low
+deepinvte (0.10.15-1) unstable; urgency=low
 
   * New upstream release.
   * Fix vim and scroll mouse (Closes: #176952)
 
  -- Christian Marillat <marillat@debian.org>  Tue, 28 Jan 2003 10:47:06 +0100
 
-vte (0.10.14-1) unstable; urgency=low
+deepinvte (0.10.14-1) unstable; urgency=low
 
   * New upstream release.
   * Workaround to fix undocumented xttitle escape sequence (Closes: #178066)
@@ -1383,31 +1383,31 @@ vte (0.10.14-1) unstable; urgency=low
 
  -- Christian Marillat <marillat@debian.org>  Fri, 24 Jan 2003 12:24:18 +0100
 
-vte (0.10.12-1) unstable; urgency=low
+deepinvte (0.10.12-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Mon, 20 Jan 2003 22:54:23 +0100
 
-vte (0.10.11-1) unstable; urgency=low
+deepinvte (0.10.11-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Sat, 18 Jan 2003 15:57:33 +0100
 
-vte (0.10.10-2) unstable; urgency=low
+deepinvte (0.10.10-2) unstable; urgency=low
 
   * -dev package should depends on libncurses5-dev (Closes: #176684)
 
  -- Christian Marillat <marillat@debian.org>  Tue, 14 Jan 2003 16:52:06 +0100
 
-vte (0.10.10-1) unstable; urgency=low
+deepinvte (0.10.10-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Tue, 14 Jan 2003 12:13:00 +0100
 
-vte (0.10.8-1) unstable; urgency=low
+deepinvte (0.10.8-1) unstable; urgency=low
 
   * New upstream release.
   * Build against libxft2-dev
@@ -1416,80 +1416,80 @@ vte (0.10.8-1) unstable; urgency=low
 
  -- Christian Marillat <marillat@debian.org>  Wed,  8 Jan 2003 16:18:25 +0100
 
-vte (0.10.7-1) unstable; urgency=low
+deepinvte (0.10.7-1) unstable; urgency=low
 
   * new upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Thu, 12 Dec 2002 15:43:33 +0100
 
-vte (0.10.5-1) unstable; urgency=low
+deepinvte (0.10.5-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Wed,  4 Dec 2002 13:19:25 +0100
 
-vte (0.10.4-1) unstable; urgency=low
+deepinvte (0.10.4-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Tue, 12 Nov 2002 17:11:26 +0100
 
-vte (0.10.3-1) unstable; urgency=low
+deepinvte (0.10.3-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Mon, 11 Nov 2002 18:48:53 +0100
 
-vte (0.10.2-1) unstable; urgency=low
+deepinvte (0.10.2-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Thu,  7 Nov 2002 16:09:09 +0100
 
-vte (0.10.1-1) unstable; urgency=low
+deepinvte (0.10.1-1) unstable; urgency=low
 
   * New upstream release.
 
  -- Christian Marillat <marillat@debian.org>  Tue,  5 Nov 2002 16:39:09 +0100
 
-vte (0.10-1) unstable; urgency=low
+deepinvte (0.10-1) unstable; urgency=low
 
   * New upstream release.
   * Bump the libray package to 4
 
  -- Christian Marillat <marillat@debian.org>  Thu, 31 Oct 2002 19:58:18 +0100
 
-vte (0.9.2-1) unstable; urgency=low
+deepinvte (0.9.2-1) unstable; urgency=low
 
   * New upstream release.
   * Fix build with the python module (Closes: #164440)
 
  -- Christian Marillat <marillat@debian.org>  Tue, 22 Oct 2002 16:15:17 +0200
 
-vte (0.9.0-2) unstable; urgency=low
+deepinvte (0.9.0-2) unstable; urgency=low
 
   * Should build-depends on gettext (Closes: #163611)
 
  -- Christian Marillat <marillat@debian.org>  Mon,  7 Oct 2002 09:13:35 +0200
 
-vte (0.9.0-1) unstable; urgency=low
+deepinvte (0.9.0-1) unstable; urgency=low
 
   * New upstream releae.
   * Add build-dependency to python-gtk2 and python-dev
-  * Add a python-vte package (Closes: #158588)
+  * Add a python-deepinvte package (Closes: #158588)
   * Bump the libray package to 3
   * Move I18N file in the -common package
 
  -- Christian Marillat <marillat@debian.org>  Sat,  5 Oct 2002 10:38:12 +0200
 
-vte (0.5.1-2) unstable; urgency=low
+deepinvte (0.5.1-2) unstable; urgency=low
 
   * Build with gcc-3.2
   * Update to standards version 3.5.7
 
  -- Christian Marillat <marillat@debian.org>  Fri, 13 Sep 2002 21:38:02 +0200
 
-vte (0.5.1-1) unstable; urgency=low
+deepinvte (0.5.1-1) unstable; urgency=low
 
   * Initial Release (Closes: #153740)
 

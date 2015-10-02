@@ -21,40 +21,40 @@
 #include <glib.h>
 #include "debug.h"
 
-VteDebugFlags _vte_debug_flags;
+DeepinvteDebugFlags _deepinvte_debug_flags;
 
 void
-_vte_debug_init(void)
+_deepinvte_debug_init(void)
 {
-#ifdef VTE_DEBUG
+#ifdef DEEPINVTE_DEBUG
   const GDebugKey keys[] = {
-    { "misc",         VTE_DEBUG_MISC         },
-    { "io",           VTE_DEBUG_IO           },
-    { "adj",          VTE_DEBUG_ADJ          },
-    { "updates",      VTE_DEBUG_UPDATES      },
-    { "events",       VTE_DEBUG_EVENTS       },
-    { "parse",        VTE_DEBUG_PARSE        },
-    { "signals",      VTE_DEBUG_SIGNALS      },
-    { "selection",    VTE_DEBUG_SELECTION    },
-    { "substitution", VTE_DEBUG_SUBSTITUTION },
-    { "ring",         VTE_DEBUG_RING         },
-    { "pty",          VTE_DEBUG_PTY          },
-    { "cursor",       VTE_DEBUG_CURSOR       },
-    { "keyboard",     VTE_DEBUG_KEYBOARD     },
-    { "lifecycle",    VTE_DEBUG_LIFECYCLE    },
-    { "trie",         VTE_DEBUG_TRIE         },
-    { "work",         VTE_DEBUG_WORK         },
-    { "cells",        VTE_DEBUG_CELLS        },
-    { "timeout",      VTE_DEBUG_TIMEOUT      },
-    { "draw",         VTE_DEBUG_DRAW         },
-    { "ally",         VTE_DEBUG_ALLY         },
-    { "pangocairo",   VTE_DEBUG_PANGOCAIRO   },
-    { "widget-size",  VTE_DEBUG_WIDGET_SIZE  },
-    { "bg",           VTE_DEBUG_BG           }
+    { "misc",         DEEPINVTE_DEBUG_MISC         },
+    { "io",           DEEPINVTE_DEBUG_IO           },
+    { "adj",          DEEPINVTE_DEBUG_ADJ          },
+    { "updates",      DEEPINVTE_DEBUG_UPDATES      },
+    { "events",       DEEPINVTE_DEBUG_EVENTS       },
+    { "parse",        DEEPINVTE_DEBUG_PARSE        },
+    { "signals",      DEEPINVTE_DEBUG_SIGNALS      },
+    { "selection",    DEEPINVTE_DEBUG_SELECTION    },
+    { "substitution", DEEPINVTE_DEBUG_SUBSTITUTION },
+    { "ring",         DEEPINVTE_DEBUG_RING         },
+    { "pty",          DEEPINVTE_DEBUG_PTY          },
+    { "cursor",       DEEPINVTE_DEBUG_CURSOR       },
+    { "keyboard",     DEEPINVTE_DEBUG_KEYBOARD     },
+    { "lifecycle",    DEEPINVTE_DEBUG_LIFECYCLE    },
+    { "trie",         DEEPINVTE_DEBUG_TRIE         },
+    { "work",         DEEPINVTE_DEBUG_WORK         },
+    { "cells",        DEEPINVTE_DEBUG_CELLS        },
+    { "timeout",      DEEPINVTE_DEBUG_TIMEOUT      },
+    { "draw",         DEEPINVTE_DEBUG_DRAW         },
+    { "ally",         DEEPINVTE_DEBUG_ALLY         },
+    { "pangocairo",   DEEPINVTE_DEBUG_PANGOCAIRO   },
+    { "widget-size",  DEEPINVTE_DEBUG_WIDGET_SIZE  },
+    { "bg",           DEEPINVTE_DEBUG_BG           }
   };
 
-  _vte_debug_flags = g_parse_debug_string (g_getenv("VTE_DEBUG"),
+  _deepinvte_debug_flags = g_parse_debug_string (g_getenv("DEEPINVTE_DEBUG"),
                                            keys, G_N_ELEMENTS (keys));
-  _vte_debug_print(0xFFFFFFFF, "VTE debug flags = %x\n", _vte_debug_flags);
-#endif /* VTE_DEBUG */
+  _deepinvte_debug_print(0xFFFFFFFF, "DEEPINVTE debug flags = %x\n", _deepinvte_debug_flags);
+#endif /* DEEPINVTE_DEBUG */
 }

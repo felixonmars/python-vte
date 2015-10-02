@@ -1,6 +1,6 @@
-# German vte translation
+# German deepinvte translation
 # Copyright (C) 2002-2003 Free Software Foundation, Inc.
-# This file is distributed under the same license as the vte package.
+# This file is distributed under the same license as the deepinvte package.
 # Christian Neumair <chris@gnome-de.org>, 2002, 2003.
 # Hendrik Richter <hendrikr@gnome.org>, 2007.
 # Andre Klapper <a9016009@gmx.de>, 2007.
@@ -8,9 +8,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vte master\n"
+"Project-Id-Version: deepinvte master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vte&component=general\n"
+"product=deepinvte&component=general\n"
 "POT-Creation-Date: 2010-03-17 17:23+0000\n"
 "PO-Revision-Date: 2010-07-16 21:34+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../src/iso2022.c:771 ../src/iso2022.c:779 ../src/iso2022.c:810
-#: ../src/vte.c:2232
+#: ../src/deepinvte.c:2232
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "Zeichen konnten nicht von %s nach %s konvertiert werden."
@@ -54,44 +54,44 @@ msgid "Duplicate (%s/%s)!"
 msgstr "Duplikat (%s/%s)!"
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:876
+#: ../src/deepinvteapp.c:876
 msgid "Could not open console.\n"
 msgstr "Konsole konnte nicht geöffnet werden.\n"
 
-#: ../src/vteapp.c:967
+#: ../src/deepinvteapp.c:967
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "Mittels --geometry übergebene Ausmaße konnten nicht verarbeitet werden"
 
-#: ../src/vte.c:1279
+#: ../src/deepinvte.c:1279
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "Fehler beim Kompilieren des regulären Ausdrucks »%s«."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:4344
+#: ../src/deepinvte.c:4344
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "Fehler beim Lesen von Kind: %s."
 
-#: ../src/vte.c:4472
+#: ../src/deepinvte.c:4472
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr ""
 "Daten konnten nicht an Kind gesendet werden, ungültiger Zeichensatz-Konverter"
 
-#: ../src/vte.c:4483 ../src/vte.c:5505
+#: ../src/deepinvte.c:4483 ../src/deepinvte.c:5505
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr "Fehler (%s) beim Konvertieren der Daten für Kind, abgebrochen."
 
-#: ../src/vte.c:7726
+#: ../src/deepinvte.c:7726
 #, c-format
 msgid "Error reading PTY size, using defaults: %s\n"
 msgstr "Fehler beim Ermitteln der PTY-Größe, Vorgaben werden verwendet: %s\n"
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:13281
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_conv_open() konnte die Zeichen des Wortes nicht festlegen"
+#: ../src/deepinvte.c:13281
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_conv_open() konnte die Zeichen des Wortes nicht festlegen"
 
 #~ msgid "Error creating signal pipe."
 #~ msgstr "Fehler beim Erstellen der Signalweiterleitung."

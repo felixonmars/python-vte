@@ -1,14 +1,14 @@
-Index: vte-0.28.0/src/vte.c
+Index: deepinvte-0.28.0/src/deepinvte.c
 ===================================================================
---- vte-0.28.0.orig/src/vte.c	2011-05-17 12:18:16.676757671 +0200
-+++ vte-0.28.0/src/vte.c	2011-05-17 12:18:22.586757675 +0200
+--- deepinvte-0.28.0.orig/src/deepinvte.c	2011-05-17 12:18:16.676757671 +0200
++++ deepinvte-0.28.0/src/deepinvte.c	2011-05-17 12:18:22.586757675 +0200
 @@ -4057,6 +4057,7 @@
  	long wcount, start, delta;
  	gboolean leftovers, modified, bottom, again;
  	gboolean invalidated_text;
 +	gboolean in_scroll_region;
  	GArray *unichars;
- 	struct _vte_incoming_chunk *chunk, *next_chunk, *achunk = NULL;
+ 	struct _deepinvte_incoming_chunk *chunk, *next_chunk, *achunk = NULL;
  
 @@ -4076,6 +4077,10 @@
  	cursor = screen->cursor_current;
@@ -29,7 +29,7 @@ Index: vte-0.28.0/src/vte.c
 +
  			/* Call the right sequence handler for the requested
  			 * behavior. */
- 			_vte_terminal_handle_sequence(terminal,
+ 			_deepinvte_terminal_handle_sequence(terminal,
 @@ -4184,12 +4191,20 @@
  			start = (next - wbuf);
  			modified = TRUE;
@@ -44,15 +44,15 @@ Index: vte-0.28.0/src/vte.c
 +			/* if we have moved greatly during the sequence handler, or moved into a scroll_region
 +                         * from outside it, restart the bbox */
  			if (invalidated_text &&
--					(screen->cursor_current.col > bbox_bottomright.x + VTE_CELL_BBOX_SLACK ||
--					 screen->cursor_current.col < bbox_topleft.x - VTE_CELL_BBOX_SLACK     ||
--					 screen->cursor_current.row > bbox_bottomright.y + VTE_CELL_BBOX_SLACK ||
--					 screen->cursor_current.row < bbox_topleft.y - VTE_CELL_BBOX_SLACK)) {
+-					(screen->cursor_current.col > bbox_bottomright.x + DEEPINVTE_CELL_BBOX_SLACK ||
+-					 screen->cursor_current.col < bbox_topleft.x - DEEPINVTE_CELL_BBOX_SLACK     ||
+-					 screen->cursor_current.row > bbox_bottomright.y + DEEPINVTE_CELL_BBOX_SLACK ||
+-					 screen->cursor_current.row < bbox_topleft.y - DEEPINVTE_CELL_BBOX_SLACK)) {
 +					((new_in_scroll_region && !in_scroll_region) ||
-+					 (screen->cursor_current.col > bbox_bottomright.x + VTE_CELL_BBOX_SLACK ||
-+					  screen->cursor_current.col < bbox_topleft.x - VTE_CELL_BBOX_SLACK     ||
-+					  screen->cursor_current.row > bbox_bottomright.y + VTE_CELL_BBOX_SLACK ||
-+					  screen->cursor_current.row < bbox_topleft.y - VTE_CELL_BBOX_SLACK))) {
++					 (screen->cursor_current.col > bbox_bottomright.x + DEEPINVTE_CELL_BBOX_SLACK ||
++					  screen->cursor_current.col < bbox_topleft.x - DEEPINVTE_CELL_BBOX_SLACK     ||
++					  screen->cursor_current.row > bbox_bottomright.y + DEEPINVTE_CELL_BBOX_SLACK ||
++					  screen->cursor_current.row < bbox_topleft.y - DEEPINVTE_CELL_BBOX_SLACK))) {
  				/* Clip off any part of the box which isn't already on-screen. */
  				bbox_topleft.x = MAX(bbox_topleft.x, 0);
  				bbox_topleft.y = MAX(bbox_topleft.y, delta);

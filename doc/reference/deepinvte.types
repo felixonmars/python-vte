@@ -1,0 +1,24 @@
+#include <glib.h>
+#include <glib-object.h>
+#include <gio/gio.h>
+#include <gtk/gtk.h>
+#include "deepinvte.h"
+#include "deepinvteversion.h"
+#include "deepinvteaccess.h"
+#include "deepinvtepty.h"
+#include "deepinvtetypebuiltins.h"
+#include "reaper.h"
+
+deepinvte_pty_get_type
+deepinvte_reaper_get_type
+deepinvte_terminal_get_type
+deepinvte_terminal_accessible_get_type
+deepinvte_terminal_accessible_factory_get_type
+
+deepinvte_pty_error_get_type
+deepinvte_pty_flags_get_type
+deepinvte_terminal_anti_alias_get_type
+deepinvte_terminal_cursor_blink_mode_get_type
+deepinvte_terminal_cursor_shape_get_type
+deepinvte_terminal_erase_binding_get_type
+deepinvte_terminal_write_flags_get_type

@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="vte"
+PKG_NAME="deepinvte"
 
 (test -f $srcdir/configure.in \
   && test -f $srcdir/README \

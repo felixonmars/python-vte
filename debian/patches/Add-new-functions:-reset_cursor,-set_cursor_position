@@ -5,13 +5,13 @@ Description: <short summary of the patch>
  information below has been extracted from the changelog. Adjust it or drop
  it.
  .
- vte (1:0.28.2-5ubuntu1) quantal; urgency=low
+ deepinvte (1:0.28.2-5ubuntu1) quantal; urgency=low
  .
    * Resynchronise with Debian (libexecdir fix closes LP: #864609).
      Remaining changes:
      - debian/patches/91_keep_fds.patch:
-       - vte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN when calling
-         vte_terminal_fork_command_full().
+       - deepinvte does not support G_SPAWN_LEAVE_DESCRIPTORS_OPEN when calling
+         deepinvte_terminal_fork_command_full().
      - debian/patches/93_add_alt_screen_scroll_toggle.patch:
        - Handle scrolling differently when using alternate screen or
          scrolling is restricted.
@@ -20,8 +20,8 @@ Description: <short summary of the patch>
      - debian/patches/backscroll-stream-mem.patch:
        - Provide a memory-based scrollback stream backend to avoid hitting
          disk with terminal contents.
-   * Add version for vte_terminal_set_alternate_screen_scroll to
-     libvte9.symbols (probably a bit too tight, but due to changelog
+   * Add version for deepinvte_terminal_set_alternate_screen_scroll to
+     libdeepinvte9.symbols (probably a bit too tight, but due to changelog
      truncation this is the best I could readily manage).
 Author: Colin Watson <cjwatson@ubuntu.com>
 Bug-Ubuntu: https://bugs.launchpad.net/bugs/864609
@@ -39,28 +39,28 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
---- vte-0.28.2.orig/python/vte.defs
-+++ vte-0.28.2/python/vte.defs
+--- deepinvte-0.28.2.orig/python/deepinvte.defs
++++ deepinvte-0.28.2/python/deepinvte.defs
 @@ -553,6 +553,12 @@
    )
  )
  
 +(define-method reset_cursor
-+  (of-object "VteTerminal")
-+  (c-name "vte_terminal_reset_cursor")
++  (of-object "DeepinvteTerminal")
++  (c-name "deepinvte_terminal_reset_cursor")
 +  (return-type "none")
 +)
 +
  (define-method get_text
-   (of-object "VteTerminal")
-   (c-name "vte_terminal_get_text")
+   (of-object "DeepinvteTerminal")
+   (c-name "deepinvte_terminal_get_text")
 @@ -594,6 +600,15 @@
    )
  )
  
 +(define-method set_cursor_position
-+  (of-object "VteTerminal")
-+  (c-name "vte_terminal_set_cursor_position")
++  (of-object "DeepinvteTerminal")
++  (c-name "deepinvte_terminal_set_cursor_position")
 +  (return-type "none")
 +  (parameters
 +   '("glong" "column")
@@ -68,63 +68,63 @@ Last-Update: <YYYY-MM-DD>
 +)
 +
  (define-method match_clear_all
-   (of-object "VteTerminal")
-   (c-name "vte_terminal_match_clear_all")
+   (of-object "DeepinvteTerminal")
+   (c-name "deepinvte_terminal_match_clear_all")
 @@ -678,6 +693,12 @@
    )
  )
  
 +(define-method search_get_gregex
-+  (of-object "VteTerminal")
-+  (c-name "vte_terminal_search_get_gregex")
++  (of-object "DeepinvteTerminal")
++  (c-name "deepinvte_terminal_search_get_gregex")
 +  (return-type "GRegex*")
 +)
 +
  (define-method search_set_wrap_around
-   (of-object "VteTerminal")
-   (c-name "vte_terminal_search_set_wrap_around")
---- vte-0.28.2.orig/src/vte.c
-+++ vte-0.28.2/src/vte.c
-@@ -6532,6 +6532,29 @@ vte_terminal_get_cursor_position(VteTerm
+   (of-object "DeepinvteTerminal")
+   (c-name "deepinvte_terminal_search_set_wrap_around")
+--- deepinvte-0.28.2.orig/src/deepinvte.c
++++ deepinvte-0.28.2/src/deepinvte.c
+@@ -6532,6 +6532,29 @@ deepinvte_terminal_get_cursor_position(DeepinvteTerm
  	}
  }
  
 +/**
-+ * vte_terminal_set_cursor_position:
-+ * @terminal: a #VteTerminal
++ * deepinvte_terminal_set_cursor_position:
++ * @terminal: a #DeepinvteTerminal
 + * @column: the new cursor column
 + * @row: the new cursor row
 + *
 + * Set the location of the cursor.
 + */
 +void
-+vte_terminal_set_cursor_position(VteTerminal *terminal,
++deepinvte_terminal_set_cursor_position(DeepinvteTerminal *terminal,
 +                                 glong column, glong row)
 +{
-+	g_return_if_fail(VTE_IS_TERMINAL(terminal));
++	g_return_if_fail(DEEPINVTE_IS_TERMINAL(terminal));
 +
-+	_vte_invalidate_cursor_once(terminal, FALSE);
++	_deepinvte_invalidate_cursor_once(terminal, FALSE);
 +	terminal->pvt->screen->cursor_current.col = column;
 +	terminal->pvt->screen->cursor_current.row = row;
-+	_vte_invalidate_cursor_once(terminal, FALSE);
-+	_vte_check_cursor_blink(terminal);
-+	vte_terminal_queue_cursor_moved(terminal);
++	_deepinvte_invalidate_cursor_once(terminal, FALSE);
++	_deepinvte_check_cursor_blink(terminal);
++	deepinvte_terminal_queue_cursor_moved(terminal);
 +}
 +
 +
  static GtkClipboard *
- vte_terminal_clipboard_get(VteTerminal *terminal, GdkAtom board)
+ deepinvte_terminal_clipboard_get(DeepinvteTerminal *terminal, GdkAtom board)
  {
-@@ -14150,6 +14173,33 @@ vte_terminal_reset(VteTerminal *terminal
+@@ -14150,6 +14173,33 @@ deepinvte_terminal_reset(DeepinvteTerminal *terminal
          g_object_thaw_notify(G_OBJECT(terminal));
  }
  
 +void 
-+vte_terminal_reset_cursor(VteTerminal *terminal)
++deepinvte_terminal_reset_cursor(DeepinvteTerminal *terminal)
 +{
-+    VteTerminalPrivate *pvt;
++    DeepinvteTerminalPrivate *pvt;
 +
-+	g_return_if_fail(VTE_IS_TERMINAL(terminal));
++	g_return_if_fail(DEEPINVTE_IS_TERMINAL(terminal));
 +
 +    pvt = terminal->pvt;
 +
@@ -142,31 +142,31 @@ Last-Update: <YYYY-MM-DD>
 +    pvt->alternate_screen.cursor_current.col = 0;
 +    pvt->alternate_screen.scroll_delta = 0;
 +    pvt->alternate_screen.insert_delta = 0;
-+    _vte_terminal_adjust_adjustments_full (terminal);
++    _deepinvte_terminal_adjust_adjustments_full (terminal);
 +}    
 +
 +
  /**
-  * vte_terminal_get_status_line:
-  * @terminal: a #VteTerminal
---- vte-0.28.2.orig/src/vte.h
-+++ vte-0.28.2/src/vte.h
-@@ -415,6 +415,8 @@ void vte_terminal_reset(VteTerminal *ter
+  * deepinvte_terminal_get_status_line:
+  * @terminal: a #DeepinvteTerminal
+--- deepinvte-0.28.2.orig/src/deepinvte.h
++++ deepinvte-0.28.2/src/deepinvte.h
+@@ -415,6 +415,8 @@ void deepinvte_terminal_reset(DeepinvteTerminal *ter
                          gboolean clear_tabstops,
  			gboolean clear_history);
  
-+void vte_terminal_reset_cursor(VteTerminal *terminal);
++void deepinvte_terminal_reset_cursor(DeepinvteTerminal *terminal);
 +
  /* Read the contents of the terminal, using a callback function to determine
   * if a particular location on the screen (0-based) is interesting enough to
   * include.  Each byte in the returned string will have a corresponding
-@@ -437,6 +439,9 @@ char *vte_terminal_get_text_range(VteTer
+@@ -437,6 +439,9 @@ char *deepinvte_terminal_get_text_range(DeepinvteTer
  				  GArray *attributes);
- void vte_terminal_get_cursor_position(VteTerminal *terminal,
+ void deepinvte_terminal_get_cursor_position(DeepinvteTerminal *terminal,
  				      glong *column, glong *row);
-+void vte_terminal_set_cursor_position(VteTerminal *terminal,
++void deepinvte_terminal_set_cursor_position(DeepinvteTerminal *terminal,
 +                                      glong column, glong row);
 +
  /* Display string matching:  clear all matching expressions. */
- void vte_terminal_match_clear_all(VteTerminal *terminal);
+ void deepinvte_terminal_match_clear_all(DeepinvteTerminal *terminal);
  

@@ -37,7 +37,7 @@ build_triplet = @build@
 host_triplet = @host@
 subdir = python
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/pyvte.pc.in
+	$(srcdir)/pydeepinvte.pc.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.in
@@ -45,7 +45,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = pyvte.pc
+CONFIG_CLEAN_FILES = pydeepinvte.pc
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -72,25 +72,25 @@ am__installdirs = "$(DESTDIR)$(pythonsiteexecdir)" \
 	"$(DESTDIR)$(defsdir)" "$(DESTDIR)$(pkgconfigdir)"
 LTLIBRARIES = $(pythonsiteexec_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_DEPENDENCIES =  \
-@BUILD_PYTHON_MODULES_TRUE@	$(top_builddir)/src/libvte.la \
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_DEPENDENCIES =  \
+@BUILD_PYTHON_MODULES_TRUE@	$(top_builddir)/src/libdeepinvte.la \
 @BUILD_PYTHON_MODULES_TRUE@	$(am__DEPENDENCIES_1) \
 @BUILD_PYTHON_MODULES_TRUE@	$(am__DEPENDENCIES_1) \
 @BUILD_PYTHON_MODULES_TRUE@	$(am__DEPENDENCIES_1)
-am__vtemodule_la_SOURCES_DIST = vtemodule.c
-@BUILD_PYTHON_MODULES_TRUE@am_vtemodule_la_OBJECTS =  \
-@BUILD_PYTHON_MODULES_TRUE@	vtemodule_la-vtemodule.lo
-@BUILD_PYTHON_MODULES_TRUE@nodist_vtemodule_la_OBJECTS =  \
-@BUILD_PYTHON_MODULES_TRUE@	vtemodule_la-vte.lo
-vtemodule_la_OBJECTS = $(am_vtemodule_la_OBJECTS) \
-	$(nodist_vtemodule_la_OBJECTS)
+am__deepinvtemodule_la_SOURCES_DIST = deepinvtemodule.c
+@BUILD_PYTHON_MODULES_TRUE@am_deepinvtemodule_la_OBJECTS =  \
+@BUILD_PYTHON_MODULES_TRUE@	deepinvtemodule_la-deepinvtemodule.lo
+@BUILD_PYTHON_MODULES_TRUE@nodist_deepinvtemodule_la_OBJECTS =  \
+@BUILD_PYTHON_MODULES_TRUE@	deepinvtemodule_la-deepinvte.lo
+deepinvtemodule_la_OBJECTS = $(am_deepinvtemodule_la_OBJECTS) \
+	$(nodist_deepinvtemodule_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-vtemodule_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(vtemodule_la_CFLAGS) \
-	$(CFLAGS) $(vtemodule_la_LDFLAGS) $(LDFLAGS) -o $@
-@BUILD_PYTHON_MODULES_TRUE@am_vtemodule_la_rpath = -rpath \
+deepinvtemodule_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(deepinvtemodule_la_CFLAGS) \
+	$(CFLAGS) $(deepinvtemodule_la_LDFLAGS) $(LDFLAGS) -o $@
+@BUILD_PYTHON_MODULES_TRUE@am_deepinvtemodule_la_rpath = -rpath \
 @BUILD_PYTHON_MODULES_TRUE@	$(pythonsiteexecdir)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -118,8 +118,8 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(vtemodule_la_SOURCES) $(nodist_vtemodule_la_SOURCES)
-DIST_SOURCES = $(am__vtemodule_la_SOURCES_DIST)
+SOURCES = $(deepinvtemodule_la_SOURCES) $(nodist_deepinvtemodule_la_SOURCES)
+DIST_SOURCES = $(am__deepinvtemodule_la_SOURCES_DIST)
 DATA = $(defs_DATA) $(pkgconfig_DATA)
 ETAGS = etags
 CTAGS = ctags
@@ -249,21 +249,21 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
-VTE_API_MAJOR_VERSION = @VTE_API_MAJOR_VERSION@
-VTE_API_MINOR_VERSION = @VTE_API_MINOR_VERSION@
-VTE_API_VERSION = @VTE_API_VERSION@
-VTE_API_VERSION_U = @VTE_API_VERSION_U@
-VTE_CFLAGS = @VTE_CFLAGS@
-VTE_DEFAULT_EMULATION = @VTE_DEFAULT_EMULATION@
-VTE_LDFLAGS = @VTE_LDFLAGS@
-VTE_LIBRARY_SUFFIX_U = @VTE_LIBRARY_SUFFIX_U@
-VTE_LIBS = @VTE_LIBS@
-VTE_MAJOR_VERSION = @VTE_MAJOR_VERSION@
-VTE_MICRO_VERSION = @VTE_MICRO_VERSION@
-VTE_MINOR_VERSION = @VTE_MINOR_VERSION@
-VTE_PC_VERSION = @VTE_PC_VERSION@
-VTE_PKGS = @VTE_PKGS@
-VTE_SEAL_CFLAGS = @VTE_SEAL_CFLAGS@
+DEEPINVTE_API_MAJOR_VERSION = @DEEPINVTE_API_MAJOR_VERSION@
+DEEPINVTE_API_MINOR_VERSION = @DEEPINVTE_API_MINOR_VERSION@
+DEEPINVTE_API_VERSION = @DEEPINVTE_API_VERSION@
+DEEPINVTE_API_VERSION_U = @DEEPINVTE_API_VERSION_U@
+DEEPINVTE_CFLAGS = @DEEPINVTE_CFLAGS@
+DEEPINVTE_DEFAULT_EMULATION = @DEEPINVTE_DEFAULT_EMULATION@
+DEEPINVTE_LDFLAGS = @DEEPINVTE_LDFLAGS@
+DEEPINVTE_LIBRARY_SUFFIX_U = @DEEPINVTE_LIBRARY_SUFFIX_U@
+DEEPINVTE_LIBS = @DEEPINVTE_LIBS@
+DEEPINVTE_MAJOR_VERSION = @DEEPINVTE_MAJOR_VERSION@
+DEEPINVTE_MICRO_VERSION = @DEEPINVTE_MICRO_VERSION@
+DEEPINVTE_MINOR_VERSION = @DEEPINVTE_MINOR_VERSION@
+DEEPINVTE_PC_VERSION = @DEEPINVTE_PC_VERSION@
+DEEPINVTE_PKGS = @DEEPINVTE_PKGS@
+DEEPINVTE_SEAL_CFLAGS = @DEEPINVTE_SEAL_CFLAGS@
 WARN_CFLAGS = @WARN_CFLAGS@
 XGETTEXT = @XGETTEXT@
 abs_builddir = @abs_builddir@
@@ -323,24 +323,24 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-EXTRA_DIST = vte.defs pyvte.pc.in vte.override cat.py unrealize.py vte-demo.py
+EXTRA_DIST = deepinvte.defs pydeepinvte.pc.in deepinvte.override cat.py unrealize.py deepinvte-demo.py
 @BUILD_PYTHON_MODULES_TRUE@defsdir = $(datadir)/pygtk/2.0/defs
-@BUILD_PYTHON_MODULES_TRUE@defs_DATA = vte.defs
+@BUILD_PYTHON_MODULES_TRUE@defs_DATA = deepinvte.defs
 @BUILD_PYTHON_MODULES_TRUE@pkgconfigdir = $(libdir)/pkgconfig
-@BUILD_PYTHON_MODULES_TRUE@pkgconfig_DATA = pyvte.pc
-@BUILD_PYTHON_MODULES_TRUE@PYTHON_MODULES = vtemodule.la
+@BUILD_PYTHON_MODULES_TRUE@pkgconfig_DATA = pydeepinvte.pc
+@BUILD_PYTHON_MODULES_TRUE@PYTHON_MODULES = deepinvtemodule.la
 @BUILD_PYTHON_MODULES_TRUE@pythonsiteexecdir = $(pyexecdir)/gtk-2.0
 @BUILD_PYTHON_MODULES_TRUE@pythonsiteexec_LTLIBRARIES = $(PYTHON_MODULES)
-@BUILD_PYTHON_MODULES_TRUE@CLEANFILES = vte.c
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_SOURCES = vtemodule.c
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_CPPFLAGS = -I$(top_builddir)/src $(AM_CPPFLAGS)
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_CFLAGS = $(VTE_CFLAGS) $(X_CFLAGS) $(PYTHON_INCLUDES) $(PYGTK_CFLAGS) $(AM_CFLAGS)
+@BUILD_PYTHON_MODULES_TRUE@CLEANFILES = deepinvte.c
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_SOURCES = deepinvtemodule.c
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_CPPFLAGS = -I$(top_builddir)/src $(AM_CPPFLAGS)
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_CFLAGS = $(DEEPINVTE_CFLAGS) $(X_CFLAGS) $(PYTHON_INCLUDES) $(PYGTK_CFLAGS) $(AM_CFLAGS)
 
 # we do this to suport building with -Wl,-z,defs which errors on
-# vtemodule.so as we cannot include $(PYTHON_LIBS) due to bug 410986.
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initvte $(PYTHON_LDFLAGS) $(AM_LDFLAGS)
-@BUILD_PYTHON_MODULES_TRUE@vtemodule_la_LIBADD = $(top_builddir)/src/libvte.la $(LIBS) $(PYGTK_LIBS) $(VTE_LIBS) $(X_LIBS)
-@BUILD_PYTHON_MODULES_TRUE@nodist_vtemodule_la_SOURCES = vte.c
+# deepinvtemodule.so as we cannot include $(PYTHON_LIBS) due to bug 410986.
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initdeepinvte $(PYTHON_LDFLAGS) $(AM_LDFLAGS)
+@BUILD_PYTHON_MODULES_TRUE@deepinvtemodule_la_LIBADD = $(top_builddir)/src/libdeepinvte.la $(LIBS) $(PYGTK_LIBS) $(DEEPINVTE_LIBS) $(X_LIBS)
+@BUILD_PYTHON_MODULES_TRUE@nodist_deepinvtemodule_la_SOURCES = deepinvte.c
 all: all-am
 
 .SUFFIXES:
@@ -375,7 +375,7 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-pyvte.pc: $(top_builddir)/config.status $(srcdir)/pyvte.pc.in
+pydeepinvte.pc: $(top_builddir)/config.status $(srcdir)/pydeepinvte.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-pythonsiteexecLTLIBRARIES: $(pythonsiteexec_LTLIBRARIES)
 	@$(NORMAL_INSTALL)
@@ -408,8 +408,8 @@ clean-pythonsiteexecLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-vtemodule.la: $(vtemodule_la_OBJECTS) $(vtemodule_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(vtemodule_la_LINK) $(am_vtemodule_la_rpath) $(vtemodule_la_OBJECTS) $(vtemodule_la_LIBADD) $(LIBS)
+deepinvtemodule.la: $(deepinvtemodule_la_OBJECTS) $(deepinvtemodule_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(deepinvtemodule_la_LINK) $(am_deepinvtemodule_la_rpath) $(deepinvtemodule_la_OBJECTS) $(deepinvtemodule_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -417,8 +417,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vtemodule_la-vte.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vtemodule_la-vtemodule.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/deepinvtemodule_la-deepinvte.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/deepinvtemodule_la-deepinvtemodule.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -444,21 +444,21 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
-vtemodule_la-vtemodule.lo: vtemodule.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(vtemodule_la_CPPFLAGS) $(CPPFLAGS) $(vtemodule_la_CFLAGS) $(CFLAGS) -MT vtemodule_la-vtemodule.lo -MD -MP -MF $(DEPDIR)/vtemodule_la-vtemodule.Tpo -c -o vtemodule_la-vtemodule.lo `test -f 'vtemodule.c' || echo '$(srcdir)/'`vtemodule.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/vtemodule_la-vtemodule.Tpo $(DEPDIR)/vtemodule_la-vtemodule.Plo
+deepinvtemodule_la-deepinvtemodule.lo: deepinvtemodule.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(deepinvtemodule_la_CPPFLAGS) $(CPPFLAGS) $(deepinvtemodule_la_CFLAGS) $(CFLAGS) -MT deepinvtemodule_la-deepinvtemodule.lo -MD -MP -MF $(DEPDIR)/deepinvtemodule_la-deepinvtemodule.Tpo -c -o deepinvtemodule_la-deepinvtemodule.lo `test -f 'deepinvtemodule.c' || echo '$(srcdir)/'`deepinvtemodule.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/deepinvtemodule_la-deepinvtemodule.Tpo $(DEPDIR)/deepinvtemodule_la-deepinvtemodule.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='vtemodule.c' object='vtemodule_la-vtemodule.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='deepinvtemodule.c' object='deepinvtemodule_la-deepinvtemodule.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(vtemodule_la_CPPFLAGS) $(CPPFLAGS) $(vtemodule_la_CFLAGS) $(CFLAGS) -c -o vtemodule_la-vtemodule.lo `test -f 'vtemodule.c' || echo '$(srcdir)/'`vtemodule.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(deepinvtemodule_la_CPPFLAGS) $(CPPFLAGS) $(deepinvtemodule_la_CFLAGS) $(CFLAGS) -c -o deepinvtemodule_la-deepinvtemodule.lo `test -f 'deepinvtemodule.c' || echo '$(srcdir)/'`deepinvtemodule.c
 
-vtemodule_la-vte.lo: vte.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(vtemodule_la_CPPFLAGS) $(CPPFLAGS) $(vtemodule_la_CFLAGS) $(CFLAGS) -MT vtemodule_la-vte.lo -MD -MP -MF $(DEPDIR)/vtemodule_la-vte.Tpo -c -o vtemodule_la-vte.lo `test -f 'vte.c' || echo '$(srcdir)/'`vte.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/vtemodule_la-vte.Tpo $(DEPDIR)/vtemodule_la-vte.Plo
+deepinvtemodule_la-deepinvte.lo: deepinvte.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(deepinvtemodule_la_CPPFLAGS) $(CPPFLAGS) $(deepinvtemodule_la_CFLAGS) $(CFLAGS) -MT deepinvtemodule_la-deepinvte.lo -MD -MP -MF $(DEPDIR)/deepinvtemodule_la-deepinvte.Tpo -c -o deepinvtemodule_la-deepinvte.lo `test -f 'deepinvte.c' || echo '$(srcdir)/'`deepinvte.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/deepinvtemodule_la-deepinvte.Tpo $(DEPDIR)/deepinvtemodule_la-deepinvte.Plo
 @am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='vte.c' object='vtemodule_la-vte.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='deepinvte.c' object='deepinvtemodule_la-deepinvte.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(vtemodule_la_CPPFLAGS) $(CPPFLAGS) $(vtemodule_la_CFLAGS) $(CFLAGS) -c -o vtemodule_la-vte.lo `test -f 'vte.c' || echo '$(srcdir)/'`vte.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(deepinvtemodule_la_CPPFLAGS) $(CPPFLAGS) $(deepinvtemodule_la_CFLAGS) $(CFLAGS) -c -o deepinvtemodule_la-deepinvte.lo `test -f 'deepinvte.c' || echo '$(srcdir)/'`deepinvte.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -712,7 +712,7 @@ uninstall-am: uninstall-defsDATA uninstall-pkgconfigDATA \
 	uninstall-pkgconfigDATA uninstall-pythonsiteexecLTLIBRARIES
 
 
-@BUILD_PYTHON_MODULES_TRUE@vte.c: vte.defs vte.override
+@BUILD_PYTHON_MODULES_TRUE@deepinvte.c: deepinvte.defs deepinvte.override
 
 @BUILD_PYTHON_MODULES_TRUE@.defs.c:
 @BUILD_PYTHON_MODULES_TRUE@	$(AM_V_GEN) (cd $(srcdir) \

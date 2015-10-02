@@ -1,0 +1,6 @@
+usr/include/deepinvte-0.0
+usr/lib/pkgconfig/deepinvte.pc
+usr/lib/pkgconfig/pydeepinvte.pc
+usr/lib/libdeepinvte.a
+usr/lib/libdeepinvte.so
+usr/share/pygtk/2.0/defs

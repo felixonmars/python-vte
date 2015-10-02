@@ -1,12 +1,12 @@
 NULL =
 
 cataloguedir = $(GLADE_CATALOGUE_DIR)
-catalogue_in_files = vte.xml.in
+catalogue_in_files = deepinvte.xml.in
 catalogue_DATA = $(catalogue_in_files:.xml.in=.xml)
 
 icons = \
-	hicolor_actions_16x16_widget-vte-terminal.png \
-	hicolor_actions_22x22_widget-vte-terminal.png \
+	hicolor_actions_16x16_widget-deepinvte-terminal.png \
+	hicolor_actions_22x22_widget-deepinvte-terminal.png \
 	$(NULL)
 
 EXTRA_DIST = \

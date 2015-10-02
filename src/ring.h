@@ -20,69 +20,69 @@
 
 /* The interfaces in this file are subject to change at any time. */
 
-#ifndef vte_ring_h_included
-#define vte_ring_h_included
+#ifndef deepinvte_ring_h_included
+#define deepinvte_ring_h_included
 
 #include <gio/gio.h>
-#include "vte.h"
+#include "deepinvte.h"
 
-#include "vterowdata.h"
-#include "vtestream.h"
+#include "deepinvterowdata.h"
+#include "deepinvtestream.h"
 
 G_BEGIN_DECLS
 
 
-typedef struct _VteCellAttrChange {
+typedef struct _DeepinvteCellAttrChange {
 	gsize text_offset;
-	VteIntCellAttr attr;
-} VteCellAttrChange;
+	DeepinvteIntCellAttr attr;
+} DeepinvteCellAttrChange;
 
 
 /*
- * VteRing: A scrollback buffer ring
+ * DeepinvteRing: A scrollback buffer ring
  */
 
-typedef struct _VteRing VteRing;
-struct _VteRing {
+typedef struct _DeepinvteRing DeepinvteRing;
+struct _DeepinvteRing {
 	gulong max;
 
 	gulong start, end;
 
 	/* Writable */
 	gulong writable, mask;
-	VteRowData *array;
+	DeepinvteRowData *array;
 
 	/* Storage */
 	gulong last_page;
-	VteStream *attr_stream, *text_stream, *row_stream;
-	VteCellAttrChange last_attr;
+	DeepinvteStream *attr_stream, *text_stream, *row_stream;
+	DeepinvteCellAttrChange last_attr;
 	GString *utf8_buffer;
 
-	VteRowData cached_row;
+	DeepinvteRowData cached_row;
 	gulong cached_row_num;
 
 };
 
-#define _vte_ring_contains(__ring, __position) \
+#define _deepinvte_ring_contains(__ring, __position) \
 	(((gulong) (__position) >= (__ring)->start) && \
 	 ((gulong) (__position) < (__ring)->end))
-#define _vte_ring_delta(__ring) ((glong) (__ring)->start)
-#define _vte_ring_length(__ring) ((glong) ((__ring)->end - (__ring)->start))
-#define _vte_ring_next(__ring) ((glong) (__ring)->end)
+#define _deepinvte_ring_delta(__ring) ((glong) (__ring)->start)
+#define _deepinvte_ring_length(__ring) ((glong) ((__ring)->end - (__ring)->start))
+#define _deepinvte_ring_next(__ring) ((glong) (__ring)->end)
 
-const VteRowData *_vte_ring_index (VteRing *ring, gulong position);
-VteRowData *_vte_ring_index_writable (VteRing *ring, gulong position);
+const DeepinvteRowData *_deepinvte_ring_index (DeepinvteRing *ring, gulong position);
+DeepinvteRowData *_deepinvte_ring_index_writable (DeepinvteRing *ring, gulong position);
 
-void _vte_ring_init (VteRing *ring, gulong max_rows);
-void _vte_ring_fini (VteRing *ring);
-void _vte_ring_resize (VteRing *ring, gulong max_rows);
-void _vte_ring_shrink (VteRing *ring, gulong max_len);
-VteRowData *_vte_ring_insert (VteRing *ring, gulong position);
-VteRowData *_vte_ring_append (VteRing *ring);
-void _vte_ring_remove (VteRing *ring, gulong position);
-gboolean _vte_ring_write_contents (VteRing *ring,
+void _deepinvte_ring_init (DeepinvteRing *ring, gulong max_rows);
+void _deepinvte_ring_fini (DeepinvteRing *ring);
+void _deepinvte_ring_resize (DeepinvteRing *ring, gulong max_rows);
+void _deepinvte_ring_shrink (DeepinvteRing *ring, gulong max_len);
+DeepinvteRowData *_deepinvte_ring_insert (DeepinvteRing *ring, gulong position);
+DeepinvteRowData *_deepinvte_ring_append (DeepinvteRing *ring);
+void _deepinvte_ring_remove (DeepinvteRing *ring, gulong position);
+gboolean _deepinvte_ring_write_contents (DeepinvteRing *ring,
 				   GOutputStream *stream,
-				   VteTerminalWriteFlags flags,
+				   DeepinvteTerminalWriteFlags flags,
 				   GCancellable *cancellable,
 				   GError **error);
 

@@ -1,9 +1,9 @@
-# Translation of vte to Croatiann
+# Translation of deepinvte to Croatiann
 # Copyright (C) Croatiann team
 # Translators: Automatski Prijevod <>,Denis Lackovic <delacko@fly.srk.fer.hr>,Robert Sedak <robert.sedak@sk.t-com.hr>
 msgid ""
 msgstr ""
-"Project-Id-Version: vte 0\n"
+"Project-Id-Version: deepinvte 0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-09-09 19:00+0200\n"
 "PO-Revision-Date: 2008-01-15 21:52+0000\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: ../src/iso2022.c:798 ../src/iso2022.c:806 ../src/iso2022.c:837
-#: ../src/vte.c:2201
+#: ../src/deepinvte.c:2201
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "Ne mogu konvertirati znakovi iz %s u %s."
@@ -56,63 +56,63 @@ msgstr "Greška prilikom stvaranja signalne cijevi."
 msgid "Duplicate (%s/%s)!"
 msgstr "Duplikat (%s/%s)!"
 
-#: ../src/vte.c:1257
+#: ../src/deepinvte.c:1257
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "Greška u kompilaciji regularnog izraza \"%s\"."
 
-#: ../src/vte.c:3061 ../src/vte.c:3066
+#: ../src/deepinvte.c:3061 ../src/deepinvte.c:3066
 #, c-format
 msgid "No handler for control sequence `%s' defined."
 msgstr "Nema rukovatelja za kontrolnu sekvencu `%s' ."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:4044
+#: ../src/deepinvte.c:4044
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "Greška prilikom čitanja od dijeteta: %s."
 
-#: ../src/vte.c:4172
+#: ../src/deepinvte.c:4172
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr "Ne mogu djetetu poslati podatak, neisptavni pretvornik niza podataka"
 
-#: ../src/vte.c:4183 ../src/vte.c:5099
+#: ../src/deepinvte.c:4183 ../src/deepinvte.c:5099
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr "Greška (%s) pri konverziji podataka za dijete, odbacujem."
 
-#: ../src/vte.c:7339
+#: ../src/deepinvte.c:7339
 #, c-format
 msgid "Error reading PTY size, using defaults: %s."
 msgstr ""
 "Greška prilikom čitanja PTY veličine, koristim uobičajene postavke: %s."
 
-#: ../src/vte.c:7375
+#: ../src/deepinvte.c:7375
 #, c-format
 msgid "Error setting PTY size: %s."
 msgstr "Greška u postavljanju veličine PTY-a: %s."
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:11970
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_conv_open() nije uspio postaviti znakove riječi"
+#: ../src/deepinvte.c:11970
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_conv_open() nije uspio postaviti znakove riječi"
 
-#: ../src/vteseq.c:3996
+#: ../src/deepinvteseq.c:3996
 #, c-format
 msgid "Got unexpected (key?) sequence `%s'."
 msgstr "Dobio sam neočekivanu (tipkanjem?) sekvencu `%s'."
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:775
+#: ../src/deepinvteapp.c:775
 msgid "Could not open console.\n"
 msgstr "Ne mogu otvoriti konzolu\n"
 
-#: ../src/vteapp.c:839
+#: ../src/deepinvteapp.c:839
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "Nisam mogao parsirati geometrijske specifikacije prosljeđene pomoću "
 "--geometry"
 
-#: ../src/vteglyph.c:556
+#: ../src/deepinvteglyph.c:556
 #, c-format
 msgid "Unknown pixel mode %d.\n"
 msgstr "Nepoznati način piksela %d.\n"

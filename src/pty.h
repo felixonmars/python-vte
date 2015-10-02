@@ -16,10 +16,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef VTE_DISABLE_DEPRECATED
+#ifndef DEEPINVTE_DISABLE_DEPRECATED
 
-#ifndef vte_pty_h_included
-#define vte_pty_h_included
+#ifndef deepinvte_pty_h_included
+#define deepinvte_pty_h_included
 
 #include <sys/types.h>
 
@@ -29,24 +29,24 @@ G_BEGIN_DECLS
  * pseudo-terminal of its own, returning the descriptor for the master
  * side of the PTY pair, logging the session to the specified files, and
  * storing the child's PID in the given argument. */
-int _vte_pty_open(pid_t *child, char **env_add,
+int _deepinvte_pty_open(pid_t *child, char **env_add,
 		  const char *command, char **argv, const char *directory,
 		  int columns, int rows,
 		  gboolean lastlog, gboolean utmp, gboolean wtmp);
 
 /* Set or read the size of a terminal.  Returns 0 on success, -1 on failure,
  * with errno set to defined return codes from ioctl(). */
-int _vte_pty_get_size(int master, int *columns, int *rows);
-int _vte_pty_set_size(int master, int columns, int rows);
+int _deepinvte_pty_get_size(int master, int *columns, int *rows);
+int _deepinvte_pty_set_size(int master, int columns, int rows);
 
 /* Try to let the kernel know that the terminal is or is not UTF-8. */
-void _vte_pty_set_utf8(int pty, gboolean utf8);
+void _deepinvte_pty_set_utf8(int pty, gboolean utf8);
 
 /* Close a pty. */
-void _vte_pty_close(int pty);
+void _deepinvte_pty_close(int pty);
 
 G_END_DECLS
 
-#endif /* vte_pty_h_included */
+#endif /* deepinvte_pty_h_included */
 
-#endif /* !VTE_DISABLE_DEPRECATED */
+#endif /* !DEEPINVTE_DISABLE_DEPRECATED */

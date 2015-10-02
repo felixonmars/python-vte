@@ -8,6 +8,6 @@
 93_add_alt_screen_scroll_toggle.patch
 lp246701_scroll_region_updates.patch
 backscroll-stream-mem.patch
-Add-vte_terminal_search_*-binding-that-not-exists-in-python-vte-0.28
-Patch-for-vte.defs,-otherwise-binding-is-not-working.
+Add-deepinvte_terminal_search_*-binding-that-not-exists-in-python-deepinvte-0.28
+Patch-for-deepinvte.defs,-otherwise-binding-is-not-working.
 Add-new-functions:-reset_cursor,-set_cursor_position

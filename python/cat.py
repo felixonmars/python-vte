@@ -3,7 +3,7 @@ import sys
 import string
 import getopt
 import gtk
-import vte
+import deepinvte
 
 def main_quit(object, *args):
 	gtk.main_quit()
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	window = gtk.Window()
 	window.connect("delete-event", main_quit)
 
-	terminal = vte.Terminal()
+	terminal = deepinvte.Terminal()
 	terminal.set_cursor_blinks(gtk.TRUE)
 	terminal.set_emulation("xterm")
 	terminal.set_font_from_string(font)

@@ -33,26 +33,26 @@
 #include "debug.h"
 #include "iso2022.h"
 #include "matcher.h"
-#include "vtetc.h"
+#include "deepinvtetc.h"
 
 int
 main(int argc, char **argv)
 {
 	char *terminal = NULL;
-	struct _vte_matcher *matcher = NULL;
-	struct _vte_termcap *termcap = NULL;
+	struct _deepinvte_matcher *matcher = NULL;
+	struct _deepinvte_termcap *termcap = NULL;
 	GArray *array;
 	unsigned int i, j;
 	int l;
 	unsigned char buf[4096];
 	GValue *value;
 	int infile;
-	struct _vte_iso2022_state *subst;
+	struct _deepinvte_iso2022_state *subst;
 	const char *tmp;
 	GQuark quark;
 	GValueArray *values;
 
-	_vte_debug_init();
+	_deepinvte_debug_init();
 
 	if (argc < 2) {
 		g_print("usage: %s terminal [file]\n", argv[0]);
@@ -72,15 +72,15 @@ main(int argc, char **argv)
 
 	g_type_init();
 	terminal = argv[1];
-	termcap = _vte_termcap_new(g_build_filename(TERMCAPDIR, terminal, NULL));
+	termcap = _deepinvte_termcap_new(g_build_filename(TERMCAPDIR, terminal, NULL));
 	if (termcap == NULL) {
-		termcap = _vte_termcap_new("/etc/termcap");
+		termcap = _deepinvte_termcap_new("/etc/termcap");
 	}
 	array = g_array_new(FALSE, FALSE, sizeof(gunichar));
 
-	matcher = _vte_matcher_new(terminal, termcap);
+	matcher = _deepinvte_matcher_new(terminal, termcap);
 
-	subst = _vte_iso2022_state_new(NULL, NULL, NULL);
+	subst = _deepinvte_iso2022_state_new(NULL, NULL, NULL);
 
 	for (;;) {
 		l = read (infile, buf, sizeof (buf));
@@ -92,14 +92,14 @@ main(int argc, char **argv)
 			exit (1);
 		}
 		g_array_set_size (array, 0);
-		_vte_iso2022_process(subst, buf, (unsigned int) l, array);
+		_deepinvte_iso2022_process(subst, buf, (unsigned int) l, array);
 
 		i = 0;
 		while (i <= array->len) {
 			tmp = NULL;
 			values = NULL;
 			for (j = 1; j < (array->len - i); j++) {
-				_vte_matcher_match(matcher,
+				_deepinvte_matcher_match(matcher,
 						   &g_array_index(array, gunichar, i),
 						   j,
 						   &tmp,
@@ -116,8 +116,8 @@ main(int argc, char **argv)
 			if (tmp == NULL) {
 				gunichar c;
 				c = g_array_index(array, gunichar, i);
-				if (VTE_ISO2022_HAS_ENCODED_WIDTH(c)) {
-					c &= ~VTE_ISO2022_ENCODED_WIDTH_MASK;
+				if (DEEPINVTE_ISO2022_HAS_ENCODED_WIDTH(c)) {
+					c &= ~DEEPINVTE_ISO2022_ENCODED_WIDTH_MASK;
 				}
 				if (c < 32) {
 					g_print("`^%c'\n", c + 64);
@@ -152,7 +152,7 @@ main(int argc, char **argv)
 				}
 			}
 			if (values != NULL) {
-				_vte_matcher_free_params_array(matcher, values);
+				_deepinvte_matcher_free_params_array(matcher, values);
 			}
 			g_print(")\n");
 			i += l;
@@ -162,9 +162,9 @@ main(int argc, char **argv)
 
 	close (infile);
 
-	_vte_iso2022_state_free(subst);
+	_deepinvte_iso2022_state_free(subst);
 	g_array_free(array, TRUE);
-	_vte_termcap_free(termcap);
-	_vte_matcher_free(matcher);
+	_deepinvte_termcap_free(termcap);
+	_deepinvte_matcher_free(matcher);
 	return 0;
 }

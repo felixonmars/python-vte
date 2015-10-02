@@ -17,15 +17,15 @@
  */
 
 /**
- * SECTION: vte-reaper
+ * SECTION: deepinvte-reaper
  * @short_description: A singleton object which catches %SIGCHLD signals and
  * converts them into GObject-style &quot;child-exited&quot; signals
  *
  * Because an application may need to be notified when child processes
- * exit, and because there is only one %SIGCHLD handler, the #VteTerminal
- * widget relies on a #VteReaper to watch for %SIGCHLD notifications and
+ * exit, and because there is only one %SIGCHLD handler, the #DeepinvteTerminal
+ * widget relies on a #DeepinvteReaper to watch for %SIGCHLD notifications and
  * retrieve the exit status of child processes which have exited.  When
- * glib provides child_watch functionality, the #VteReaper merely acts as
+ * glib provides child_watch functionality, the #DeepinvteReaper merely acts as
  * a proxy for glib's own functionality.
  *
  * Since 0.11.11
@@ -37,21 +37,21 @@
 #include "marshal.h"
 #include "reaper.h"
 
-static VteReaper *singleton_reaper = NULL;
+static DeepinvteReaper *singleton_reaper = NULL;
 
-G_DEFINE_TYPE(VteReaper, vte_reaper, G_TYPE_OBJECT)
+G_DEFINE_TYPE(DeepinvteReaper, deepinvte_reaper, G_TYPE_OBJECT)
 
 static void
-vte_reaper_child_watch_cb(GPid pid, gint status, gpointer data)
+deepinvte_reaper_child_watch_cb(GPid pid, gint status, gpointer data)
 {
-	_vte_debug_print(VTE_DEBUG_SIGNALS,
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_SIGNALS,
 			"Reaper emitting child-exited signal.\n");
 	g_signal_emit_by_name(data, "child-exited", pid, status);
 	g_spawn_close_pid (pid);
 }
 
 /**
- * vte_reaper_add_child:
+ * deepinvte_reaper_add_child:
  * @pid: the ID of a child process which will be monitored
  *
  * Ensures that child-exited signals will be emitted when @pid exits.  This is
@@ -62,22 +62,22 @@ vte_reaper_child_watch_cb(GPid pid, gint status, gpointer data)
  * Since 0.11.11
  */
 int
-vte_reaper_add_child(GPid pid)
+deepinvte_reaper_add_child(GPid pid)
 {
 	return g_child_watch_add_full(G_PRIORITY_LOW,
 				      pid,
-				      vte_reaper_child_watch_cb,
-				      vte_reaper_get(),
+				      deepinvte_reaper_child_watch_cb,
+				      deepinvte_reaper_get(),
 				      (GDestroyNotify)g_object_unref);
 }
 
 static void
-vte_reaper_init(VteReaper *reaper)
+deepinvte_reaper_init(DeepinvteReaper *reaper)
 {
 }
 
 static GObject*
-vte_reaper_constructor (GType                  type,
+deepinvte_reaper_constructor (GType                  type,
                         guint                  n_construct_properties,
                         GObjectConstructParam *construct_properties)
 {
@@ -85,32 +85,32 @@ vte_reaper_constructor (GType                  type,
 	  return g_object_ref (singleton_reaper);
   } else {
 	  GObject *obj;
-	  obj = G_OBJECT_CLASS (vte_reaper_parent_class)->constructor (type, n_construct_properties, construct_properties);
-	  singleton_reaper = VTE_REAPER (obj);
+	  obj = G_OBJECT_CLASS (deepinvte_reaper_parent_class)->constructor (type, n_construct_properties, construct_properties);
+	  singleton_reaper = DEEPINVTE_REAPER (obj);
 	  return obj;
   }
 }
 
 
 static void
-vte_reaper_finalize(GObject *reaper)
+deepinvte_reaper_finalize(GObject *reaper)
 {
-	G_OBJECT_CLASS(vte_reaper_parent_class)->finalize(reaper);
+	G_OBJECT_CLASS(deepinvte_reaper_parent_class)->finalize(reaper);
 	singleton_reaper = NULL;
 }
 
 static void
-vte_reaper_class_init(VteReaperClass *klass)
+deepinvte_reaper_class_init(DeepinvteReaperClass *klass)
 {
 	GObjectClass *gobject_class;
 
         /**
-         * VteReaper::child-exited:
-         * @vtereaper: the object which received the signal
+         * DeepinvteReaper::child-exited:
+         * @deepinvtereaper: the object which received the signal
          * @arg1: the process ID of the exited child
          * @arg2: the status of the exited child, as returned by waitpid()
          * 
-         * Emitted when the #VteReaper object detects that a child of the
+         * Emitted when the #DeepinvteReaper object detects that a child of the
          * current process has exited.
          *
          * Since: 0.11.11
@@ -121,27 +121,27 @@ vte_reaper_class_init(VteReaperClass *klass)
 						  0,
 						  NULL,
 						  NULL,
-						  _vte_marshal_VOID__INT_INT,
+						  _deepinvte_marshal_VOID__INT_INT,
 						  G_TYPE_NONE,
 						  2, G_TYPE_INT, G_TYPE_INT);
 
 	gobject_class = G_OBJECT_CLASS(klass);
-	gobject_class->constructor = vte_reaper_constructor;
-	gobject_class->finalize = vte_reaper_finalize;
+	gobject_class->constructor = deepinvte_reaper_constructor;
+	gobject_class->finalize = deepinvte_reaper_finalize;
 }
 
 /**
- * vte_reaper_get:
+ * deepinvte_reaper_get:
  *
- * Finds the address of the global #VteReaper object, creating the object if
+ * Finds the address of the global #DeepinvteReaper object, creating the object if
  * necessary.
  *
- * Returns: the global #VteReaper object, which should not be unreffed.
+ * Returns: the global #DeepinvteReaper object, which should not be unreffed.
  */
-VteReaper *
-vte_reaper_get(void)
+DeepinvteReaper *
+deepinvte_reaper_get(void)
 {
-	return g_object_new(VTE_TYPE_REAPER, NULL);
+	return g_object_new(DEEPINVTE_TYPE_REAPER, NULL);
 }
 
 #ifdef REAPER_MAIN
@@ -166,15 +166,15 @@ child_exited(GObject *object, int pid, int status, gpointer data)
 int
 main(int argc, char **argv)
 {
-	VteReaper *reaper;
+	DeepinvteReaper *reaper;
 	pid_t p, q;
 
-	_vte_debug_init();
+	_deepinvte_debug_init();
 
 	g_type_init();
 	context = g_main_context_default();
 	loop = g_main_loop_new(context, FALSE);
-	reaper = vte_reaper_get();
+	reaper = deepinvte_reaper_get();
 
 	g_print("[parent] Forking.\n");
 	p = fork();

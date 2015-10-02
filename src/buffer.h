@@ -20,23 +20,23 @@
 
 /* The interfaces in this file are subject to change at any time. */
 
-#ifndef vte_buffer_h_included
-#define vte_buffer_h_included
+#ifndef deepinvte_buffer_h_included
+#define deepinvte_buffer_h_included
 
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-typedef GByteArray VteBuffer;
+typedef GByteArray DeepinvteBuffer;
 
-#define _vte_buffer_new				g_byte_array_new
-#define _vte_buffer_free(B)			g_byte_array_free (B, TRUE)
-#define _vte_buffer_append(B, data, length)	g_byte_array_append (B, (const guint8 *) (data), length)
-#define _vte_buffer_length(B)			((B)->len)
-#define _vte_buffer_consume(B, length)		g_byte_array_remove_range (B, 0, length)
-#define _vte_buffer_clear(B)			g_byte_array_set_size (B, 0)
-#define _vte_buffer_set_minimum_size(B, length)	g_byte_array_set_size (B, (guint) MAX ((gint) (length), (gint) (B)->len))
+#define _deepinvte_buffer_new				g_byte_array_new
+#define _deepinvte_buffer_free(B)			g_byte_array_free (B, TRUE)
+#define _deepinvte_buffer_append(B, data, length)	g_byte_array_append (B, (const guint8 *) (data), length)
+#define _deepinvte_buffer_length(B)			((B)->len)
+#define _deepinvte_buffer_consume(B, length)		g_byte_array_remove_range (B, 0, length)
+#define _deepinvte_buffer_clear(B)			g_byte_array_set_size (B, 0)
+#define _deepinvte_buffer_set_minimum_size(B, length)	g_byte_array_set_size (B, (guint) MAX ((gint) (length), (gint) (B)->len))
 
 G_END_DECLS
 

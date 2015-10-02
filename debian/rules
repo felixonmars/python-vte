@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
-libvteN := $(shell sed -rn 's/^Package:[[:space:]]*(libvte[0-9]+)[[:space:]]*$$/\1/p' debian/control)
-udeb := $(libvteN)-udeb
+libdeepinvteN := $(shell sed -rn 's/^Package:[[:space:]]*(libdeepinvte[0-9]+)[[:space:]]*$$/\1/p' debian/control)
+udeb := $(libdeepinvteN)-udeb
 
 PY_VERSIONS = $(shell pyversions --requested debian/control)
 DEB_BUILDDIR = debian/build
@@ -14,9 +14,9 @@ include /usr/share/cdbs/1/class/gnome.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
-DEB_CONFIGURE_LIBEXECDIR := \$${prefix}/lib/$(libvteN)
+DEB_CONFIGURE_LIBEXECDIR := \$${prefix}/lib/$(libdeepinvteN)
 DEB_FIXPERMS_EXCLUDE += gnome-pty-helper
-DEB_DH_MAKESHLIBS_ARGS_$(libvteN) += -V '$(libvteN) (>= 1:0.28.0)' --add-udeb=$(udeb)
+DEB_DH_MAKESHLIBS_ARGS_$(libdeepinvteN) += -V '$(libdeepinvteN) (>= 1:0.28.0)' --add-udeb=$(udeb)
 
 DEB_CONFIGURE_EXTRA_FLAGS += PYTHON="/usr/bin/$(cdbs_make_curflavor)"
 
@@ -38,5 +38,5 @@ DEB_DH_INSTALL_ARGS_$(udeb) += --sourcedir=debian/tmp/udeb
 #CFLAGS_udeb += $(CFLAGS) -Os
 CFLAGS += $(if $(findstring udeb,$(cdbs_make_curflavor)),-Os)
 
-binary-install/python-vte::
-	dh_python2 -ppython-vte
+binary-install/python-deepinvte::
+	dh_python2 -ppython-deepinvte

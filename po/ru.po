@@ -1,7 +1,7 @@
 # translation of ru.po to
-# Russian translation for vte.
+# Russian translation for deepinvte.
 # Copyright (C) 2003, 2007 Free Software Foundation, Inc.
-# This file is distributed under the same license as the vte package.
+# This file is distributed under the same license as the deepinvte package.
 #
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2003.
 # Leonid Kanter <leon@asplinux.ru>, 2007.
@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
-"product=vte&component=general\n"
+"product=deepinvte&component=general\n"
 "POT-Creation-Date: 2010-09-21 02:24+0000\n"
 "PO-Revision-Date: 2010-09-21 12:09+0300\n"
 "Last-Translator: Yuri Myasoedov <omerta13@yandex.ru>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../src/iso2022.c:779 ../src/iso2022.c:787 ../src/iso2022.c:818
-#: ../src/vte.c:2260
+#: ../src/deepinvte.c:2260
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "Не удалось преобразовать символы из набора %s в набор %s."
@@ -48,39 +48,39 @@ msgid "Duplicate (%s/%s)!"
 msgstr "Дублирование (%s/%s)!"
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:971
+#: ../src/deepinvteapp.c:971
 msgid "Could not open console.\n"
 msgstr "Не удалось открыть консоль.\n"
 
-#: ../src/vteapp.c:1062
+#: ../src/deepinvteapp.c:1062
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr ""
 "Не удалось разобрать спецификацию геометрии, переданную параметру --geometry"
 
-#: ../src/vte.c:1286
+#: ../src/deepinvte.c:1286
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "Произошла ошибка при компиляции регулярного выражения «%s». "
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:4396
+#: ../src/deepinvte.c:4396
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "Произошла ошибка при чтении из потомка: %s."
 
-#: ../src/vte.c:4523
+#: ../src/deepinvte.c:4523
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr ""
 "Не удаётся отправить данные дочернему процессу, неверный преобразователь "
 "кодовой таблицы"
 
-#: ../src/vte.c:4534 ../src/vte.c:5565
+#: ../src/deepinvte.c:4534 ../src/deepinvte.c:5565
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr ""
 "Произошла ошибка (%s) при преобразовании данных для потомка, отбрасывается."
 
-#: ../src/vte.c:7759
+#: ../src/deepinvte.c:7759
 #, c-format
 msgid "Error reading PTY size, using defaults: %s\n"
 msgstr ""
@@ -88,7 +88,7 @@ msgstr ""
 "%s\n"
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:13322
-msgid "_vte_conv_open() failed setting word characters"
+#: ../src/deepinvte.c:13322
+msgid "_deepinvte_conv_open() failed setting word characters"
 msgstr ""
-"Произошёл сбой в функции _vte_conv_open() при установке символов в слове"
+"Произошёл сбой в функции _deepinvte_conv_open() при установке символов в слове"

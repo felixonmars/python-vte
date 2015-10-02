@@ -2,7 +2,7 @@
 import sys
 import getopt
 import gtk
-import vte
+import deepinvte
 
 # FIXME: figure out why we don't get a PID here.
 def exited_cb(terminal):
@@ -31,7 +31,7 @@ if __name__ == '__main__':
 			print "Setting terminal type to `" + argpair[1] + "'."
 			emulation = argpair[1]
 	window = gtk.Window()
-	terminal = vte.Terminal()
+	terminal = deepinvte.Terminal()
 	terminal.set_emulation(emulation)
 	terminal.set_font_from_string(font)
 	terminal.connect("child-exited", exited_cb)

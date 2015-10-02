@@ -24,8 +24,8 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <atk/atk.h>
-#ifdef USE_VTE
-#include "vte.h"
+#ifdef USE_DEEPINVTE
+#include "deepinvte.h"
 #endif
 
 static GArray *contents = NULL;
@@ -55,23 +55,23 @@ terminal_adjustment_text_view(GtkWidget *terminal)
 #endif
 }
 #endif
-#ifdef USE_VTE
+#ifdef USE_DEEPINVTE
 /*
- * Implementation for a VteTerminal widget.
+ * Implementation for a DeepinvteTerminal widget.
  */
 static void
-terminal_init_vte(GtkWidget **terminal)
+terminal_init_deepinvte(GtkWidget **terminal)
 {
-	*terminal = vte_terminal_new();
+	*terminal = deepinvte_terminal_new();
 	g_signal_connect(G_OBJECT(*terminal), "eof",
 			 G_CALLBACK(gtk_main_quit), NULL);
 	g_signal_connect(G_OBJECT(*terminal), "child-exited",
 			 G_CALLBACK(gtk_main_quit), NULL);
 }
 static void
-terminal_shell_vte(GtkWidget *terminal)
+terminal_shell_deepinvte(GtkWidget *terminal)
 {
-	vte_terminal_fork_command(VTE_TERMINAL(terminal),
+	deepinvte_terminal_fork_command(DEEPINVTE_TERMINAL(terminal),
 				  getenv("SHELL") ? getenv("SHELL") : "/bin/sh",
 				  NULL,
 				  NULL,
@@ -81,9 +81,9 @@ terminal_shell_vte(GtkWidget *terminal)
 				  FALSE);
 }
 static GtkAdjustment *
-terminal_adjustment_vte(GtkWidget *terminal)
+terminal_adjustment_deepinvte(GtkWidget *terminal)
 {
-	return (VTE_TERMINAL(terminal))->adjustment;
+	return (DEEPINVTE_TERMINAL(terminal))->adjustment;
 }
 #endif
 
@@ -155,7 +155,7 @@ text_changed_insert(AtkObject *obj, gint offset, gint length, gpointer data)
 		p = g_utf8_next_char(p);
 	}
 
-#ifdef VTE_DEBUG
+#ifdef DEEPINVTE_DEBUG
 	if ((getenv("REFLECT_VERBOSE") != NULL) &&
 	    (atol(getenv("REFLECT_VERBOSE")) != 0)) {
 		g_printerr("Inserted %d chars ('%.*s') at %d,",
@@ -181,7 +181,7 @@ text_changed_delete(AtkObject *obj, gint offset, gint length, gpointer data)
 		}
 		g_array_remove_index(contents, i);
 	}
-#ifdef VTE_DEBUG
+#ifdef DEEPINVTE_DEBUG
 	if ((getenv("REFLECT_VERBOSE") != NULL) &&
 	    (atol(getenv("REFLECT_VERBOSE")) != 0)) {
 		g_printerr("Deleted %d chars at %d.\n", length, offset);
@@ -211,8 +211,8 @@ terminal_init(GtkWidget **terminal)
 	terminal_init_text_view(terminal);
 	return;
 #endif
-#ifdef USE_VTE
-	terminal_init_vte(terminal);
+#ifdef USE_DEEPINVTE
+	terminal_init_deepinvte(terminal);
 	return;
 #endif
 	g_assert_not_reached();
@@ -224,8 +224,8 @@ terminal_shell(GtkWidget *terminal)
 	terminal_shell_text_view(terminal);
 	return;
 #endif
-#ifdef USE_VTE
-	terminal_shell_vte(terminal);
+#ifdef USE_DEEPINVTE
+	terminal_shell_deepinvte(terminal);
 	return;
 #endif
 	g_assert_not_reached();
@@ -236,8 +236,8 @@ terminal_adjustment(GtkWidget *terminal)
 #ifdef USE_TEXT_VIEW
 	return terminal_adjustment_text_view(terminal);
 #endif
-#ifdef USE_VTE
-	return terminal_adjustment_vte(terminal);
+#ifdef USE_DEEPINVTE
+	return terminal_adjustment_deepinvte(terminal);
 #endif
 	g_assert_not_reached();
 }

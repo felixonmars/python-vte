@@ -192,13 +192,13 @@
 #undef VERSION
 
 /* Enable debugging messages. */
-#undef VTE_DEBUG
+#undef DEEPINVTE_DEBUG
 
 /* The default terminal type to be emulated. */
-#undef VTE_DEFAULT_EMULATION
+#undef DEEPINVTE_DEFAULT_EMULATION
 
 /* Define if you intend to use gnome-pty-helper. */
-#undef VTE_USE_GNOME_PTY_HELPER
+#undef DEEPINVTE_USE_GNOME_PTY_HELPER
 
 /* Use all glibc features. */
 #undef _GNU_SOURCE

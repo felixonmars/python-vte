@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+defaultemulation=@DEEPINVTE_DEFAULT_EMULATION@
+
+Name: deepinvte
+Description: Deepinvte terminal widget.
+Version: @VERSION@
+Requires: @DEEPINVTE_PKGS@
+Libs: -L${libdir} -ldeepinvte@DEEPINVTE_LIBRARY_SUFFIX_U@
+Cflags: -I${includedir}/deepinvte-@DEEPINVTE_API_VERSION@ @DEEPINVTE_SEAL_CFLAGS@

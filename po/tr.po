@@ -1,14 +1,14 @@
-# translation of vte.HEAD.tr.po to Turkish
-# Turkish translation of vte.
-# Copyright (C) 2003 vte's COPYRIGHT HOLDER
-# This file is distributed under the same license as the vte package.
+# translation of deepinvte.HEAD.tr.po to Turkish
+# Turkish translation of deepinvte.
+# Copyright (C) 2003 deepinvte's COPYRIGHT HOLDER
+# This file is distributed under the same license as the deepinvte package.
 #
 # Görkem �Getin <gorkem@gelecek.com.tr>, 2003.
 # Arman Aksoy <armish@linux-sevenler.de>, 2003.
 # Baris Cicek <baris@teamforce.name.tr>, 2004, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: vte.HEAD.tr\n"
+"Project-Id-Version: deepinvte.HEAD.tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-03-31 14:31+0300\n"
 "PO-Revision-Date: 2008-03-31 14:28+0300\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
 #: ../src/iso2022.c:791 ../src/iso2022.c:799 ../src/iso2022.c:830
-#: ../src/vte.c:1851
+#: ../src/deepinvte.c:1851
 #, c-format
 msgid "Unable to convert characters from %s to %s."
 msgstr "Karakterler %s'den %s'e dönüştürülemiyor."
@@ -58,61 +58,61 @@ msgstr "Sinyal borusu oluştururken hata."
 msgid "Duplicate (%s/%s)!"
 msgstr "Çift (%s/%s)!"
 
-#: ../src/vte.c:1231
+#: ../src/deepinvte.c:1231
 #, c-format
 msgid "Error compiling regular expression \"%s\"."
 msgstr "Düzenli ifade derlenirken hata: \"%s\"."
 
-#: ../src/vte.c:2713 ../src/vte.c:2718
+#: ../src/deepinvte.c:2713 ../src/deepinvte.c:2718
 #, c-format
 msgid "No handler for control sequence `%s' defined."
 msgstr "`%s' kontrol serisi için işlemci tanımlanmamış."
 
 #. Translators: %s is replaced with error message returned by strerror().
-#: ../src/vte.c:3704
+#: ../src/deepinvte.c:3704
 #, c-format
 msgid "Error reading from child: %s."
 msgstr "Oğul süreçten okunurken hata: %s."
 
-#: ../src/vte.c:3832
+#: ../src/deepinvte.c:3832
 msgid "Unable to send data to child, invalid charset convertor"
 msgstr "Alt sürece veri gönderilemedi, geçersiz karakter kümesi çevirici"
 
-#: ../src/vte.c:3843 ../src/vte.c:4770
+#: ../src/deepinvte.c:3843 ../src/deepinvte.c:4770
 #, c-format
 msgid "Error (%s) converting data for child, dropping."
 msgstr "Oğul süreç için veriyi çeviriken hata (%s), bırakılıyor."
 
-#: ../src/vte.c:7016
+#: ../src/deepinvte.c:7016
 #, c-format
 msgid "Error reading PTY size, using defaults: %s."
 msgstr "PTY boyutu okunurken hata, öntanımlı değerler kullanılıyor: %s."
 
-#: ../src/vte.c:7052
+#: ../src/deepinvte.c:7052
 #, c-format
 msgid "Error setting PTY size: %s."
 msgstr "PTY boyutu ayarlanırken hata: %s."
 
 #. Aaargh.  We're screwed.
-#: ../src/vte.c:11526
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_iconv_open() kelime karakterlerini ayarlarken başarısız oldu"
+#: ../src/deepinvte.c:11526
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_iconv_open() kelime karakterlerini ayarlarken başarısız oldu"
 
-#: ../src/vteseq.c:3979
+#: ../src/deepinvteseq.c:3979
 #, c-format
 msgid "Got unexpected (key?) sequence `%s'."
 msgstr "Beklenmeyen (tuş?) serisi `%s' alındı."
 
 #. Bail back to normal mode.
-#: ../src/vteapp.c:775
+#: ../src/deepinvteapp.c:775
 msgid "Could not open console.\n"
 msgstr "Konsol açılamadı.\n"
 
-#: ../src/vteapp.c:839
+#: ../src/deepinvteapp.c:839
 msgid "Could not parse the geometry spec passed to --geometry"
 msgstr "--geometry'de belirtilen geometri belirtimi ayrıştırılamadı"
 
-#: ../src/vteglyph.c:556
+#: ../src/deepinvteglyph.c:556
 #, c-format
 msgid "Unknown pixel mode %d.\n"
 msgstr "Bilinmeyen benek kipi %d.\n"

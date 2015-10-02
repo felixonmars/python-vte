@@ -27,24 +27,24 @@
 #include "table.h"
 #include "trie.h"
 
-struct _vte_matcher {
-	_vte_matcher_match_func match; /* shortcut to the most common op */
-	struct _vte_matcher_impl *impl;
+struct _deepinvte_matcher {
+	_deepinvte_matcher_match_func match; /* shortcut to the most common op */
+	struct _deepinvte_matcher_impl *impl;
 	GValueArray *free_params;
 };
 
-static GStaticMutex _vte_matcher_mutex = G_STATIC_MUTEX_INIT;
-static GCache *_vte_matcher_cache = NULL;
-static struct _vte_matcher_impl dummy_vte_matcher_trie = {
-	&_vte_matcher_trie
+static GStaticMutex _deepinvte_matcher_mutex = G_STATIC_MUTEX_INIT;
+static GCache *_deepinvte_matcher_cache = NULL;
+static struct _deepinvte_matcher_impl dummy_deepinvte_matcher_trie = {
+	&_deepinvte_matcher_trie
 };
-static struct _vte_matcher_impl dummy_vte_matcher_table = {
-	&_vte_matcher_table
+static struct _deepinvte_matcher_impl dummy_deepinvte_matcher_table = {
+	&_deepinvte_matcher_table
 };
 
 /* Add a string to the matcher. */
 static void
-_vte_matcher_add(const struct _vte_matcher *matcher,
+_deepinvte_matcher_add(const struct _deepinvte_matcher *matcher,
 		 const char *pattern, gssize length,
 		 const char *result, GQuark quark)
 {
@@ -53,8 +53,8 @@ _vte_matcher_add(const struct _vte_matcher *matcher,
 
 /* Loads all sequences into matcher */
 static void
-_vte_matcher_init(struct _vte_matcher *matcher, const char *emulation,
-		  struct _vte_termcap *termcap)
+_deepinvte_matcher_init(struct _deepinvte_matcher *matcher, const char *emulation,
+		  struct _deepinvte_termcap *termcap)
 {
 	const char *code, *value;
 	gboolean found_cr = FALSE, found_lf = FALSE;
@@ -62,24 +62,24 @@ _vte_matcher_init(struct _vte_matcher *matcher, const char *emulation,
 	char *stripped;
 	int i;
 
-	_vte_debug_print(VTE_DEBUG_LIFECYCLE, "_vte_matcher_init()\n");
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_LIFECYCLE, "_deepinvte_matcher_init()\n");
 
 	if (termcap != NULL) {
 		/* Load the known capability strings from the termcap
 		 * structure into the table for recognition. */
 		for (i = 0;
-				_vte_terminal_capability_strings[i].capability[0];
+				_deepinvte_terminal_capability_strings[i].capability[0];
 				i++) {
-			if (_vte_terminal_capability_strings[i].key) {
+			if (_deepinvte_terminal_capability_strings[i].key) {
 				continue;
 			}
-			code = _vte_terminal_capability_strings[i].capability;
-			stripped = _vte_termcap_find_string_length(termcap,
+			code = _deepinvte_terminal_capability_strings[i].capability;
+			stripped = _deepinvte_termcap_find_string_length(termcap,
 					emulation,
 					code,
 					&stripped_length);
 			if (stripped[0] != '\0') {
-				_vte_matcher_add(matcher,
+				_deepinvte_matcher_add(matcher,
 						stripped, stripped_length,
 						code, 0);
 				if (stripped[0] == '\r') {
@@ -100,48 +100,48 @@ _vte_matcher_init(struct _vte_matcher *matcher, const char *emulation,
 	if (strstr(emulation, "xterm") || strstr(emulation, "dtterm")) {
 		/* Add all of the xterm-specific stuff. */
 		for (i = 0;
-		     _vte_xterm_capability_strings[i].value != NULL;
+		     _deepinvte_xterm_capability_strings[i].value != NULL;
 		     i++) {
-			code = _vte_xterm_capability_strings[i].code;
-			value = _vte_xterm_capability_strings[i].value;
-			_vte_matcher_add(matcher, code, strlen (code),
+			code = _deepinvte_xterm_capability_strings[i].code;
+			value = _deepinvte_xterm_capability_strings[i].value;
+			_deepinvte_matcher_add(matcher, code, strlen (code),
 					 value, 0);
 		}
 	}
 
 	/* Always define cr and lf. */
 	if (!found_cr) {
-		_vte_matcher_add(matcher, "\r", 1, "cr", 0);
+		_deepinvte_matcher_add(matcher, "\r", 1, "cr", 0);
 	}
 	if (!found_lf) {
-		_vte_matcher_add(matcher, "\n", 1, "sf", 0);
+		_deepinvte_matcher_add(matcher, "\n", 1, "sf", 0);
 	}
 
-	_VTE_DEBUG_IF(VTE_DEBUG_TRIE) {
+	_DEEPINVTE_DEBUG_IF(DEEPINVTE_DEBUG_TRIE) {
 		g_printerr("Trie contents:\n");
-		_vte_matcher_print(matcher);
+		_deepinvte_matcher_print(matcher);
 		g_printerr("\n");
 	}
 }
 
 /* Allocates new matcher structure. */
 static gpointer
-_vte_matcher_create(gpointer key)
+_deepinvte_matcher_create(gpointer key)
 {
 	char *emulation = key;
-	struct _vte_matcher *ret = NULL;
+	struct _deepinvte_matcher *ret = NULL;
 
-	_vte_debug_print(VTE_DEBUG_LIFECYCLE, "_vte_matcher_create()\n");
-	ret = g_slice_new(struct _vte_matcher);
-	ret->impl = &dummy_vte_matcher_trie;
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_LIFECYCLE, "_deepinvte_matcher_create()\n");
+	ret = g_slice_new(struct _deepinvte_matcher);
+	ret->impl = &dummy_deepinvte_matcher_trie;
 	ret->match = NULL;
 	ret->free_params = NULL;
 
 	if (strcmp(emulation, "xterm") == 0) {
-		ret->impl = &dummy_vte_matcher_table;
+		ret->impl = &dummy_deepinvte_matcher_table;
 	} else
 	if (strcmp(emulation, "dtterm") == 0) {
-		ret->impl = &dummy_vte_matcher_table;
+		ret->impl = &dummy_deepinvte_matcher_table;
 	}
 
 	return ret;
@@ -149,62 +149,62 @@ _vte_matcher_create(gpointer key)
 
 /* Noone uses this matcher, free it. */
 static void
-_vte_matcher_destroy(gpointer value)
+_deepinvte_matcher_destroy(gpointer value)
 {
-	struct _vte_matcher *matcher = value;
+	struct _deepinvte_matcher *matcher = value;
 
-	_vte_debug_print(VTE_DEBUG_LIFECYCLE, "_vte_matcher_destroy()\n");
+	_deepinvte_debug_print(DEEPINVTE_DEBUG_LIFECYCLE, "_deepinvte_matcher_destroy()\n");
 	if (matcher->free_params != NULL) {
 		g_value_array_free (matcher->free_params);
 	}
 	if (matcher->match != NULL) /* do not call destroy on dummy values */
 		matcher->impl->klass->destroy(matcher->impl);
-	g_slice_free(struct _vte_matcher, matcher);
+	g_slice_free(struct _deepinvte_matcher, matcher);
 }
 
 /* Create and init matcher. */
-struct _vte_matcher *
-_vte_matcher_new(const char *emulation, struct _vte_termcap *termcap)
+struct _deepinvte_matcher *
+_deepinvte_matcher_new(const char *emulation, struct _deepinvte_termcap *termcap)
 {
-	struct _vte_matcher *ret = NULL;
-	g_static_mutex_lock(&_vte_matcher_mutex);
+	struct _deepinvte_matcher *ret = NULL;
+	g_static_mutex_lock(&_deepinvte_matcher_mutex);
 
 	if (emulation == NULL) {
 		emulation = "";
 	}
 
-	if (_vte_matcher_cache == NULL) {
-		_vte_matcher_cache = g_cache_new(_vte_matcher_create,
-				_vte_matcher_destroy,
+	if (_deepinvte_matcher_cache == NULL) {
+		_deepinvte_matcher_cache = g_cache_new(_deepinvte_matcher_create,
+				_deepinvte_matcher_destroy,
 				(GCacheDupFunc) g_strdup, g_free,
 				g_str_hash, g_direct_hash, g_str_equal);
 	}
 
-	ret = g_cache_insert(_vte_matcher_cache, (gpointer) emulation);
+	ret = g_cache_insert(_deepinvte_matcher_cache, (gpointer) emulation);
 
 	if (ret->match == NULL) {
 		ret->impl = ret->impl->klass->create();
 		ret->match = ret->impl->klass->match;
-		_vte_matcher_init(ret, emulation, termcap);
+		_deepinvte_matcher_init(ret, emulation, termcap);
 	}
 
-	g_static_mutex_unlock(&_vte_matcher_mutex);
+	g_static_mutex_unlock(&_deepinvte_matcher_mutex);
 	return ret;
 }
 
 /* Free a matcher. */
 void
-_vte_matcher_free(struct _vte_matcher *matcher)
+_deepinvte_matcher_free(struct _deepinvte_matcher *matcher)
 {
-	g_assert(_vte_matcher_cache != NULL);
-	g_static_mutex_lock(&_vte_matcher_mutex);
-	g_cache_remove(_vte_matcher_cache, matcher);
-	g_static_mutex_unlock(&_vte_matcher_mutex);
+	g_assert(_deepinvte_matcher_cache != NULL);
+	g_static_mutex_lock(&_deepinvte_matcher_mutex);
+	g_cache_remove(_deepinvte_matcher_cache, matcher);
+	g_static_mutex_unlock(&_deepinvte_matcher_mutex);
 }
 
 /* Check if a string matches a sequence the matcher knows about. */
 const char *
-_vte_matcher_match(struct _vte_matcher *matcher,
+_deepinvte_matcher_match(struct _deepinvte_matcher *matcher,
 		   const gunichar *pattern, gssize length,
 		   const char **res, const gunichar **consumed,
 		   GQuark *quark, GValueArray **array)
@@ -219,7 +219,7 @@ _vte_matcher_match(struct _vte_matcher *matcher,
 
 /* Dump out the contents of a matcher, mainly for debugging. */
 void
-_vte_matcher_print(struct _vte_matcher *matcher)
+_deepinvte_matcher_print(struct _deepinvte_matcher *matcher)
 {
 	matcher->impl->klass->print(matcher->impl);
 }
@@ -228,7 +228,7 @@ _vte_matcher_print(struct _vte_matcher *matcher)
  * themselves, but we're using gpointers to hold unicode character strings, and
  * we need to free those ourselves. */
 void
-_vte_matcher_free_params_array(struct _vte_matcher *matcher,
+_deepinvte_matcher_free_params_array(struct _deepinvte_matcher *matcher,
 		               GValueArray *params)
 {
 	guint i;

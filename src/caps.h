@@ -18,41 +18,41 @@
 
 /* The interfaces in this file are subject to change at any time. */
 
-#ifndef vte_caps_h_included
-#define vte_caps_h_included
+#ifndef deepinvte_caps_h_included
+#define deepinvte_caps_h_included
 
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-#define _VTE_CAP_ESC "\033"		/* Escape */
-#define _VTE_CAP_CSI _VTE_CAP_ESC "["	/* Control Sequence Introducer */
-#define _VTE_CAP_ST  _VTE_CAP_ESC "\\"	/* String Terminator */
-#define _VTE_CAP_OSC _VTE_CAP_ESC "]"	/* Operating System Command */
-#define _VTE_CAP_PM  _VTE_CAP_ESC "^"	/* Privacy Message */
-#define _VTE_CAP_APC _VTE_CAP_ESC "_"	/* Application Program Command */
-#define _VTE_CAP_SS2 _VTE_CAP_ESC "N"	/* Single-shift to G2 */
-#define _VTE_CAP_SS3 _VTE_CAP_ESC "O"	/* Single-shift to G3 */
+#define _DEEPINVTE_CAP_ESC "\033"		/* Escape */
+#define _DEEPINVTE_CAP_CSI _DEEPINVTE_CAP_ESC "["	/* Control Sequence Introducer */
+#define _DEEPINVTE_CAP_ST  _DEEPINVTE_CAP_ESC "\\"	/* String Terminator */
+#define _DEEPINVTE_CAP_OSC _DEEPINVTE_CAP_ESC "]"	/* Operating System Command */
+#define _DEEPINVTE_CAP_PM  _DEEPINVTE_CAP_ESC "^"	/* Privacy Message */
+#define _DEEPINVTE_CAP_APC _DEEPINVTE_CAP_ESC "_"	/* Application Program Command */
+#define _DEEPINVTE_CAP_SS2 _DEEPINVTE_CAP_ESC "N"	/* Single-shift to G2 */
+#define _DEEPINVTE_CAP_SS3 _DEEPINVTE_CAP_ESC "O"	/* Single-shift to G3 */
 
 /* A NULL-terminated list of capability strings which have string values,
  * which means they're either key sequences or commands. */
-struct _vte_capability_quark {
+struct _deepinvte_capability_quark {
 	const char capability[4];
 	gboolean key;
 	GQuark quark;
 };
-struct _vte_capability_string {
+struct _deepinvte_capability_string {
 	const char *code;
 	const char *value;
 	GQuark quark;
 };
 
 /* The known capability strings in termcap entries, terminated by NULLs. */
-extern struct _vte_capability_quark _vte_terminal_capability_strings[];
+extern struct _deepinvte_capability_quark _deepinvte_terminal_capability_strings[];
 
 /* The xterm-specific terminal control strings, terminated by NULLs. */
-extern struct _vte_capability_string _vte_xterm_capability_strings[];
+extern struct _deepinvte_capability_string _deepinvte_xterm_capability_strings[];
 
 G_END_DECLS
 

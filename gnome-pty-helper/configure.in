@@ -1,4 +1,4 @@
-AC_INIT([gnome-pty-helper],[1.95.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=vte])
+AC_INIT([gnome-pty-helper],[1.95.0],[http://bugzilla.gnome.org/enter_bug.cgi?product=deepinvte])
 
 AM_INIT_AUTOMAKE([1.9 foreign no-dist-gzip dist-bzip2])
 

@@ -1,4 +1,4 @@
-# vte Finnish translation.
+# deepinvte Finnish translation.
 # Suomennos: http://gnome-fi.sourceforge.net/
 #
 # Copyright (C) 2003 Free Software Foundation, Inc.
@@ -7,7 +7,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vte\n"
+"Project-Id-Version: deepinvte\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-07-04 14:09+0300\n"
 "PO-Revision-Date: 2011-07-04 14:10+0300\n"
@@ -66,8 +66,8 @@ msgid "Error reading PTY size, using defaults: %s\n"
 msgstr "Virhe PTY-koon lukemisessa: oletus käytössä: %s\n"
 
 #. Aaargh.  We're screwed.
-msgid "_vte_conv_open() failed setting word characters"
-msgstr "_vte_conv_open() ei onnistunut asettamaan sanamerkkejä"
+msgid "_deepinvte_conv_open() failed setting word characters"
+msgstr "_deepinvte_conv_open() ei onnistunut asettamaan sanamerkkejä"
 
 #~ msgid "can not run %s"
 #~ msgstr "ei voi suorittaa: %s"
